@@ -8,6 +8,7 @@ import '@material/mwc-icon-button';
 import '@openscd/oscd-action-pane';
 import { renderLNodes } from './l-node-editor.js';
 import { renderEqFunctions } from './eq-function-editor.js';
+import { renderText } from './text-editor.js';
 
 import {
   generalConductingEquipmentIcon,
@@ -45,6 +46,7 @@ export class GeneralEquipmentEditor extends BaseSubstationElementEditor {
           ></mwc-icon-button>
         </abbr>
         ${this.renderAddButton()}
+        ${renderText(this.element, this.editCount, this.showfunctions)}
         ${renderLNodes(this.element, this.editCount, this.showfunctions)}
         ${renderEqFunctions(this.element, this.editCount)}
       </oscd-action-pane>`;

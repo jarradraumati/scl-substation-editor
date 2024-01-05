@@ -7,6 +7,8 @@ import '@openscd/oscd-action-icon';
 import '@openscd/oscd-action-pane';
 import { renderLNodes } from './l-node-editor.js';
 import { renderEqFunctions } from './eq-function-editor.js';
+import { renderText } from './text-editor.js';
+
 import { getChildElementsByTagName } from '../foundation.js';
 import BaseSubstationElementEditor from './base-substation-element-editor.js';
 
@@ -43,6 +45,7 @@ export class SubEquipmentEditor extends BaseSubstationElementEditor {
         ></mwc-icon-button>
       </abbr>
       ${this.renderAddButton()}
+      ${renderText(this.element, this.editCount, this.showfunctions)}
       ${renderLNodes(this.element, this.editCount, this.showfunctions)}
       ${renderEqFunctions(this.element, this.editCount)}
     </oscd-action-pane> `;

@@ -10,6 +10,7 @@ import { renderFunctions } from './function-editor.js';
 import { renderGeneralEquipment } from './general-equipment-editor.js';
 import { renderLNodes } from './l-node-editor.js';
 import { renderPowerTransformerContainer } from './power-transformer-editor.js';
+import { renderText } from './text-editor.js';
 
 import { getChildElementsByTagName, styles } from '../foundation.js';
 import BaseSubstationElementEditor from './base-substation-element-editor.js';
@@ -42,6 +43,7 @@ export class SubstationEditor extends BaseSubstationElementEditor {
         ></mwc-icon-button>
       </abbr>
       ${this.renderAddButton()}
+      ${renderText(this.element, this.editCount, this.showfunctions)}
       ${renderLNodes(this.element, this.editCount, this.showfunctions)}
       ${renderGeneralEquipment(
         this.element,

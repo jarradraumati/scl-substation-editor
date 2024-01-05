@@ -10,6 +10,7 @@ import '@openscd/oscd-action-pane';
 
 import { renderLNodes } from './l-node-editor.js';
 import { renderEqFunctions } from './eq-function-editor.js';
+import { renderText } from './text-editor.js';
 
 import { getChildElementsByTagName, getIcon, styles } from '../foundation.js';
 import { renderSubEquipments } from './sub-equipment-editor.js';
@@ -67,6 +68,7 @@ export class ConductingEquipmentEditor extends BaseSubstationElementEditor {
       </abbr>
       ${this.renderAddButton()}
       ${this.renderContentPane()}
+      ${renderText(this.element, this.editCount, this.showfunctions)}
         ${renderLNodes(this.element, this.editCount, this.showfunctions)}
         ${renderEqFunctions(this.element, this.editCount)}
         ${renderSubEquipments(this.element, this.editCount, this.showfunctions)}

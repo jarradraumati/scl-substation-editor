@@ -10,6 +10,7 @@ import './transformer-winding-editor.js';
 import { renderLNodes } from './l-node-editor.js';
 import { renderEqFunctions } from './eq-function-editor.js';
 import { renderSubEquipments } from './sub-equipment-editor.js';
+import { renderText } from './text-editor.js';
 
 import {
   getChildElementsByTagName,
@@ -88,6 +89,7 @@ export class PowerTransformerEditor extends BaseSubstationElementEditor {
           ></mwc-icon-button>
         </abbr>
         ${this.renderAddButton()} ${this.renderContentPane()}
+        ${renderText(this.element, this.editCount, this.showfunctions)}
         ${renderLNodes(this.element, this.editCount, this.showfunctions)}
         ${this.renderTransformerWinding()}
         ${renderEqFunctions(this.element, this.editCount)}

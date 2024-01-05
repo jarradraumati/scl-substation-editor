@@ -19,6 +19,7 @@ export const substationDoc = `<SCL>
         <LNode iedName="IED1" ldInst="ldInst" prefix="prefix" lnInst="1" />
         <LNode iedName="IED1" ldInst="ldInst" prefix="prefix" lnClass="PTOC" lnInst="1" />
         <VoltageLevel name="E1" >
+            <Text>Hello world</Text>
             <Bay name="Q01" >
                 <Function name="func1" >
                     <SubFunction name="subFunc1" >

@@ -48,6 +48,10 @@ export default class BaseSubstationElementEditor extends LitElement {
     this.dispatchEvent(newEditWizardEvent(this.element));
   }
 
+  openMapWizard(): void {
+    this.dispatchEvent(newEditWizardEvent(this.element, true));
+  }
+
   removeElement(): void {
     this.dispatchEvent(
       newEditEvent({

@@ -44,6 +44,7 @@ export class VoltageLevelEditor extends BaseSubstationElementEditor {
           .editCount=${this.editCount}
           .element=${bay}
           ?showfunctions=${this.showfunctions}
+          ?showuserdef=${this.showuserdef}
         ></bay-editor>`
       )}
     </div>`;
@@ -66,20 +67,32 @@ export class VoltageLevelEditor extends BaseSubstationElementEditor {
         ></mwc-icon-button>
       </abbr>
       ${this.renderAddButton()}
-      ${renderText(this.element, this.editCount, this.showfunctions)}
+      ${renderText(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
       ${renderLNodes(this.element, this.editCount, this.showfunctions)}
       ${renderGeneralEquipment(
         this.element,
         this.editCount,
-        this.showfunctions
+        this.showfunctions,
+        this.showuserdef
       )}
       ${renderPowerTransformerContainer(
         this.element,
         this.editCount,
-        this.showfunctions
+        this.showfunctions,
+        this.showuserdef
       )}
       ${this.renderBay()}
-      ${renderFunctions(this.element, this.editCount, this.showfunctions)}
+      ${renderFunctions(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
     </oscd-action-pane>`;
   }
 

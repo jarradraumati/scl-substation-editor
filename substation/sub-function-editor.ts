@@ -45,19 +45,31 @@ export class SubFunctionEditor extends BaseSubstationElementEditor {
         ></mwc-icon-button>
       </abbr>
       ${this.renderAddButton()}
-      ${renderText(this.element, this.editCount, this.showfunctions)}
+      ${renderText(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
       ${renderLNodes(this.element, this.editCount, this.showfunctions)}
       ${renderGeneralEquipment(
         this.element,
         this.editCount,
-        this.showfunctions
+        this.showfunctions,
+        this.showuserdef
       )}
       ${renderConductingEquipments(
         this.element,
         this.editCount,
-        this.showfunctions
+        this.showfunctions,
+        this.showuserdef
       )}
-      ${renderSubFunctions(this.element, this.editCount, this.showfunctions)}
+      ${renderSubFunctions(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
     </oscd-action-pane>`;
   }
 
@@ -88,7 +100,8 @@ export class SubFunctionEditor extends BaseSubstationElementEditor {
 export function renderSubFunctions(
   parent: Element,
   editCount: number,
-  showfunctions: boolean
+  showfunctions: boolean,
+  showuserdef: boolean
 ): TemplateResult {
   const subfunctions = getChildElementsByTagName(parent, 'SubFunction');
   return html` ${subfunctions.map(
@@ -97,6 +110,7 @@ export function renderSubFunctions(
         .element=${subFunction}
         .editCount=${editCount}
         ?showfunctions=${showfunctions}
+        ?showuserdef=${showuserdef}
       ></sub-function-editor>`
   )}`;
 }

@@ -28,6 +28,10 @@ export default class BaseSubstationElementEditor extends LitElement {
   @property({ type: Boolean })
   showfunctions = false;
 
+  /** Whether text/private type element shall be shown */
+  @property({ type: Boolean })
+  showuserdef = false;
+
   @query('mwc-menu') addMenu?: Menu;
 
   @query('mwc-icon-button[icon="playlist_add"]') addButton!: IconButton;

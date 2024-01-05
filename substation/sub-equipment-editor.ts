@@ -45,9 +45,14 @@ export class SubEquipmentEditor extends BaseSubstationElementEditor {
         ></mwc-icon-button>
       </abbr>
       ${this.renderAddButton()}
-      ${renderText(this.element, this.editCount, this.showfunctions)}
+      ${renderText(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
       ${renderLNodes(this.element, this.editCount, this.showfunctions)}
-      ${renderEqFunctions(this.element, this.editCount)}
+      ${renderEqFunctions(this.element, this.editCount, this.showuserdef)}
     </oscd-action-pane> `;
   }
 
@@ -70,7 +75,8 @@ export class SubEquipmentEditor extends BaseSubstationElementEditor {
 export function renderSubEquipments(
   parent: Element,
   editCount: number,
-  showfunctions: boolean
+  showfunctions: boolean,
+  showuserdef: boolean
 ): TemplateResult {
   const subEquipments = getChildElementsByTagName(parent, 'SubEquipment');
 
@@ -80,6 +86,7 @@ export function renderSubEquipments(
         .editCount=${editCount}
         .element=${subEquipment}
         ?showfunctions=${showfunctions}
+        ?showuserdef=${showuserdef}
       ></sub-equipment-editor>`
   )}`;
 }

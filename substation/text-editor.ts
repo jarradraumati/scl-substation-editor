@@ -54,9 +54,11 @@ export class TextEditor extends BaseSubstationElementEditor {
 export function renderText(
   parent: Element,
   editCount: number,
-  showfunctions: boolean
+  showfunctions: boolean,
+  showuserdef: boolean
 ): TemplateResult {
   if (!showfunctions) return html``;
+  if (!showuserdef) return html``;
 
   const text = getChildElementsByTagName(parent, 'Text');
   return html`${text.map(
@@ -65,6 +67,7 @@ export function renderText(
         .editCount=${editCount}
         .element=${fText}
         ?showfunctions=${showfunctions}
+        ?showuserdef=${showuserdef}
       ></text-editor>`
   )}`;
 }

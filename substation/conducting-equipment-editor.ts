@@ -68,10 +68,28 @@ export class ConductingEquipmentEditor extends BaseSubstationElementEditor {
       </abbr>
       ${this.renderAddButton()}
       ${this.renderContentPane()}
-      ${renderText(this.element, this.editCount, this.showfunctions)}
-        ${renderLNodes(this.element, this.editCount, this.showfunctions)}
-        ${renderEqFunctions(this.element, this.editCount)}
-        ${renderSubEquipments(this.element, this.editCount, this.showfunctions)}
+      ${renderText(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderLNodes(this.element, this.editCount, this.showfunctions)}
+      ${renderEqFunctions(this.element, this.editCount, this.showuserdef)}
+      ${renderSubEquipments(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderLNodes(this.element, this.editCount, this.showfunctions)}
+      ${renderEqFunctions(this.element, this.editCount, this.showuserdef)}
+      ${renderSubEquipments(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
         </oscd-action-pane
         ></oscd-action-pane
       >`;
@@ -94,7 +112,8 @@ export class ConductingEquipmentEditor extends BaseSubstationElementEditor {
 export function renderConductingEquipments(
   parent: Element,
   editCount: number,
-  showfunctions: boolean
+  showfunctions: boolean,
+  showuserdef: boolean
 ): TemplateResult {
   const condEqs = getChildElementsByTagName(parent, 'ConductingEquipment');
 
@@ -105,6 +124,7 @@ export function renderConductingEquipments(
           .element=${condEq}
           .editCount=${editCount}
           ?showfunctions=${showfunctions}
+          ?showuserdef=${showuserdef}
         ></conducting-equipment-editor>`
     )}`;
 
@@ -116,6 +136,7 @@ export function renderConductingEquipments(
               .editCount=${editCount}
               .element=${conductingEquipment}
               ?showfunctions=${showfunctions}
+              ?showuserdef=${showuserdef}
             ></conducting-equipment-editor>`
         )}
       </div>`

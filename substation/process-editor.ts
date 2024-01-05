@@ -42,22 +42,49 @@ export class ProcessEditor extends BaseSubstationElementEditor {
         ></mwc-icon-button
       ></abbr>
       ${this.renderAddButton()}
-      ${renderText(this.element, this.editCount, this.showfunctions)}
+      ${renderText(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
       ${renderLNodes(this.element, this.editCount, this.showfunctions)}
       ${renderGeneralEquipment(
         this.element,
         this.editCount,
-        this.showfunctions
+        this.showfunctions,
+        this.showuserdef
       )}
       ${renderConductingEquipments(
         this.element,
         this.editCount,
-        this.showfunctions
+        this.showfunctions,
+        this.showuserdef
       )}
-      ${renderLines(this.element, this.editCount, this.showfunctions)}
-      ${renderSubstations(this.element, this.editCount, this.showfunctions)}
-      ${renderProcesses(this.element, this.editCount, this.showfunctions)}
-      ${renderFunctions(this.element, this.editCount, this.showfunctions)}
+      ${renderLines(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderSubstations(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderProcesses(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderFunctions(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
     </oscd-action-pane>`;
   }
 
@@ -74,7 +101,8 @@ export class ProcessEditor extends BaseSubstationElementEditor {
 export function renderProcesses(
   parent: Element,
   editCount: number,
-  showfunctions: boolean
+  showfunctions: boolean,
+  showuserdef: boolean
 ): TemplateResult {
   const processes = parent.querySelectorAll(':scope > Process');
 
@@ -84,6 +112,7 @@ export function renderProcesses(
         .element=${process}
         .editCount=${editCount}
         ?showfunctions=${showfunctions}
+        ?showuserdef=${showuserdef}
       ></process-editor>`
   )}`;
 }

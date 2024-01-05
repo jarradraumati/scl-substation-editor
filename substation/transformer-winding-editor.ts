@@ -34,6 +34,7 @@ export class TransformerWindingEditor extends BaseSubstationElementEditor {
           .element=${tapChanger}
           .editCount=${this.editCount}
           ?showfunctions=${this.showfunctions}
+          ?showuserdef=${this.showuserdef}
         ></tap-changer-editor>`
     )}`;
   }
@@ -55,11 +56,21 @@ export class TransformerWindingEditor extends BaseSubstationElementEditor {
         ></mwc-icon-button>
       </abbr>
       ${this.renderAddButton()}
-      ${renderText(this.element, this.editCount, this.showfunctions)}
+      ${renderText(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
       ${renderLNodes(this.element, this.editCount, this.showfunctions)}
       ${this.renderTapChanger()}
-      ${renderEqFunctions(this.element, this.editCount)}
-      ${renderSubEquipments(this.element, this.editCount, this.showfunctions)}
+      ${renderEqFunctions(this.element, this.editCount, this.showuserdef)}
+      ${renderSubEquipments(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
     </oscd-action-pane> `;
   }
 

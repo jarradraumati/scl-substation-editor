@@ -53,19 +53,31 @@ export class LineEditor extends BaseSubstationElementEditor {
         ></mwc-icon-button>
       </abbr>
       ${this.renderAddButton()}
-      ${renderText(this.element, this.editCount, this.showfunctions)}
+      ${renderText(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
       ${renderLNodes(this.element, this.editCount, this.showfunctions)}
       ${renderConductingEquipments(
         this.element,
         this.editCount,
-        this.showfunctions
+        this.showfunctions,
+        this.showuserdef
       )}
       ${renderGeneralEquipment(
         this.element,
         this.editCount,
-        this.showfunctions
+        this.showfunctions,
+        this.showuserdef
       )}
-      ${renderFunctions(this.element, this.editCount, this.showfunctions)}
+      ${renderFunctions(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
     </oscd-action-pane>`;
   }
 
@@ -77,7 +89,8 @@ export class LineEditor extends BaseSubstationElementEditor {
 export function renderLines(
   parent: Element,
   editCount: number,
-  showfunctions: boolean
+  showfunctions: boolean,
+  showuserdef: boolean
 ): TemplateResult {
   const lines = getChildElementsByTagName(parent, 'Line');
 
@@ -87,6 +100,7 @@ export function renderLines(
         .element=${Line}
         .editCount=${editCount}
         ?showfunctions=${showfunctions}
+        ?showuserdef=${showuserdef}
       ></line-editor>`
   )}`;
 }

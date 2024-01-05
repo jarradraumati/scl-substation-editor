@@ -9,8 +9,8 @@ import { substationDoc } from '../substation.testfiles.js';
 
 import { baseStyle } from './base-visual.js';
 
-import './voltage-level-editor.js';
-import type { VoltageLevelEditor } from './voltage-level-editor.js';
+import './substation-editor.js';
+import type { SubstationEditor } from './substation-editor.js';
 
 const factor = window.process && process.env.CI ? 4 : 2;
 function timeout(ms: number) {
@@ -26,14 +26,18 @@ document.body.prepend(style);
 
 describe('Component for SCL element Text ', () => {
   describe('with showfunction false', () => {
-    let editor: VoltageLevelEditor;
+    let editor: SubstationEditor;
     beforeEach(async () => {
-      const voltLv = new DOMParser()
+      const subst = new DOMParser()
         .parseFromString(substationDoc, 'application/xml')
-        .querySelector(`VoltageLevel[name="E1"]`)!;
+        .querySelector(`Substation[name="AA1"]`)!;
 
       editor = await fixture(
-        html`<voltage-level-editor .element=${voltLv}></voltage-level-editor>`
+        html`<substation-editor
+          .element=${subst}
+          ?showfunctions=${false}
+          ?showuserdef=${false}
+        ></substation-editor>`
       );
       document.body.style.width = '1200';
       document.body.style.height = '800';
@@ -52,23 +56,24 @@ describe('Component for SCL element Text ', () => {
       await timeout(600);
       await visualDiff(
         document.body,
-        `text-editor/#1 Unfocused with showfunction=false`
+        `text-editor/#1 Unfocused with showfunction false and showuserdef false`
       );
     });
   });
 
-  describe('with showfunction true', () => {
-    let editor: VoltageLevelEditor;
+  describe('with showfunction true and showuserdef true', () => {
+    let editor: SubstationEditor;
     beforeEach(async () => {
-      const voltLv = new DOMParser()
+      const subst = new DOMParser()
         .parseFromString(substationDoc, 'application/xml')
-        .querySelector(`VoltageLevel[name="E1"]`)!;
+        .querySelector(`Substation[name="AA1"]`)!;
 
       editor = await fixture(
-        html`<voltage-level-editor
-          .element=${voltLv}
+        html`<substation-editor
+          .element=${subst}
           ?showfunctions=${true}
-        ></voltage-level-editor>`
+          ?showuserdef=${true}
+        ></substation-editor>`
       );
       document.body.style.width = '1200';
       document.body.style.height = '800';
@@ -88,7 +93,42 @@ describe('Component for SCL element Text ', () => {
       await timeout(600);
       await visualDiff(
         document.body,
-        `text-editor/#2 Focused with showfunction=true`
+        `text-editor/#2 Focused with showfunction=true and showuserdef true`
+      );
+    });
+  });
+
+  describe('with showfunction true and showuserdef false', () => {
+    let editor: SubstationEditor;
+    beforeEach(async () => {
+      const subst = new DOMParser()
+        .parseFromString(substationDoc, 'application/xml')
+        .querySelector(`Substation[name="AA1"]`)!;
+
+      editor = await fixture(
+        html`<substation-editor
+          .element=${subst}
+          ?showfunctions=${true}
+          ?showuserdef=${false}
+        ></substation-editor>`
+      );
+      document.body.style.width = '1200';
+      document.body.style.height = '800';
+      document.body.prepend(editor);
+    });
+
+    afterEach(async () => {
+      editor.remove();
+    });
+
+    it('looks like the latest snapshot', async () => {
+      await setViewport({ width: 1200, height: 600 });
+
+      await editor.updateComplete;
+      await timeout(600);
+      await visualDiff(
+        document.body,
+        `text-editor/#3 Focused with showfunction true and showuserdef false`
       );
     });
   });

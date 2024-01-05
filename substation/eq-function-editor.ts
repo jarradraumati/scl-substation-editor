@@ -44,12 +44,18 @@ export class EqFunctionEditor extends BaseSubstationElementEditor {
         ></mwc-icon-button>
       </abbr>
       ${this.renderAddButton()}
-      ${renderText(this.element, this.editCount, this.showfunctions)}
+      ${renderText(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
       ${renderLNodes(this.element, this.editCount, this.showfunctions)}
       ${renderGeneralEquipment(
         this.element,
         this.editCount,
-        this.showfunctions
+        this.showfunctions,
+        this.showuserdef
       )}
       ${renderEqSubFunctions(this.element, this.editCount, this.showfunctions)}
     </oscd-action-pane>`;
@@ -81,7 +87,8 @@ export class EqFunctionEditor extends BaseSubstationElementEditor {
 
 export function renderEqFunctions(
   parent: Element,
-  editCount: number
+  editCount: number,
+  showuserdef: boolean
 ): TemplateResult {
   const eqFunctions = getChildElementsByTagName(parent, 'EqFunction');
   return html` ${eqFunctions.map(
@@ -90,6 +97,7 @@ export function renderEqFunctions(
         .element=${eqFunction}
         .editCount=${editCount}
         ?showfunctions=${true}
+        ?showuserdef=${showuserdef}
       ></eq-function-editor>`
   )}`;
 }

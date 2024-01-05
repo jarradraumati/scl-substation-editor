@@ -43,17 +43,24 @@ export class SubstationEditor extends BaseSubstationElementEditor {
         ></mwc-icon-button>
       </abbr>
       ${this.renderAddButton()}
-      ${renderText(this.element, this.editCount, this.showfunctions)}
+      ${renderText(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
       ${renderLNodes(this.element, this.editCount, this.showfunctions)}
       ${renderGeneralEquipment(
         this.element,
         this.editCount,
-        this.showfunctions
+        this.showfunctions,
+        this.showuserdef
       )}
       ${renderPowerTransformerContainer(
         this.element,
         this.editCount,
-        this.showfunctions
+        this.showfunctions,
+        this.showuserdef
       )}
       ${getChildElementsByTagName(this.element, 'VoltageLevel').map(
         voltageLevel =>
@@ -61,9 +68,15 @@ export class SubstationEditor extends BaseSubstationElementEditor {
             .editCount=${this.editCount}
             .element=${voltageLevel}
             ?showfunctions=${this.showfunctions}
+            ?showuserdef=${this.showuserdef}
           ></voltage-level-editor>`
       )}
-      ${renderFunctions(this.element, this.editCount, this.showfunctions)}
+      ${renderFunctions(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
     </oscd-action-pane>`;
   }
 
@@ -75,7 +88,8 @@ export class SubstationEditor extends BaseSubstationElementEditor {
 export function renderSubstations(
   parent: Element,
   editCount: number,
-  showfunctions: boolean
+  showfunctions: boolean,
+  showuserdef: boolean
 ): TemplateResult {
   const substations = getChildElementsByTagName(parent, 'Substation');
 
@@ -85,6 +99,7 @@ export function renderSubstations(
         .element=${Substation}
         .editCount=${editCount}
         ?showfunctions=${showfunctions}
+        ?showuserdef=${showuserdef}
       ></substation-editor>`
   )}`;
 }

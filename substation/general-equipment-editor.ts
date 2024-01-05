@@ -46,9 +46,14 @@ export class GeneralEquipmentEditor extends BaseSubstationElementEditor {
           ></mwc-icon-button>
         </abbr>
         ${this.renderAddButton()}
-        ${renderText(this.element, this.editCount, this.showfunctions)}
+        ${renderText(
+          this.element,
+          this.editCount,
+          this.showfunctions,
+          this.showuserdef
+        )}
         ${renderLNodes(this.element, this.editCount, this.showfunctions)}
-        ${renderEqFunctions(this.element, this.editCount)}
+        ${renderEqFunctions(this.element, this.editCount, this.showuserdef)}
       </oscd-action-pane>`;
 
     return html`<oscd-action-icon label=${this.header}>
@@ -89,7 +94,8 @@ export class GeneralEquipmentEditor extends BaseSubstationElementEditor {
 export function renderGeneralEquipment(
   parent: Element,
   editCount: number,
-  showfunctions: boolean
+  showfunctions: boolean,
+  showuserdef: boolean
 ): TemplateResult {
   const generalEquipment = getChildElementsByTagName(
     parent,
@@ -103,6 +109,7 @@ export function renderGeneralEquipment(
           .editCount=${editCount}
           .element=${gEquipment}
           ?showfunctions=${showfunctions}
+          ?showuserdef=${showuserdef}
         ></general-equipment-editor>`
     )}`;
 
@@ -114,6 +121,7 @@ export function renderGeneralEquipment(
               .editCount=${editCount}
               .element=${gEquipment}
               ?showfunctions=${showfunctions}
+              ?showuserdef=${showuserdef}
             ></general-equipment-editor>`
         )}
       </div>`

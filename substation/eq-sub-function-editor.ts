@@ -8,6 +8,7 @@ import '@openscd/oscd-action-pane';
 import { renderGeneralEquipment } from './general-equipment-editor.js';
 import { renderLNodes } from './l-node-editor.js';
 import { renderText } from './text-editor.js';
+import { renderPrivate } from './private-editor.js';
 
 import { getChildElementsByTagName } from '../foundation.js';
 import BaseSubstationElementEditor from './base-substation-element-editor.js';
@@ -45,6 +46,12 @@ export class EqSubFunctionEditor extends BaseSubstationElementEditor {
       </abbr>
       ${this.renderAddButton()}
       ${renderText(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderPrivate(
         this.element,
         this.editCount,
         this.showfunctions,

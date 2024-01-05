@@ -11,6 +11,7 @@ import { renderLNodes } from './l-node-editor.js';
 import { renderEqFunctions } from './eq-function-editor.js';
 import { renderSubEquipments } from './sub-equipment-editor.js';
 import { renderText } from './text-editor.js';
+import { renderPrivate } from './private-editor.js';
 
 import {
   getChildElementsByTagName,
@@ -91,6 +92,12 @@ export class PowerTransformerEditor extends BaseSubstationElementEditor {
         </abbr>
         ${this.renderAddButton()} ${this.renderContentPane()}
         ${renderText(
+          this.element,
+          this.editCount,
+          this.showfunctions,
+          this.showuserdef
+        )}
+        ${renderPrivate(
           this.element,
           this.editCount,
           this.showfunctions,

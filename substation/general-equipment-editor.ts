@@ -9,6 +9,7 @@ import '@openscd/oscd-action-pane';
 import { renderLNodes } from './l-node-editor.js';
 import { renderEqFunctions } from './eq-function-editor.js';
 import { renderText } from './text-editor.js';
+import { renderPrivate } from './private-editor.js';
 
 import {
   generalConductingEquipmentIcon,
@@ -47,6 +48,12 @@ export class GeneralEquipmentEditor extends BaseSubstationElementEditor {
         </abbr>
         ${this.renderAddButton()}
         ${renderText(
+          this.element,
+          this.editCount,
+          this.showfunctions,
+          this.showuserdef
+        )}
+        ${renderPrivate(
           this.element,
           this.editCount,
           this.showfunctions,

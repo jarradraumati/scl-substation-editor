@@ -1,6 +1,7 @@
 export const substationDoc = `<SCL>
     <Substation name="AA1">
         <Text>This is a text element</Text>
+        <Private type="OpenEnergyTools-Test-Private-Type" />
         <LNode iedName="IED1" ldInst="ldInst" prefix="prefix" lnClass="Lxxx" lnInst="1" />
         <LNode iedName="IED1" ldInst="ldInst" prefix="prefix" lnClass="Axxx" lnInst="1" />
         <LNode iedName="IED1" ldInst="ldInst" prefix="prefix" lnClass="Cxxx" lnInst="1" />
@@ -23,17 +24,22 @@ export const substationDoc = `<SCL>
             <Text>Hello world</Text>
             <Bay name="Q01" >
                 <Text>This is a text element</Text>
+                <Private type="OpenEnergyTools-Test-Private-Type" />
                 <Function name="func1" >
                     <Text>This is a text element</Text>
+                    <Private type="OpenEnergyTools-Test-Private-Type" />
                     <SubFunction name="subFunc1" >
                         <Text>This is a text element</Text>
+                        <Private type="OpenEnergyTools-Test-Private-Type" />
                         <LNode iedName="IED1" ldInst="ldInst" lnClass="PTOC" lnInst="1" />
                         <LNode iedName="IED1" ldInst="ldInst" lnClass="PTOC" lnInst="2" />
                         <GeneralEquipment name="genEquip1" desc="desc" />
                             <Text>This is a text element</Text>
+                            <Private type="OpenEnergyTools-Test-Private-Type" />
                         <GeneralEquipment name="genEquip2" />
                         <ConductingEquipment name="condEquip1" desc="desc" type="CBR" />
                             <Text>This is a text element</Text>
+                            <Private type="OpenEnergyTools-Test-Private-Type" />
                         <ConductingEquipment name="condEquip2" type="DIS" />
                         <SubFunction name="subSubFunc1" desc="desc" type="type" >
                             <LNode iedName="IED1" ldInst="ldInst" lnClass="PTOC" lnInst="1" />
@@ -58,8 +64,10 @@ export const substationDoc = `<SCL>
                 <ConductingEquipment name="QA1" desc="desc" type="CBR" >
                     <EqFunction name="eqFunc1" desc="desc" type="type">
                         <Text>This is a text element</Text>
+                        <Private type="OpenEnergyTools-Test-Private-Type" />
                         <EqSubFunction name="Trip" desc="" >
                             <Text>This is a text element</Text>
+                            <Private type="OpenEnergyTools-Test-Private-Type" />
                             <LNode iedName="IED1" ldInst="ldInst" lnClass="XCBR" lnInst="1" />
                             <LNode iedName="IED1" ldInst="ldInst" lnClass="PTOC" lnInst="1" />
                             <GeneralEquipment name="someGenEquipment1" desc="desc" >
@@ -115,11 +123,13 @@ export const substationDoc = `<SCL>
             <Bay name="PowTrans" >
                 <PowerTransformer name="PTR1" type="PTR" >
                     <Text>This is a text element</Text>
-                <PowerTransformer name="PTR1" type="PTR" >  
+                    <Private type="OpenEnergyTools-Test-Private-Type" />
                     <TransformerWinding name="winding1" >
                         <Text>This is a text element</Text>
+                        <Private type="OpenEnergyTools-Test-Private-Type" />
                         <TapChanger name="ch1" >
                             <Text>This is a text element</Text>
+                            <Private type="OpenEnergyTools-Test-Private-Type" />
                             <LNode iedName="IED1" ldInst="ldInst" lnClass="PTOC" lnInst="1" />
                             <LNode iedName="IED1" ldInst="ldInst" lnClass="PTOC" lnInst="2" />
                             <SubEquipment name="phsA" />

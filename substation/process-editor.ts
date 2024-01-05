@@ -11,6 +11,7 @@ import { renderLines } from './line-editor.js';
 import { renderLNodes } from './l-node-editor.js';
 import { renderSubstations } from './substation-editor.js';
 import { renderText } from './text-editor.js';
+import { renderPrivate } from './private-editor.js';
 
 import { styles } from '../foundation.js';
 import BaseSubstationElementEditor from './base-substation-element-editor.js';
@@ -43,6 +44,12 @@ export class ProcessEditor extends BaseSubstationElementEditor {
       ></abbr>
       ${this.renderAddButton()}
       ${renderText(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderPrivate(
         this.element,
         this.editCount,
         this.showfunctions,

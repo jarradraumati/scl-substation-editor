@@ -11,10 +11,9 @@ import { renderEqFunctions } from './eq-function-editor.js';
 import { renderText } from './text-editor.js';
 import { renderPrivate } from './private-editor.js';
 
-import {
-  generalConductingEquipmentIcon,
-  getChildElementsByTagName,
-} from '../foundation.js';
+import { generalConductingEquipmentIcon } from '../icons.js';
+
+import { getChildElementsByTagName } from '../foundation.js';
 import BaseSubstationElementEditor from './base-substation-element-editor.js';
 
 @customElement('general-equipment-editor')

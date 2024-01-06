@@ -13,7 +13,9 @@ import { renderEqFunctions } from './eq-function-editor.js';
 import { renderText } from './text-editor.js';
 import { renderPrivate } from './private-editor.js';
 
-import { getChildElementsByTagName, getIcon, styles } from '../foundation.js';
+import { getIcon } from '../icons.js';
+
+import { getChildElementsByTagName, styles } from '../foundation.js';
 import { renderSubEquipments } from './sub-equipment-editor.js';
 import BaseSubstationElementEditor from './base-substation-element-editor.js';
 

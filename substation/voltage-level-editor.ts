@@ -13,6 +13,8 @@ import { renderPowerTransformerContainer } from './power-transformer-editor.js';
 import { renderText } from './text-editor.js';
 import { renderPrivate } from './private-editor.js';
 
+import { voltageLevelIcon } from '../icons.js';
+
 import { getChildElementsByTagName, styles } from '../foundation.js';
 import BaseSubstationElementEditor from './base-substation-element-editor.js';
 
@@ -67,6 +69,9 @@ export class VoltageLevelEditor extends BaseSubstationElementEditor {
           @click=${() => this.removeElement()}
         ></mwc-icon-button>
       </abbr>
+      <mwc-icon slot="icon" style="width:24px;height:24px"
+        >${voltageLevelIcon}</mwc-icon
+      >
       ${this.renderAddButton()}
       ${renderText(
         this.element,

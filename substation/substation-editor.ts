@@ -28,7 +28,7 @@ export class SubstationEditor extends BaseSubstationElementEditor {
   }
 
   render(): TemplateResult {
-    return html`<oscd-action-pane label="${this.header}">
+    return html`<oscd-action-pane label="${this.header}" icon="margin">
       <abbr slot="action" title="Edit">
         <mwc-icon-button
           class="action edit"

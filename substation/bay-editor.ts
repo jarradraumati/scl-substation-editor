@@ -11,6 +11,8 @@ import { renderGeneralEquipment } from './general-equipment-editor.js';
 import { renderPowerTransformerContainer } from './power-transformer-editor.js';
 import { renderLNodes } from './l-node-editor.js';
 
+import { bayIcon } from '../icons.js';
+
 import { styles } from '../foundation.js';
 import BaseSubstationElementEditor from './base-substation-element-editor.js';
 
@@ -41,6 +43,7 @@ export class BayEditor extends BaseSubstationElementEditor {
           @click=${() => this.removeElement()}
         ></mwc-icon-button>
       </abbr>
+      <mwc-icon slot="icon" style="width:24px;height:24px">${bayIcon}</mwc-icon>
       ${this.renderAddButton()}
       ${renderLNodes(this.element, this.editCount, this.showfunctions)}
       ${renderGeneralEquipment(

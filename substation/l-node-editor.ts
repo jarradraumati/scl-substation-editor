@@ -88,6 +88,13 @@ export class LNodeEditor extends BaseSubstationElementEditor {
         icon="delete"
         @click="${() => this.removeElement()}"
       ></mwc-fab>
+      <mwc-fab
+        class="action edit"
+        slot="action"
+        mini
+        icon="developer_board"
+        @click="${() => this.openMapWizard()}"
+      ></mwc-fab>
     </oscd-action-icon>`;
   }
 }

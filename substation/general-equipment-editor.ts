@@ -9,10 +9,9 @@ import '@openscd/oscd-action-pane';
 import { renderLNodes } from './l-node-editor.js';
 import { renderEqFunctions } from './eq-function-editor.js';
 
-import {
-  generalConductingEquipmentIcon,
-  getChildElementsByTagName,
-} from '../foundation.js';
+import { generalConductingEquipmentIcon } from '../icons.js';
+
+import { getChildElementsByTagName } from '../foundation.js';
 import BaseSubstationElementEditor from './base-substation-element-editor.js';
 
 @customElement('general-equipment-editor')

@@ -410,12 +410,311 @@ export const earthSwitchIcon = html`<svg
   />
 </svg>`;
 
+export const infeedingLine = html`<svg
+  viewBox="0 0 25 25"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M 12.5 0 L 12.5 4"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <polygon
+    points="4,4 12.5,21 21,4"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linejoin="round"
+    stroke-linecap="round"
+  />
+</svg>`;
+
+export const synchronousMachine = html`<svg
+  viewBox="0 0 25 25"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <circle
+    cx="12.5"
+    cy="12.5"
+    r="11"
+    stroke-width="1.5"
+    stroke="currentColor"
+    fill="transparent"
+  />
+  <path
+    d="m 16.6,12.5 c -0.7,1.4 -1.3,2.8 -2.1,2.8 -1.5,0 -2.6,-5.6 -4.1,-5.6 -0.7,0 -1.4,1.4 -2.1,2.8"
+    stroke="currentColor"
+    fill="none"
+    stroke-width="1.2"
+    stroke-linecap="round"
+  />
+</svg>`;
+
+export const motor = html`<svg
+  viewBox="0 0 25 25"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <circle
+    cx="12.5"
+    cy="12.5"
+    r="11"
+    stroke-width="1.5"
+    stroke="currentColor"
+    fill="transparent"
+  />
+  <path
+    d="m 12.5,15.5 2.3,-7.8 h 1.4 v 9.6 h -1.1 v -3.7 l 0.1,-3.7 -2.3,7.4 h -0.9 L 9.8,9.8 9.9,13.6 v 3.7 H 8.8 V 7.7 h 1.4 z"
+    stroke="currentColor"
+    fill="currentColor"
+    stroke-width="0.3"
+    stroke-linecap="round"
+  />
+</svg>`;
+
+export const line = html`<svg
+  viewBox="0 0 25 25"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M 12.5,0 V 25"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="m 10.3,12.5 4.3,-2.5"
+    fill="currentColor"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="m 10.3,15 4.3,-2.5"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+</svg>`;
+
+export const neutralResistor = html`<svg
+  viewBox="0 0 25 25"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M 12.5,0 V 4"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="m 12.5 25 v -4"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <rect
+    y="4"
+    x="8.5"
+    height="17"
+    width="8"
+    stroke="currentColor"
+    fill="none"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+</svg>`;
+
+export const reactor = html`<svg
+  viewBox="0 0 25 25"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="m 4.5,12.5 h 8 V 0"
+    stroke="currentColor"
+    fill="none"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="m 4.5,12.5 a 8,8 0 0 1 8,-8 8,8 0 0 1 8,8 8,8 0 0 1 -8,8"
+    stroke="currentColor"
+    fill="none"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="M 12.5,20.5 V 25"
+    stroke="currentColor"
+    fill="none"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+</svg>`;
+
+export const capacitor = html`<svg
+  viewBox="0 0 25 25"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M 6.5,10.1 H 18.5"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="M 12.5,0 V 10.1"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="M 6.5,14.9 H 18.5"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="M 12.5,14.9 V 25"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+</svg>`;
+
+export const generator = html`<svg
+  viewBox="0 0 25 25"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <circle
+    cx="12.5"
+    cy="12.5"
+    r="11"
+    stroke-width="1.5"
+    stroke="currentColor"
+    fill="transparent"
+  />
+  <path
+    d="m 16.2,12.5 v 4.2 q -0.2,0.2 -0.6,0.6 -0.4,0.4 -1.1,0.7 -0.7,0.3 -1.8,0.3 -1.8,0 -2.9,-1.2 -1.1,-1.2 -1.1,-3.6 v -2.1 q 0,-2.4 1,-3.6 1,-1.1 2.9,-1.1 1.7,0 2.6,0.9 0.9,0.9 1,2.6 h -1.4 q -0.1,-1.1 -0.6,-1.6 -0.5,-0.6 -1.5,-0.6 -1.3,0 -1.8,0.9 -0.5,0.9 -0.5,2.6 v 2.1 q 0,1.8 0.7,2.7 0.7,0.9 1.9,0.9 1,0 1.4,-0.3 0.4,-0.3 0.6,-0.5 v -2.6 h -2.1 v -1.2 z"
+    stroke="currentColor"
+    fill="currentColor"
+    stroke-width="0.3"
+    stroke-linecap="round"
+  />
+</svg>`;
+
+export const powerCable = html`<svg
+  viewBox="0 0 25 25"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M 12.5,0 V 4"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="M 9.4,4.2 H 15.6 L 12.5,8.3 Z"
+    fill="currentColor"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="m 12.5,8.3 v 9"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="m 9.4,21.3 h 6.2 l -3.1,-4.1 z"
+    fill="currentColor"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="m 12.5,21.3 v 4"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+</svg>`;
+
+export const surgeArresterIcon = html`<svg
+  viewBox="0 0 25 25"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M 12.5,0 V 8"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="m 12.5,21 v 4"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <line
+    x1="10"
+    y1="24.25"
+    x2="15"
+    y2="24.25"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="M 11.2,8 12.5,11 13.8,8 Z"
+    fill="currentColor"
+    stroke="currentColor"
+    stroke-width="1"
+    stroke-linecap="round"
+  />
+  <rect
+    y="4"
+    x="8.5"
+    height="17"
+    width="8"
+    stroke="currentColor"
+    fill="none"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+</svg> `;
+
 const typeIcons: Partial<Record<string, TemplateResult>> = {
   CBR: circuitBreakerIcon,
   DIS: disconnectorIcon,
   CTR: currentTransformerIcon,
   VTR: voltageTransformerIcon,
   ERS: earthSwitchIcon,
+  CAB: powerCable,
+  CAP: capacitor,
+  GEN: generator,
+  IFL: infeedingLine,
+  LIN: line,
+  MOT: motor,
+  REA: reactor,
+  RES: neutralResistor,
+  SAR: surgeArresterIcon,
+  SMC: synchronousMachine,
 };
 
 export function crossProduct<T>(...arrays: T[][]): T[][] {

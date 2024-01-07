@@ -7,8 +7,16 @@ import '@material/mwc-icon-button';
 
 import '@openscd/oscd-action-pane';
 
+import { renderProcessResources } from './iec61850-6-100/process-resources.js';
+import { renderPowerSystemRelations } from './iec61850-6-100/power-system-relations.js';
+import { renderVariable } from './iec61850-6-100/variable.js';
+import { renderServiceSpecifications } from './iec61850-6-100/service-specifications.js';
+import { renderAllocationRole } from './iec61850-6-100/allocation-role.js';
+import { renderApplication } from './iec61850-6-100/application.js';
+
 import { getChildElementsByTagName } from '../foundation.js';
 import BaseSubstationElementEditor from './base-substation-element-editor.js';
+import { renderBehaviorDescription } from './iec61850-6-100/behavior-description.js';
 
 @customElement('private-editor')
 export class PrivateEditor extends BaseSubstationElementEditor {
@@ -41,6 +49,48 @@ export class PrivateEditor extends BaseSubstationElementEditor {
           @click=${() => this.removeElement()}
         ></mwc-icon-button>
       </abbr>
+      ${renderApplication(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderBehaviorDescription(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderAllocationRole(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderServiceSpecifications(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderProcessResources(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderPowerSystemRelations(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderVariable(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
     </oscd-action-pane>`;
   }
 

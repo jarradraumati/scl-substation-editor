@@ -7,7 +7,7 @@ export function getChildElementsByTagName(
   tag: string | null | undefined
 ): Element[] {
   if (!element || !tag) return [];
-  return Array.from(element.children).filter(child => child.tagName === tag);
+  return Array.from(element.children).filter(child => child.localName === tag);
 }
 
 /** Common `CSS` styles used by substation subeditors */

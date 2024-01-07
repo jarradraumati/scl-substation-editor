@@ -13,6 +13,7 @@ import { newEditEvent } from '@openscd/open-scd-core';
 import { getChildren } from '@openenergytools/scl-lib';
 
 import { newCreateWizardEvent, newEditWizardEvent } from '../foundation.js';
+import { get6100Children } from './iec61850-6-100/getChildren.js';
 
 /** base class hosting global properties and the remove method */
 export default class BaseSubstationElementEditor extends LitElement {
@@ -31,6 +32,10 @@ export default class BaseSubstationElementEditor extends LitElement {
   /** Whether text/private type element shall be shown */
   @property({ type: Boolean })
   showuserdef = false;
+
+  /** Whether private type element is eIEC61850-6-100 */
+  @property({ type: Boolean })
+  is6100 = false;
 
   @query('mwc-menu') addMenu?: Menu;
 
@@ -67,6 +72,18 @@ export default class BaseSubstationElementEditor extends LitElement {
   private renderAddButtons(): TemplateResult[] {
     const alreadyHasText = this.element.querySelector(':scope > Text') ?? false;
 
+    if (this.is6100) {
+      return get6100Children(this.element)
+        .filter(
+          child => child !== 'Text' || (child === 'Text' && !alreadyHasText)
+        )
+        .map(
+          child =>
+            html`<mwc-list-item class="action add" value="${child}"
+              ><span>${child}</span></mwc-list-item
+            >`
+        );
+    }
     return getChildren(this.element)
       .filter(
         child => child !== 'Text' || (child === 'Text' && !alreadyHasText)

@@ -7,6 +7,7 @@ import { renderSubstations } from './substation/substation-editor.js';
 import { renderLines } from './substation/line-editor.js';
 import { renderProcesses } from './substation/process-editor.js';
 import { getChildElementsByTagName } from './foundation.js';
+import { renderPrivate } from './substation/private-editor.js';
 
 function shouldShowFunctions(): boolean {
   return localStorage.getItem('showfunctions') === 'on';
@@ -101,6 +102,12 @@ export default class SclSubstationEditorPlugin extends LitElement {
         </nav>
       </h1>
       <section>
+        ${renderPrivate(
+          this.doc.documentElement,
+          this.editCount,
+          shouldShowFunctions(),
+          shouldShowUserDef()
+        )}
         ${renderSubstations(
           this.doc.documentElement,
           this.editCount,

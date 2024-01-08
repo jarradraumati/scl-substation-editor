@@ -144,7 +144,17 @@ export const tags6100: Record<
 > = {
   Private: {
     parents: [],
-    children: ['ProcessResources', 'ServiceSpecifications'],
+    children: [
+      'ProcessResources',
+      'ServiceSpecifications',
+      'Application',
+      'Variable',
+      'LNodeSpecNaming',
+      'LNodeInputs',
+      'DOS',
+      'AllocationRole',
+      'BehaviorDescription',
+    ],
   },
   SubCategory: {
     parents: ['FunctionCategory'],

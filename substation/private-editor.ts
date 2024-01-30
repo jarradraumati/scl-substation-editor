@@ -14,10 +14,9 @@ import BaseSubstationElementEditor from './base-substation-element-editor.js';
 export class PrivateEditor extends BaseSubstationElementEditor {
   @state()
   get header(): string {
-    // const content = this.element.textContent;
     const privateType = this.element.getAttribute('type');
 
-    return `Private - ${privateType}`;
+    return `${privateType}`;
   }
 
   render(): TemplateResult {
@@ -41,6 +40,7 @@ export class PrivateEditor extends BaseSubstationElementEditor {
           @click=${() => this.removeElement()}
         ></mwc-icon-button>
       </abbr>
+      <div class="private-content">${this.element.innerHTML}</div>
     </oscd-action-pane>`;
   }
 
@@ -48,6 +48,12 @@ export class PrivateEditor extends BaseSubstationElementEditor {
     abbr {
       text-decoration: none;
       border-bottom: none;
+    }
+    .private-content {
+      word-wrap: break-word;
+      overflow: clip;
+      text-overflow: ellipsis;
+      font-family: var(--oscd-action-pane-theme-font, var(--oscd-theme-font));
     }
   `;
 }

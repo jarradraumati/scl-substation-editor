@@ -16,7 +16,7 @@ export class TextEditor extends BaseSubstationElementEditor {
   get header(): string {
     const content = this.element.textContent;
 
-    return `Text - ${content}`;
+    return `${content}`;
   }
 
   render(): TemplateResult {
@@ -40,6 +40,7 @@ export class TextEditor extends BaseSubstationElementEditor {
           @click=${() => this.removeElement()}
         ></mwc-icon-button>
       </abbr>
+      <div class="text-content">${this.element.innerHTML}</div>
     </oscd-action-pane>`;
   }
 
@@ -47,6 +48,11 @@ export class TextEditor extends BaseSubstationElementEditor {
     abbr {
       text-decoration: none;
       border-bottom: none;
+    }
+    .text-content {
+      white-space: pre-line;
+      word-wrap: break-word;
+      font-family: var(--oscd-action-pane-theme-font, var(--oscd-theme-font));
     }
   `;
 }

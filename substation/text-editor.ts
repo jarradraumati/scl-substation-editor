@@ -40,7 +40,7 @@ export class TextEditor extends BaseSubstationElementEditor {
           @click=${() => this.removeElement()}
         ></mwc-icon-button>
       </abbr>
-      <div class="text-content">${this.element.innerHTML}</div>
+      <div class="text-content">${this.element.textContent}</div>
     </oscd-action-pane>`;
   }
 

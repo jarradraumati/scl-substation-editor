@@ -29,6 +29,8 @@ export class PrivateEditor extends BaseSubstationElementEditor {
   }
 
   render(): TemplateResult {
+    if (this.element.getAttribute('type') === 'eIEC61850-6-100')
+      this.is6100 = true;
     return html`<oscd-action-pane
       label="${this.header}"
       icon="contact_page"
@@ -49,6 +51,7 @@ export class PrivateEditor extends BaseSubstationElementEditor {
           @click=${() => this.removeElement()}
         ></mwc-icon-button>
       </abbr>
+      ${this.renderAddButton()}
       ${renderApplication(
         this.element,
         this.editCount,

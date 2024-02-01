@@ -15,9 +15,8 @@ export class FunctionRoleEditor extends BaseSubstationElementEditor {
   @state()
   private get header(): string {
     const name = this.element.getAttribute('name');
-    const desc = this.element.getAttribute('desc');
 
-    return `FunctionRole${name}${desc ? ` - ${desc}` : ''}`;
+    return `FunctionRole${name ? ` - ${name}` : ''}`;
   }
 
   render(): TemplateResult {

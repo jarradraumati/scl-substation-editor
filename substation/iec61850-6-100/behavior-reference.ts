@@ -58,7 +58,7 @@ export function renderBehaviorReference(
 ): TemplateResult {
   const BehaviorReference = getChildElementsByTagName(
     parent,
-    'BehaviorReferenceTo'
+    'BehaviorReference'
   );
   return html` ${BehaviorReference.map(
     behRef =>

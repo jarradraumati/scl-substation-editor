@@ -10,6 +10,7 @@ import BaseSubstationElementEditor from '../base-substation-element-editor.js';
 import { renderGooseParameters } from './goose-parameters.js';
 import { renderSMVParameters } from './smv-parameters.js';
 import { renderReportParameters } from './report-parameters.js';
+import { renderText } from '../text-editor.js';
 
 /** Pane rendering `CommunicationServiceSpecifications` element with its children */
 @customElement('communication-service-specifications-editor')
@@ -43,6 +44,12 @@ export class CommunicationServiceSpecificationsEditor extends BaseSubstationElem
         ></mwc-icon-button>
       </abbr>
       ${this.renderAddButton()}
+      ${renderText(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
       ${renderGooseParameters(
         this.element,
         this.editCount,
@@ -68,22 +75,6 @@ export class CommunicationServiceSpecificationsEditor extends BaseSubstationElem
     abbr {
       text-decoration: none;
       border-bottom: none;
-    }
-
-    .content.actionicon {
-      display: grid;
-      grid-gap: 12px;
-      padding: 8px 12px 16px;
-      box-sizing: border-box;
-      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
-    }
-
-    .container.processresource {
-      display: grid;
-      grid-gap: 12px;
-      padding: 8px 12px 16px;
-      box-sizing: border-box;
-      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
     }
   `;
 }

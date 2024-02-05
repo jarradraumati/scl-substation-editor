@@ -1,25 +1,22 @@
-/* eslint-disable no-use-before-define */
 /* eslint-disable import/no-extraneous-dependencies */
 import { TemplateResult, css, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 
-import '@openscd/oscd-action-pane';
+import '@material/mwc-fab';
+import '@material/mwc-icon-button';
 
-import { renderText } from '../text-editor.js';
+import '@openscd/oscd-action-pane';
 
 import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
-import { renderFunctionRole } from './function-role.js';
-import { renderAllocationRoleRef } from './allocation-role-ref.js';
 
-/** Pane rendering `Application` element with its children */
-@customElement('application-editor')
-export class ApplicationEditor extends BaseSubstationElementEditor {
+@customElement('bay-type')
+export class BayType extends BaseSubstationElementEditor {
   @state()
-  private get header(): string {
-    const name = this.element.getAttribute('name');
+  get header(): string {
+    const content = this.element.textContent;
 
-    return `Application${name ? ` - ${name}` : ''}`;
+    return `${content}`;
   }
 
   render(): TemplateResult {
@@ -27,10 +24,11 @@ export class ApplicationEditor extends BaseSubstationElementEditor {
       this.is6100 = true;
     return html`<oscd-action-pane
       label="${this.header}"
-      icon="widgets"
+      icon="notes"
       secondary
       highlighted
-      ><abbr slot="action" title="Edit">
+    >
+      <abbr slot="action" title="Edit">
         <mwc-icon-button
           class="action edit"
           icon="edit"
@@ -44,25 +42,6 @@ export class ApplicationEditor extends BaseSubstationElementEditor {
           @click=${() => this.removeElement()}
         ></mwc-icon-button>
       </abbr>
-      ${this.renderAddButton()}
-      ${renderText(
-        this.element,
-        this.editCount,
-        this.showfunctions,
-        this.showuserdef
-      )}
-      ${renderAllocationRoleRef(
-        this.element,
-        this.editCount,
-        this.showfunctions,
-        this.showuserdef
-      )}
-      ${renderFunctionRole(
-        this.element,
-        this.editCount,
-        this.showfunctions,
-        this.showuserdef
-      )}
     </oscd-action-pane>`;
   }
 
@@ -74,20 +53,20 @@ export class ApplicationEditor extends BaseSubstationElementEditor {
   `;
 }
 
-export function renderApplication(
+export function renderBayType(
   parent: Element,
   editCount: number,
   showfunctions: boolean,
   showuserdef: boolean
 ): TemplateResult {
-  const Application = getChildElementsByTagName(parent, 'Application');
-  return html` ${Application.map(
-    app =>
-      html`<application-editor
-        .element=${app}
+  const bayType = getChildElementsByTagName(parent, 'BayType');
+  return html`${bayType.map(
+    fbayType =>
+      html`<bay-type
         .editCount=${editCount}
+        .element=${fbayType}
         ?showfunctions=${showfunctions}
         ?showuserdef=${showuserdef}
-      ></application-editor>`
+      ></bay-type>`
   )}`;
 }

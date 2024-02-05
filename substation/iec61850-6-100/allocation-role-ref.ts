@@ -10,17 +10,13 @@ import BaseSubstationElementEditor from '../base-substation-element-editor.js';
 import { renderText } from '../text-editor.js';
 import { renderFunctionalVariantRef } from './functional-variant-ref.js';
 
-/** Pane rendering `BehaviorDescriptionRef` element with its children */
-@customElement('behavior-description-ref-editor')
-export class BehaviorDescriptionRefEditor extends BaseSubstationElementEditor {
+/** Pane rendering `AllocationRoleRef` element with its children */
+@customElement('allocation-role-ref-editor')
+export class AllocationRoleRefEditor extends BaseSubstationElementEditor {
   @state()
   private get header(): string {
-    const behaviorDescription = this.element.getAttribute(
-      'behaviorDescription'
-    );
-    return `BehaviorDescriptionRef${
-      behaviorDescription ? ` - ${behaviorDescription}` : ''
-    }`;
+    const allocationRole = this.element.getAttribute('AllocationRole');
+    return `AllocationRoleRef${allocationRole ? ` - ${allocationRole}` : ''}`;
   }
 
   render(): TemplateResult {
@@ -65,23 +61,23 @@ export class BehaviorDescriptionRefEditor extends BaseSubstationElementEditor {
   `;
 }
 
-export function renderBehaviorDescriptionRef(
+export function renderAllocationRoleRef(
   parent: Element,
   editCount: number,
   showfunctions: boolean,
   showuserdef: boolean
 ): TemplateResult {
-  const BehaviorDescriptionRef = getChildElementsByTagName(
+  const AllocationRoleRef = getChildElementsByTagName(
     parent,
-    'BehaviorDescriptionRef'
+    'AllocationRoleRef'
   );
-  return html` ${BehaviorDescriptionRef.map(
+  return html` ${AllocationRoleRef.map(
     behDescRef =>
-      html`<behavior-description-ref-editor
+      html`<allocation-role-ref-editor
         .element=${behDescRef}
         .editCount=${editCount}
         ?showfunctions=${showfunctions}
         ?showuserdef=${showuserdef}
-      ></behavior-description-ref-editor>`
+      ></allocation-role-ref-editor>`
   )}`;
 }

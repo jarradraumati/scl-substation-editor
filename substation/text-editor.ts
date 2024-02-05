@@ -16,7 +16,7 @@ export class TextEditor extends BaseSubstationElementEditor {
   get header(): string {
     const content = this.element.textContent;
 
-    return `Text - ${content}`;
+    return `${content}`;
   }
 
   render(): TemplateResult {

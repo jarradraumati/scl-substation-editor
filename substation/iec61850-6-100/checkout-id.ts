@@ -7,26 +7,24 @@ import '@openscd/oscd-action-pane';
 
 import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
-import { renderText } from '../text-editor.js';
-import { renderFunctionalVariantRef } from './functional-variant-ref.js';
 
-/** Pane rendering `BehaviorDescriptionRef` element with its children */
-@customElement('behavior-description-ref-editor')
-export class BehaviorDescriptionRefEditor extends BaseSubstationElementEditor {
+/** Pane rendering `CheckoutID` element with its children */
+@customElement('checkout-id-editor')
+export class CheckoutIDEditor extends BaseSubstationElementEditor {
   @state()
   private get header(): string {
-    const behaviorDescription = this.element.getAttribute(
-      'behaviorDescription'
-    );
-    return `BehaviorDescriptionRef${
-      behaviorDescription ? ` - ${behaviorDescription}` : ''
-    }`;
+    const desc = this.element.getAttribute('desc');
+
+    return `CheckoutID${desc ? ` - ${desc}` : ''}`;
   }
 
   render(): TemplateResult {
     if (this.element.namespaceURI === 'http://www.iec.ch/61850/2019/SCL/6-100')
       this.is6100 = true;
-    return html`<oscd-action-pane label="${this.header}" icon="commit" secondary
+    return html`<oscd-action-pane
+      label="${this.header}"
+      icon="approval"
+      secondary
       ><abbr slot="action" title="Edit">
         <mwc-icon-button
           class="action edit"
@@ -41,19 +39,6 @@ export class BehaviorDescriptionRefEditor extends BaseSubstationElementEditor {
           @click=${() => this.removeElement()}
         ></mwc-icon-button>
       </abbr>
-      ${this.renderAddButton()}
-      ${renderText(
-        this.element,
-        this.editCount,
-        this.showfunctions,
-        this.showuserdef
-      )}
-      ${renderFunctionalVariantRef(
-        this.element,
-        this.editCount,
-        this.showfunctions,
-        this.showuserdef
-      )}
     </oscd-action-pane>`;
   }
 
@@ -65,23 +50,20 @@ export class BehaviorDescriptionRefEditor extends BaseSubstationElementEditor {
   `;
 }
 
-export function renderBehaviorDescriptionRef(
+export function renderCheckoutID(
   parent: Element,
   editCount: number,
   showfunctions: boolean,
   showuserdef: boolean
 ): TemplateResult {
-  const BehaviorDescriptionRef = getChildElementsByTagName(
-    parent,
-    'BehaviorDescriptionRef'
-  );
-  return html` ${BehaviorDescriptionRef.map(
-    behDescRef =>
-      html`<behavior-description-ref-editor
-        .element=${behDescRef}
+  const CheckoutID = getChildElementsByTagName(parent, 'CheckoutID');
+  return html` ${CheckoutID.map(
+    chkoutid =>
+      html`<checkout-id-editor
+        .element=${chkoutid}
         .editCount=${editCount}
         ?showfunctions=${showfunctions}
         ?showuserdef=${showuserdef}
-      ></behavior-description-ref-editor>`
+      ></checkout-id-editor>`
   )}`;
 }

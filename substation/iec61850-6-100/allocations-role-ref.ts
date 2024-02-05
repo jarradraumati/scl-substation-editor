@@ -11,7 +11,7 @@ import { renderText } from '../text-editor.js';
 import { renderFunctionalVariantRef } from './functional-variant-ref.js';
 
 /** Pane rendering `BehaviorDescriptionRef` element with its children */
-@customElement('behavior-description-ref-editor')
+@customElement('allocation-role-ref-editor')
 export class BehaviorDescriptionRefEditor extends BaseSubstationElementEditor {
   @state()
   private get header(): string {
@@ -77,11 +77,11 @@ export function renderBehaviorDescriptionRef(
   );
   return html` ${BehaviorDescriptionRef.map(
     behDescRef =>
-      html`<behavior-description-ref-editor
+      html`<allocation-role-ref-editor
         .element=${behDescRef}
         .editCount=${editCount}
         ?showfunctions=${showfunctions}
         ?showuserdef=${showuserdef}
-      ></behavior-description-ref-editor>`
+      ></allocation-role-ref-editor>`
   )}`;
 }

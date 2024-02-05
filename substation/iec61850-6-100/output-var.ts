@@ -13,7 +13,7 @@ import BaseSubstationElementEditor from '../base-substation-element-editor.js';
 export class OutputVarEditor extends BaseSubstationElementEditor {
   @state()
   private get header(): string {
-    const varName = this.element.getAttribute('function');
+    const varName = this.element.getAttribute('varName');
     return `OutputVar${varName ? ` - ${varName}` : ''}`;
   }
 

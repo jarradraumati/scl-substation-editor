@@ -9,7 +9,7 @@ import { renderText } from '../text-editor.js';
 
 import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
-import { renderResource } from './resource.js';
+import { renderResources } from './resource.js';
 
 /** Pane rendering `ProcessResource` element with its children */
 @customElement('process-resource-editor')
@@ -51,12 +51,7 @@ export class ProcessResourceEditor extends BaseSubstationElementEditor {
         this.showfunctions,
         this.showuserdef
       )}
-      ${renderResource(
-        this.element,
-        this.editCount,
-        this.showfunctions,
-        this.showuserdef
-      )}
+      ${renderResources(this.element, this.editCount)}
     </oscd-action-pane>`;
   }
 
@@ -67,6 +62,14 @@ export class ProcessResourceEditor extends BaseSubstationElementEditor {
     }
 
     .content.actionicon {
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      box-sizing: border-box;
+      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+    }
+
+    .container.resource {
       display: grid;
       grid-gap: 12px;
       padding: 8px 12px 16px;

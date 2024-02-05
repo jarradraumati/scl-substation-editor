@@ -8,18 +8,16 @@ import '@openscd/oscd-action-pane';
 import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
 import { renderText } from '../text-editor.js';
-import { renderFunctionalVariantRef } from './functional-variant-ref.js';
 
-/** Pane rendering `BehaviorDescriptionRef` element with its children */
-@customElement('behavior-description-ref-editor')
-export class BehaviorDescriptionRefEditor extends BaseSubstationElementEditor {
+/** Pane rendering `FunctionalVariantRef` element with its children */
+@customElement('functional-variant-ref-editor')
+export class FunctionalVariantRefEditor extends BaseSubstationElementEditor {
   @state()
   private get header(): string {
-    const behaviorDescription = this.element.getAttribute(
-      'behaviorDescription'
-    );
-    return `BehaviorDescriptionRef${
-      behaviorDescription ? ` - ${behaviorDescription}` : ''
+    const functionalVariant = this.element.getAttribute('function');
+
+    return `FunctionalVariantRef${
+      functionalVariant ? ` - ${functionalVariant}` : ''
     }`;
   }
 
@@ -41,14 +39,7 @@ export class BehaviorDescriptionRefEditor extends BaseSubstationElementEditor {
           @click=${() => this.removeElement()}
         ></mwc-icon-button>
       </abbr>
-      ${this.renderAddButton()}
       ${renderText(
-        this.element,
-        this.editCount,
-        this.showfunctions,
-        this.showuserdef
-      )}
-      ${renderFunctionalVariantRef(
         this.element,
         this.editCount,
         this.showfunctions,
@@ -65,23 +56,23 @@ export class BehaviorDescriptionRefEditor extends BaseSubstationElementEditor {
   `;
 }
 
-export function renderBehaviorDescriptionRef(
+export function renderFunctionalVariantRef(
   parent: Element,
   editCount: number,
   showfunctions: boolean,
   showuserdef: boolean
 ): TemplateResult {
-  const BehaviorDescriptionRef = getChildElementsByTagName(
+  const FunctionalVariantRef = getChildElementsByTagName(
     parent,
-    'BehaviorDescriptionRef'
+    'FunctionalVariantRef'
   );
-  return html` ${BehaviorDescriptionRef.map(
-    behDescRef =>
-      html`<behavior-description-ref-editor
-        .element=${behDescRef}
+  return html` ${FunctionalVariantRef.map(
+    functCatRef =>
+      html`<functional-variant-ref-editor
+        .element=${functCatRef}
         .editCount=${editCount}
         ?showfunctions=${showfunctions}
         ?showuserdef=${showuserdef}
-      ></behavior-description-ref-editor>`
+      ></functional-variant-ref-editor>`
   )}`;
 }

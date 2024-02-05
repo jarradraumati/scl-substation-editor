@@ -12,6 +12,7 @@ import { renderSMVParameters } from './smv-parameters.js';
 import { renderReportParameters } from './report-parameters.js';
 import { renderBinaryWiringParameters } from './binary-wiring-parameters.js';
 import { renderAnalogueWiringParameters } from './analogue-wiring-parameters.js';
+import { renderLogParameters } from './log-parameters.js';
 
 /** Pane rendering `ServiceSpecifications` element with its children */
 @customElement('service-specifications-editor')
@@ -70,6 +71,12 @@ export class ServiceSpecificationsEditor extends BaseSubstationElementEditor {
         this.showuserdef
       )}
       ${renderAnalogueWiringParameters(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderLogParameters(
         this.element,
         this.editCount,
         this.showfunctions,

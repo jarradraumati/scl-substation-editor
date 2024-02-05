@@ -7,6 +7,8 @@ import '@openscd/oscd-action-pane';
 
 import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
+import { renderFunctionalVariantRef } from './functional-variant-ref.js';
+import { renderText } from '../text-editor.js';
 
 /** Pane rendering `ProcessResourceRef` element with its children */
 @customElement('process-resource-ref-editor')
@@ -37,6 +39,18 @@ export class ProcessResourceRefEditor extends BaseSubstationElementEditor {
           @click=${() => this.removeElement()}
         ></mwc-icon-button>
       </abbr>
+      ${renderText(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderFunctionalVariantRef(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
     </oscd-action-pane>`;
   }
 

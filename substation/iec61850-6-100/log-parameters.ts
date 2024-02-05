@@ -7,26 +7,26 @@ import '@openscd/oscd-action-pane';
 
 import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
-import { renderText } from '../text-editor.js';
-import { renderFunctionalVariantRef } from './functional-variant-ref.js';
 
-/** Pane rendering `BehaviorDescriptionRef` element with its children */
-@customElement('behavior-description-ref-editor')
-export class BehaviorDescriptionRefEditor extends BaseSubstationElementEditor {
+/** Pane rendering `LogParameters` element with its children */
+@customElement('log-parameters-editor')
+export class LogParametersEditor extends BaseSubstationElementEditor {
   @state()
   private get header(): string {
-    const behaviorDescription = this.element.getAttribute(
-      'behaviorDescription'
-    );
-    return `BehaviorDescriptionRef${
-      behaviorDescription ? ` - ${behaviorDescription}` : ''
-    }`;
+    const id = this.element.getAttribute('id');
+    const desc = this.element.getAttribute('desc');
+
+    return `${id}${desc ? ` - ${desc}` : ''}`;
   }
 
   render(): TemplateResult {
     if (this.element.namespaceURI === 'http://www.iec.ch/61850/2019/SCL/6-100')
       this.is6100 = true;
-    return html`<oscd-action-pane label="${this.header}" icon="commit" secondary
+    return html`<oscd-action-pane
+      label="${this.header}"
+      icon="schema"
+      secondary
+      highlighted
       ><abbr slot="action" title="Edit">
         <mwc-icon-button
           class="action edit"
@@ -42,18 +42,6 @@ export class BehaviorDescriptionRefEditor extends BaseSubstationElementEditor {
         ></mwc-icon-button>
       </abbr>
       ${this.renderAddButton()}
-      ${renderText(
-        this.element,
-        this.editCount,
-        this.showfunctions,
-        this.showuserdef
-      )}
-      ${renderFunctionalVariantRef(
-        this.element,
-        this.editCount,
-        this.showfunctions,
-        this.showuserdef
-      )}
     </oscd-action-pane>`;
   }
 
@@ -62,26 +50,31 @@ export class BehaviorDescriptionRefEditor extends BaseSubstationElementEditor {
       text-decoration: none;
       border-bottom: none;
     }
+
+    .content.actionicon {
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      box-sizing: border-box;
+      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+    }
   `;
 }
 
-export function renderBehaviorDescriptionRef(
+export function renderLogParameters(
   parent: Element,
   editCount: number,
   showfunctions: boolean,
   showuserdef: boolean
 ): TemplateResult {
-  const BehaviorDescriptionRef = getChildElementsByTagName(
-    parent,
-    'BehaviorDescriptionRef'
-  );
-  return html` ${BehaviorDescriptionRef.map(
-    behDescRef =>
-      html`<behavior-description-ref-editor
-        .element=${behDescRef}
+  const LogParameters = getChildElementsByTagName(parent, 'LogParameters');
+  return html` ${LogParameters.map(
+    binWirPara =>
+      html`<log-parameters-editor
+        .element=${binWirPara}
         .editCount=${editCount}
         ?showfunctions=${showfunctions}
         ?showuserdef=${showuserdef}
-      ></behavior-description-ref-editor>`
+      ></log-parameters-editor>`
   )}`;
 }

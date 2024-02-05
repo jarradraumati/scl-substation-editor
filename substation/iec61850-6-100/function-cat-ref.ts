@@ -7,6 +7,8 @@ import '@openscd/oscd-action-pane';
 
 import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
+import { renderText } from '../text-editor.js';
+import { renderFunctionalVariantRef } from './functional-variant-ref.js';
 
 /** Pane rendering `FunctionCatRef` element with its children */
 @customElement('function-cat-ref-editor')
@@ -36,6 +38,18 @@ export class FunctionCatRefEditor extends BaseSubstationElementEditor {
           @click=${() => this.removeElement()}
         ></mwc-icon-button>
       </abbr>
+      ${renderText(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderFunctionalVariantRef(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
     </oscd-action-pane>`;
   }
 

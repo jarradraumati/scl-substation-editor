@@ -1,4 +1,4 @@
-const tFunctionCategory = ['SubCategory', 'FunctionCatRef'] as const;
+const tFunctionCategory = ['FunctionCatRef', 'SubCategory'] as const;
 const tProcessResources = ['ProcessResource'] as const;
 const tProcessResource = ['Resource'] as const;
 const tPowerSystemRelations = ['PowerSystemRelation'] as const;
@@ -18,7 +18,7 @@ const tCommServiceSpecifications = [
   'SMVParameters',
   'ReportParameters',
 ] as const;
-const tFunctionRef = ['SignalRole'] as const;
+const tFunctionRef = ['FunctionalVariantRef', 'SignalRole'] as const;
 const tFunctionRoleContent = [
   'FunctionRef',
   'BehaviorDescriptionRef',
@@ -86,51 +86,82 @@ const tControllingLNode = [
   'BinaryWiringParametersRef',
   'AnalogueWiringParametersRef',
 ] as const;
+const tInputVarRef = ['FunctionalVariantRef'] as const;
+const tLNodeDataRef = ['FunctionalVariantRef'] as const;
+const tLNodeInputRef = ['FunctionalVariantRef'] as const;
+const tLNodeOutputRef = ['FunctionalVariantRef'] as const;
+const tOutputVarRef = ['FunctionalVariantRef'] as const;
+const tGooseParameters = [
+  'L2CommParameters',
+  'L3IPv4CommParameters',
+  'L3IPv6CommParameters',
+] as const;
+const tSMVParameters = [
+  'L2CommParameters',
+  'L3IPv4CommParameters',
+  'L3IPv6CommParameters',
+] as const;
+const tBehaviorDescriptionRef = [
+  'FunctionalVariantRef',
+  'InputVarRef',
+  'OutputVarRef',
+] as const;
+const tSignalRole = [
+  'FunctionalVariantRef',
+  'LNodeDataRef',
+  'LNodeInputRef',
+  'LNodeOutputRef',
+] as const;
 
 const sCL6100Tags = [
   'Private',
-  'FunctionCategory',
-  'ProcessResources',
-  'PowerSystemRelations',
-  'LNodeInputs',
-  'LNodeOutputs',
-  'ProcessEcho',
-  'LNodeSpecNaming',
-  'DOS',
-  'FunctionSclRef',
-  'Variable',
-  'CommunicationServiceSpecifications',
-  'ServiceSpecifications',
-  'BayType',
   'AllocationRole',
   'Application',
+  'BayType',
   'BehaviorDescription',
-  'Project',
+  'CheckoutID',
+  'CommunicationServiceSpecifications',
+  'DOS',
+  'FunctionCategory',
+  'FunctionSclRef',
   'FunctionTemplate',
-  ...tFunctionCategory,
-  ...tProcessResources,
-  ...tProcessResource,
-  ...tPowerSystemRelations,
-  ...tLNodeInputs,
-  ...tLNodeOutputs,
-  ...tVariable,
-  ...tCommServiceSpecifications,
-  ...tServiceSpecifications,
-  ...tFunctionRef,
-  ...tFunctionRoleContent,
-  ...tFunctionRole,
+  'LNodeInputs',
+  'LNodeOutputs',
+  'LNodeSpecNaming',
+  'PowerSystemRelations',
+  'ProcessEcho',
+  'ProcessResources',
+  'Project',
+  'ServiceSpecifications',
+  'Variable',
   ...tAllocationRole,
   ...tApplication,
   ...tBehaviorDescription,
-  ...tProject,
-  ...tFunctionTemplate,
-  ...tSubFunctionTemplate,
-  ...tFunctionSclRef,
-  ...tDOS,
-  ...tSDS,
-  ...tDAS,
-  ...tSubscriberLNode,
+  ...tBehaviorDescriptionRef,
+  ...tCommServiceSpecifications,
   ...tControllingLNode,
+  ...tDAS,
+  ...tDOS,
+  ...tFunctionCategory,
+  ...tFunctionRef,
+  ...tFunctionRole,
+  ...tFunctionRoleContent,
+  ...tFunctionSclRef,
+  ...tFunctionTemplate,
+  ...tGooseParameters,
+  ...tLNodeInputs,
+  ...tLNodeOutputs,
+  ...tPowerSystemRelations,
+  ...tProcessResource,
+  ...tProcessResources,
+  ...tProject,
+  ...tSDS,
+  ...tServiceSpecifications,
+  ...tSignalRole,
+  ...tSMVParameters,
+  ...tSubFunctionTemplate,
+  ...tSubscriberLNode,
+  ...tVariable,
 ] as const;
 
 export type SCL6100Tag = (typeof sCL6100Tags)[number];
@@ -168,11 +199,11 @@ export const tags6100: Record<
   },
   GooseParameters: {
     parents: ['CommunicationServiceSpecifications', 'ServiceSpecifications'],
-    children: [],
+    children: [...tGooseParameters],
   },
   SMVParameters: {
     parents: ['CommunicationServiceSpecifications', 'ServiceSpecifications'],
-    children: [],
+    children: [...tSMVParameters],
   },
   ReportParameters: {
     parents: ['CommunicationServiceSpecifications', 'ServiceSpecifications'],
@@ -180,7 +211,7 @@ export const tags6100: Record<
   },
   SignalRole: {
     parents: ['FunctionRef'],
-    children: [],
+    children: [...tSignalRole],
   },
   FunctionRef: {
     parents: ['FunctionRoleContent', 'AllocationRole'],
@@ -188,7 +219,7 @@ export const tags6100: Record<
   },
   BehaviorDescriptionRef: {
     parents: ['FunctionRoleContent'],
-    children: [],
+    children: [...tBehaviorDescriptionRef],
   },
   ProcessResourceRef: {
     parents: ['FunctionRoleContent'],
@@ -319,7 +350,7 @@ export const tags6100: Record<
     children: [...tLNodeOutputs],
   },
   ProcessEcho: {
-    parents: ['DOS'],
+    parents: ['DOS', 'DAS', 'SDS'],
     children: [],
   },
   LNodeSpecNaming: {
@@ -416,6 +447,61 @@ export const tags6100: Record<
   },
   AnalogueWiringParametersRef: {
     parents: ['ControllingLNode'],
+    children: [],
+  },
+  FunctionalVariantRef: {
+    parents: [
+      'AllocationRoleRef',
+      'BehaviorDescriptionRef',
+      'FunctionCategoryRef',
+      'FunctionRef',
+      'FunctionRole',
+      'InputVarRef',
+      'LNodeDataRef',
+      'LNodeInputRef',
+      'LNodeOutputRef',
+      'OutputVarRef',
+      'PowerSystemRelationRef',
+      'ProcessResourceRef',
+      'SignalRole',
+      'VariableRef',
+    ],
+    children: [],
+  },
+  InputVarRef: {
+    parents: ['BehaviorDescriptionRef'],
+    children: [...tInputVarRef],
+  },
+  LNodeDataRef: {
+    parents: ['SignalRole'],
+    children: [...tLNodeDataRef],
+  },
+  LNodeInputRef: {
+    parents: ['SignalRole'],
+    children: [...tLNodeInputRef],
+  },
+  LNodeOutputRef: {
+    parents: ['SignalRole'],
+    children: [...tLNodeOutputRef],
+  },
+  OutputVarRef: {
+    parents: ['BehaviorDescriptionRef'],
+    children: [...tOutputVarRef],
+  },
+  L2CommParameters: {
+    parents: ['GooseParameters', 'SMVParameters'],
+    children: [],
+  },
+  L3IPv4CommParameters: {
+    parents: ['GooseParameters', 'SMVParameters'],
+    children: [],
+  },
+  L3IPv6CommParameters: {
+    parents: ['GooseParameters', 'SMVParameters'],
+    children: [],
+  },
+  CheckoutID: {
+    parents: ['Private'],
     children: [],
   },
 };

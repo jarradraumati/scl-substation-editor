@@ -22,7 +22,11 @@ export class PowerSystemRelationEditor extends BaseSubstationElementEditor {
   render(): TemplateResult {
     if (this.element.namespaceURI === 'http://www.iec.ch/61850/2019/SCL/6-100')
       this.is6100 = true;
-    return html`<oscd-action-pane label="${this.header}" icon="bolt" secondary
+    return html`<oscd-action-pane
+      label="${this.header}"
+      icon="bolt"
+      secondary
+      highlighted
       ><abbr slot="action" title="Edit">
         <mwc-icon-button
           class="action edit"

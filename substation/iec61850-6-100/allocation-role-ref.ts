@@ -15,14 +15,18 @@ import { renderFunctionalVariantRef } from './functional-variant-ref.js';
 export class AllocationRoleRefEditor extends BaseSubstationElementEditor {
   @state()
   private get header(): string {
-    const allocationRole = this.element.getAttribute('AllocationRole');
+    const allocationRole = this.element.getAttribute('allocationRole');
     return `AllocationRoleRef${allocationRole ? ` - ${allocationRole}` : ''}`;
   }
 
   render(): TemplateResult {
     if (this.element.namespaceURI === 'http://www.iec.ch/61850/2019/SCL/6-100')
       this.is6100 = true;
-    return html`<oscd-action-pane label="${this.header}" icon="commit" secondary
+    return html`<oscd-action-pane
+      label="${this.header}"
+      icon="commit"
+      secondary
+      highlighted
       ><abbr slot="action" title="Edit">
         <mwc-icon-button
           class="action edit"

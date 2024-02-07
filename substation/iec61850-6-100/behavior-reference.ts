@@ -25,6 +25,7 @@ export class BehaviorReferenceEditor extends BaseSubstationElementEditor {
       label="${this.header}"
       icon="approval"
       secondary
+      highlighted
       ><abbr slot="action" title="Edit">
         <mwc-icon-button
           class="action edit"

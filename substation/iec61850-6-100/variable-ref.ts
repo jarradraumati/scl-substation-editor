@@ -7,20 +7,16 @@ import '@openscd/oscd-action-pane';
 
 import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
-import { renderText } from '../text-editor.js';
-import { renderL2CommParameters } from './l2-comm-parameters.js';
-import { renderL3IPv4CommParameters } from './l3-ipv4-comm-parameters.js';
-import { renderL3IPv6CommParameters } from './l3-ipv6-comm-parameters.js';
+import { renderFunctionalVariantRef } from './functional-variant-ref.js';
 
-/** Pane rendering `GooseParameters` element with its children */
-@customElement('goose-parameters-editor')
-export class GooseParametersEditor extends BaseSubstationElementEditor {
+/** Pane rendering `VariableRef` element with its children */
+@customElement('variable-ref-editor')
+export class VariableRefEditor extends BaseSubstationElementEditor {
   @state()
   private get header(): string {
-    const id = this.element.getAttribute('id');
     const desc = this.element.getAttribute('desc');
 
-    return `${id}${desc ? ` - ${desc}` : ''}`;
+    return `VariableRef${desc ? ` - ${desc}` : ''}`;
   }
 
   render(): TemplateResult {
@@ -28,7 +24,7 @@ export class GooseParametersEditor extends BaseSubstationElementEditor {
       this.is6100 = true;
     return html`<oscd-action-pane
       label="${this.header}"
-      icon="schema"
+      icon="approval"
       secondary
       highlighted
       ><abbr slot="action" title="Edit">
@@ -46,25 +42,7 @@ export class GooseParametersEditor extends BaseSubstationElementEditor {
         ></mwc-icon-button>
       </abbr>
       ${this.renderAddButton()}
-      ${renderText(
-        this.element,
-        this.editCount,
-        this.showfunctions,
-        this.showuserdef
-      )}
-      ${renderL2CommParameters(
-        this.element,
-        this.editCount,
-        this.showfunctions,
-        this.showuserdef
-      )}
-      ${renderL3IPv4CommParameters(
-        this.element,
-        this.editCount,
-        this.showfunctions,
-        this.showuserdef
-      )}
-      ${renderL3IPv6CommParameters(
+      ${renderFunctionalVariantRef(
         this.element,
         this.editCount,
         this.showfunctions,
@@ -78,31 +56,23 @@ export class GooseParametersEditor extends BaseSubstationElementEditor {
       text-decoration: none;
       border-bottom: none;
     }
-
-    .content.actionicon {
-      display: grid;
-      grid-gap: 12px;
-      padding: 8px 12px 16px;
-      box-sizing: border-box;
-      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
-    }
   `;
 }
 
-export function renderGooseParameters(
+export function renderVariableRef(
   parent: Element,
   editCount: number,
   showfunctions: boolean,
   showuserdef: boolean
 ): TemplateResult {
-  const GooseParameters = getChildElementsByTagName(parent, 'GooseParameters');
-  return html` ${GooseParameters.map(
-    gsePara =>
-      html`<goose-parameters-editor
-        .element=${gsePara}
+  const VariableRef = getChildElementsByTagName(parent, 'VariableRef');
+  return html` ${VariableRef.map(
+    fVariableRef =>
+      html`<variable-ref-editor
+        .element=${fVariableRef}
         .editCount=${editCount}
         ?showfunctions=${showfunctions}
         ?showuserdef=${showuserdef}
-      ></goose-parameters-editor>`
+      ></variable-ref-editor>`
   )}`;
 }

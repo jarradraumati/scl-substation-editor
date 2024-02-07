@@ -24,11 +24,17 @@ export class FunctionRefEditor extends BaseSubstationElementEditor {
   render(): TemplateResult {
     if (this.element.namespaceURI === 'http://www.iec.ch/61850/2019/SCL/6-100')
       this.is6100 = true;
-    return html`<oscd-action-pane label="${this.header}" icon="commit" secondary
+    return html`<oscd-action-pane
+      label="${this.header}"
+      icon="commit"
+      secondary
+      highlighted
       ><abbr slot="action" title="Edit">
         <mwc-icon-button
           class="action edit"
           icon="edit"
+          secondary
+          highlighted
           @click=${() => this.openEditWizard()}
         ></mwc-icon-button>
       </abbr>

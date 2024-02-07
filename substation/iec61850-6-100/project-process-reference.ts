@@ -5,19 +5,19 @@ import { customElement, state } from 'lit/decorators.js';
 
 import '@openscd/oscd-action-pane';
 
+import { renderText } from '../text-editor.js';
+
 import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
-import { renderText } from '../text-editor.js';
-import { renderSourceRef } from './source-ref.js';
 
-/** Pane rendering `LNodeInputs` element with its children */
-@customElement('lnode-inputs-editor')
-export class LNodeInputsEditor extends BaseSubstationElementEditor {
+/** Pane rendering `ProjectProcessReference` element with its children */
+@customElement('project-process-reference-editor')
+export class ProjectProcessReferenceEditor extends BaseSubstationElementEditor {
   @state()
   private get header(): string {
     const desc = this.element.getAttribute('desc');
 
-    return `LNodeInputs${desc ? ` - ${desc}` : ''}`;
+    return `ProjectProcessReference${desc ? ` - ${desc}` : ''}`;
   }
 
   render(): TemplateResult {
@@ -25,7 +25,7 @@ export class LNodeInputsEditor extends BaseSubstationElementEditor {
       this.is6100 = true;
     return html`<oscd-action-pane
       label="${this.header}"
-      icon="settings_applications"
+      icon="widgets"
       secondary
       highlighted
       ><abbr slot="action" title="Edit">
@@ -33,22 +33,16 @@ export class LNodeInputsEditor extends BaseSubstationElementEditor {
           class="action edit"
           icon="edit"
           @click=${() => this.openEditWizard()}
-        ></mwc-icon-button> </abbr
-      ><abbr slot="action" title="Remove">
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title="Remove">
         <mwc-icon-button
           class="action remove"
           icon="delete"
           @click=${() => this.removeElement()}
         ></mwc-icon-button>
       </abbr>
-      ${this.renderAddButton()}
       ${renderText(
-        this.element,
-        this.editCount,
-        this.showfunctions,
-        this.showuserdef
-      )}
-      ${renderSourceRef(
         this.element,
         this.editCount,
         this.showfunctions,
@@ -62,39 +56,26 @@ export class LNodeInputsEditor extends BaseSubstationElementEditor {
       text-decoration: none;
       border-bottom: none;
     }
-
-    .content.actionicon {
-      display: grid;
-      grid-gap: 12px;
-      padding: 8px 12px 16px;
-      box-sizing: border-box;
-      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
-    }
-
-    .container.processresource {
-      display: grid;
-      grid-gap: 12px;
-      padding: 8px 12px 16px;
-      box-sizing: border-box;
-      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
-    }
   `;
 }
 
-export function renderLNodeInputs(
+export function renderProjectProcessReference(
   parent: Element,
   editCount: number,
   showfunctions: boolean,
   showuserdef: boolean
 ): TemplateResult {
-  const LNodeInputs = getChildElementsByTagName(parent, 'LNodeInputs');
-  return html` ${LNodeInputs.map(
-    commServSpec =>
-      html`<lnode-inputs-editor
-        .element=${commServSpec}
+  const ProjectProcessReference = getChildElementsByTagName(
+    parent,
+    'ProjectProcessReference'
+  );
+  return html` ${ProjectProcessReference.map(
+    proResc =>
+      html`<project-process-reference-editor
+        .element=${proResc}
         .editCount=${editCount}
         ?showfunctions=${showfunctions}
         ?showuserdef=${showuserdef}
-      ></lnode-inputs-editor>`
+      ></project-process-reference-editor>`
   )}`;
 }

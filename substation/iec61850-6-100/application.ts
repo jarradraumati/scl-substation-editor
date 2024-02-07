@@ -13,6 +13,7 @@ import { renderFunctionRole } from './function-role.js';
 import { renderAllocationRoleRef } from './allocation-role-ref.js';
 import { renderFunctionalVariant } from './functional-variant.js';
 import { renderFunctionalVariantGroup } from './functional-variant-group.js';
+import { renderApplicationSclRef } from './application-scl-ref.js';
 
 /** Pane rendering `Application` element with its children */
 @customElement('application-editor')
@@ -72,6 +73,12 @@ export class ApplicationEditor extends BaseSubstationElementEditor {
         this.showuserdef
       )}
       ${renderAllocationRoleRef(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderApplicationSclRef(
         this.element,
         this.editCount,
         this.showfunctions,

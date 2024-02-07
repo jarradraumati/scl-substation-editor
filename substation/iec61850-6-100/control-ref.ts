@@ -8,16 +8,17 @@ import '@openscd/oscd-action-pane';
 import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
 import { renderText } from '../text-editor.js';
-import { renderSourceRef } from './source-ref.js';
+import { renderAnalogueWiringParametersRef } from './analogue-wiring-parameters-ref.js';
+import { renderBinaryWiringParametersRef } from './binary-wiring-parameters-ref.js';
 
-/** Pane rendering `LNodeInputs` element with its children */
-@customElement('lnode-inputs-editor')
-export class LNodeInputsEditor extends BaseSubstationElementEditor {
+/** Pane rendering `ControlRef` element with its children */
+@customElement('control-ref-editor')
+export class ControlRefEditor extends BaseSubstationElementEditor {
   @state()
   private get header(): string {
     const desc = this.element.getAttribute('desc');
 
-    return `LNodeInputs${desc ? ` - ${desc}` : ''}`;
+    return `ControlRef${desc ? ` - ${desc}` : ''}`;
   }
 
   render(): TemplateResult {
@@ -48,7 +49,13 @@ export class LNodeInputsEditor extends BaseSubstationElementEditor {
         this.showfunctions,
         this.showuserdef
       )}
-      ${renderSourceRef(
+      ${renderAnalogueWiringParametersRef(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderBinaryWiringParametersRef(
         this.element,
         this.editCount,
         this.showfunctions,
@@ -81,20 +88,20 @@ export class LNodeInputsEditor extends BaseSubstationElementEditor {
   `;
 }
 
-export function renderLNodeInputs(
+export function renderControlRef(
   parent: Element,
   editCount: number,
   showfunctions: boolean,
   showuserdef: boolean
 ): TemplateResult {
-  const LNodeInputs = getChildElementsByTagName(parent, 'LNodeInputs');
-  return html` ${LNodeInputs.map(
+  const ControlRef = getChildElementsByTagName(parent, 'ControlRef');
+  return html` ${ControlRef.map(
     commServSpec =>
-      html`<lnode-inputs-editor
+      html`<control-ref-editor
         .element=${commServSpec}
         .editCount=${editCount}
         ?showfunctions=${showfunctions}
         ?showuserdef=${showuserdef}
-      ></lnode-inputs-editor>`
+      ></control-ref-editor>`
   )}`;
 }

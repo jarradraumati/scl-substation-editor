@@ -8,16 +8,20 @@ import '@openscd/oscd-action-pane';
 import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
 import { renderText } from '../text-editor.js';
-import { renderSourceRef } from './source-ref.js';
+import { renderAnalogueWiringParametersRef } from './analogue-wiring-parameters-ref.js';
+import { renderBinaryWiringParametersRef } from './binary-wiring-parameters-ref.js';
+import { renderGooseParametersRef } from './goose-parameters-ref.js';
+import { renderSMVParametersRef } from './smv-parameters-ref.js';
+import { renderReportParametersRef } from './report-parameters-ref.js';
 
-/** Pane rendering `LNodeInputs` element with its children */
-@customElement('lnode-inputs-editor')
-export class LNodeInputsEditor extends BaseSubstationElementEditor {
+/** Pane rendering `SourceRef` element with its children */
+@customElement('source-ref-editor')
+export class SourceRefEditor extends BaseSubstationElementEditor {
   @state()
   private get header(): string {
     const desc = this.element.getAttribute('desc');
 
-    return `LNodeInputs${desc ? ` - ${desc}` : ''}`;
+    return `SourceRef${desc ? ` - ${desc}` : ''}`;
   }
 
   render(): TemplateResult {
@@ -48,7 +52,31 @@ export class LNodeInputsEditor extends BaseSubstationElementEditor {
         this.showfunctions,
         this.showuserdef
       )}
-      ${renderSourceRef(
+      ${renderAnalogueWiringParametersRef(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderBinaryWiringParametersRef(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderGooseParametersRef(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderReportParametersRef(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderSMVParametersRef(
         this.element,
         this.editCount,
         this.showfunctions,
@@ -81,20 +109,20 @@ export class LNodeInputsEditor extends BaseSubstationElementEditor {
   `;
 }
 
-export function renderLNodeInputs(
+export function renderSourceRef(
   parent: Element,
   editCount: number,
   showfunctions: boolean,
   showuserdef: boolean
 ): TemplateResult {
-  const LNodeInputs = getChildElementsByTagName(parent, 'LNodeInputs');
-  return html` ${LNodeInputs.map(
+  const SourceRef = getChildElementsByTagName(parent, 'SourceRef');
+  return html` ${SourceRef.map(
     commServSpec =>
-      html`<lnode-inputs-editor
+      html`<source-ref-editor
         .element=${commServSpec}
         .editCount=${editCount}
         ?showfunctions=${showfunctions}
         ?showuserdef=${showuserdef}
-      ></lnode-inputs-editor>`
+      ></source-ref-editor>`
   )}`;
 }

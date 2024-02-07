@@ -7,6 +7,7 @@ import '@openscd/oscd-action-pane';
 
 import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
+import { renderText } from '../text-editor.js';
 
 /** Pane rendering `AnalogueWiringParameters` element with its children */
 @customElement('analogue-wiring-parameters-editor')
@@ -41,7 +42,12 @@ export class AnalogueWiringParametersEditor extends BaseSubstationElementEditor 
           @click=${() => this.removeElement()}
         ></mwc-icon-button>
       </abbr>
-      ${this.renderAddButton()}
+      ${renderText(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
     </oscd-action-pane>`;
   }
 

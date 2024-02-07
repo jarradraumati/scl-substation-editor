@@ -8,6 +8,7 @@ import '@openscd/oscd-action-pane';
 import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
 import { renderFunctionCatRef } from './function-cat-ref.js';
+import { renderSubCategory } from './sub-category.js';
 
 /** Pane rendering `FunctionCategory` element with its children */
 @customElement('function-category-editor')
@@ -43,6 +44,12 @@ export class FunctionCategoryEditor extends BaseSubstationElementEditor {
       </abbr>
       ${this.renderAddButton()}
       ${renderFunctionCatRef(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderSubCategory(
         this.element,
         this.editCount,
         this.showfunctions,

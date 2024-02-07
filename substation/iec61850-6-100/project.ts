@@ -9,6 +9,7 @@ import { renderText } from '../text-editor.js';
 
 import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
+import { renderProjectProcessReference } from './project-process-reference.js';
 
 /** Pane rendering `Project` element with its children */
 @customElement('project-editor')
@@ -45,6 +46,12 @@ export class ProjectEditor extends BaseSubstationElementEditor {
       </abbr>
       ${this.renderAddButton()}
       ${renderText(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderProjectProcessReference(
         this.element,
         this.editCount,
         this.showfunctions,

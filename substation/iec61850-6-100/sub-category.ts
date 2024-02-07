@@ -7,17 +7,16 @@ import '@openscd/oscd-action-pane';
 
 import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
-import { renderText } from '../text-editor.js';
-import { renderSourceRef } from './source-ref.js';
+import { renderFunctionCatRef } from './function-cat-ref.js';
 
-/** Pane rendering `LNodeInputs` element with its children */
-@customElement('lnode-inputs-editor')
-export class LNodeInputsEditor extends BaseSubstationElementEditor {
+/** Pane rendering `SubCategory` element with its children */
+@customElement('sub-category-editor')
+export class SubCategoryEditor extends BaseSubstationElementEditor {
   @state()
   private get header(): string {
-    const desc = this.element.getAttribute('desc');
+    const name = this.element.getAttribute('name');
 
-    return `LNodeInputs${desc ? ` - ${desc}` : ''}`;
+    return `${name}`;
   }
 
   render(): TemplateResult {
@@ -25,7 +24,7 @@ export class LNodeInputsEditor extends BaseSubstationElementEditor {
       this.is6100 = true;
     return html`<oscd-action-pane
       label="${this.header}"
-      icon="settings_applications"
+      icon="schema"
       secondary
       highlighted
       ><abbr slot="action" title="Edit">
@@ -33,8 +32,9 @@ export class LNodeInputsEditor extends BaseSubstationElementEditor {
           class="action edit"
           icon="edit"
           @click=${() => this.openEditWizard()}
-        ></mwc-icon-button> </abbr
-      ><abbr slot="action" title="Remove">
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title="Remove">
         <mwc-icon-button
           class="action remove"
           icon="delete"
@@ -42,13 +42,13 @@ export class LNodeInputsEditor extends BaseSubstationElementEditor {
         ></mwc-icon-button>
       </abbr>
       ${this.renderAddButton()}
-      ${renderText(
+      ${renderFunctionCatRef(
         this.element,
         this.editCount,
         this.showfunctions,
         this.showuserdef
       )}
-      ${renderSourceRef(
+      ${renderSubCategory(
         this.element,
         this.editCount,
         this.showfunctions,
@@ -70,31 +70,23 @@ export class LNodeInputsEditor extends BaseSubstationElementEditor {
       box-sizing: border-box;
       grid-template-columns: repeat(auto-fit, minmax(64px, auto));
     }
-
-    .container.processresource {
-      display: grid;
-      grid-gap: 12px;
-      padding: 8px 12px 16px;
-      box-sizing: border-box;
-      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
-    }
   `;
 }
 
-export function renderLNodeInputs(
+export function renderSubCategory(
   parent: Element,
   editCount: number,
   showfunctions: boolean,
   showuserdef: boolean
 ): TemplateResult {
-  const LNodeInputs = getChildElementsByTagName(parent, 'LNodeInputs');
-  return html` ${LNodeInputs.map(
-    commServSpec =>
-      html`<lnode-inputs-editor
-        .element=${commServSpec}
+  const SubCategory = getChildElementsByTagName(parent, 'SubCategory');
+  return html` ${SubCategory.map(
+    functCat =>
+      html`<sub-category-editor
+        .element=${functCat}
         .editCount=${editCount}
         ?showfunctions=${showfunctions}
         ?showuserdef=${showuserdef}
-      ></lnode-inputs-editor>`
+      ></sub-category-editor>`
   )}`;
 }

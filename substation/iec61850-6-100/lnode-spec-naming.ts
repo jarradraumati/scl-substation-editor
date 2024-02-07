@@ -39,7 +39,6 @@ export class LNodeSpecNamingEditor extends BaseSubstationElementEditor {
           @click=${() => this.removeElement()}
         ></mwc-icon-button>
       </abbr>
-      ${this.renderAddButton()}
       ${renderText(
         this.element,
         this.editCount,

@@ -8,16 +8,16 @@ import '@openscd/oscd-action-pane';
 import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
 import { renderText } from '../text-editor.js';
-import { renderSourceRef } from './source-ref.js';
 
-/** Pane rendering `LNodeInputs` element with its children */
-@customElement('lnode-inputs-editor')
-export class LNodeInputsEditor extends BaseSubstationElementEditor {
+/** Pane rendering `ReportParametersRef` element with its children */
+@customElement('report-parameters-ref-editor')
+export class ReportParametersRefEditor extends BaseSubstationElementEditor {
   @state()
   private get header(): string {
+    const id = this.element.getAttribute('id');
     const desc = this.element.getAttribute('desc');
 
-    return `LNodeInputs${desc ? ` - ${desc}` : ''}`;
+    return `${id}${desc ? ` - ${desc}` : ''}`;
   }
 
   render(): TemplateResult {
@@ -25,7 +25,7 @@ export class LNodeInputsEditor extends BaseSubstationElementEditor {
       this.is6100 = true;
     return html`<oscd-action-pane
       label="${this.header}"
-      icon="settings_applications"
+      icon="schema"
       secondary
       highlighted
       ><abbr slot="action" title="Edit">
@@ -33,22 +33,16 @@ export class LNodeInputsEditor extends BaseSubstationElementEditor {
           class="action edit"
           icon="edit"
           @click=${() => this.openEditWizard()}
-        ></mwc-icon-button> </abbr
-      ><abbr slot="action" title="Remove">
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title="Remove">
         <mwc-icon-button
           class="action remove"
           icon="delete"
           @click=${() => this.removeElement()}
         ></mwc-icon-button>
       </abbr>
-      ${this.renderAddButton()}
       ${renderText(
-        this.element,
-        this.editCount,
-        this.showfunctions,
-        this.showuserdef
-      )}
-      ${renderSourceRef(
         this.element,
         this.editCount,
         this.showfunctions,
@@ -70,31 +64,26 @@ export class LNodeInputsEditor extends BaseSubstationElementEditor {
       box-sizing: border-box;
       grid-template-columns: repeat(auto-fit, minmax(64px, auto));
     }
-
-    .container.processresource {
-      display: grid;
-      grid-gap: 12px;
-      padding: 8px 12px 16px;
-      box-sizing: border-box;
-      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
-    }
   `;
 }
 
-export function renderLNodeInputs(
+export function renderReportParametersRef(
   parent: Element,
   editCount: number,
   showfunctions: boolean,
   showuserdef: boolean
 ): TemplateResult {
-  const LNodeInputs = getChildElementsByTagName(parent, 'LNodeInputs');
-  return html` ${LNodeInputs.map(
-    commServSpec =>
-      html`<lnode-inputs-editor
-        .element=${commServSpec}
+  const ReportParametersRef = getChildElementsByTagName(
+    parent,
+    'ReportParametersRef'
+  );
+  return html` ${ReportParametersRef.map(
+    gsePara =>
+      html`<report-parameters-ref-editor
+        .element=${gsePara}
         .editCount=${editCount}
         ?showfunctions=${showfunctions}
         ?showuserdef=${showuserdef}
-      ></lnode-inputs-editor>`
+      ></report-parameters-ref-editor>`
   )}`;
 }

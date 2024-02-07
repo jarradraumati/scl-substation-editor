@@ -8,16 +8,14 @@ import '@openscd/oscd-action-pane';
 import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
 import { renderText } from '../text-editor.js';
-import { renderSourceRef } from './source-ref.js';
 
-/** Pane rendering `LNodeInputs` element with its children */
-@customElement('lnode-inputs-editor')
-export class LNodeInputsEditor extends BaseSubstationElementEditor {
+/** Pane rendering `ApplicationSclRef` element with its children */
+@customElement('application-scl-ref-editor')
+export class ApplicationSclRefEditor extends BaseSubstationElementEditor {
   @state()
   private get header(): string {
-    const desc = this.element.getAttribute('desc');
-
-    return `LNodeInputs${desc ? ` - ${desc}` : ''}`;
+    const fileName = this.element.firstElementChild?.getAttribute('fileName');
+    return `ApplicationSclRef${fileName ? ` - ${fileName}` : ''}`;
   }
 
   render(): TemplateResult {
@@ -48,12 +46,6 @@ export class LNodeInputsEditor extends BaseSubstationElementEditor {
         this.showfunctions,
         this.showuserdef
       )}
-      ${renderSourceRef(
-        this.element,
-        this.editCount,
-        this.showfunctions,
-        this.showuserdef
-      )}
     </oscd-action-pane>`;
   }
 
@@ -70,31 +62,26 @@ export class LNodeInputsEditor extends BaseSubstationElementEditor {
       box-sizing: border-box;
       grid-template-columns: repeat(auto-fit, minmax(64px, auto));
     }
-
-    .container.processresource {
-      display: grid;
-      grid-gap: 12px;
-      padding: 8px 12px 16px;
-      box-sizing: border-box;
-      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
-    }
   `;
 }
 
-export function renderLNodeInputs(
+export function renderApplicationSclRef(
   parent: Element,
   editCount: number,
   showfunctions: boolean,
   showuserdef: boolean
 ): TemplateResult {
-  const LNodeInputs = getChildElementsByTagName(parent, 'LNodeInputs');
-  return html` ${LNodeInputs.map(
-    commServSpec =>
-      html`<lnode-inputs-editor
-        .element=${commServSpec}
+  const ApplicationSclRef = getChildElementsByTagName(
+    parent,
+    'ApplicationSclRef'
+  );
+  return html` ${ApplicationSclRef.map(
+    funcSclRef =>
+      html`<application-scl-ref-editor
+        .element=${funcSclRef}
         .editCount=${editCount}
         ?showfunctions=${showfunctions}
         ?showuserdef=${showuserdef}
-      ></lnode-inputs-editor>`
+      ></application-scl-ref-editor>`
   )}`;
 }

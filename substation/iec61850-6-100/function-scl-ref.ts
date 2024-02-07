@@ -14,8 +14,8 @@ import { renderText } from '../text-editor.js';
 export class FunctionSclRefEditor extends BaseSubstationElementEditor {
   @state()
   private get header(): string {
-    const sLnClass = this.element.getAttribute('sLnClass');
-    return `FunctionSclRef${sLnClass ? ` - ${sLnClass}` : ''}`;
+    const fileName = this.element.firstElementChild?.getAttribute('fileName');
+    return `FunctionSclRef${fileName ? ` - ${fileName}` : ''}`;
   }
 
   render(): TemplateResult {

@@ -9,7 +9,10 @@ import { renderText } from '../text-editor.js';
 
 import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
-import { renderFunctionRole } from './function-role.js';
+import { renderFunctionalVariantRef } from './functional-variant-ref.js';
+import { renderLNodeDataRef } from './lnode-data-ref.js';
+import { renderLNodeInputRef } from './lnode-input-ref.js';
+import { renderLNodeOutputRef } from './lnode-output-ref.js';
 
 /** Pane rendering `SignalRole` element with its children */
 @customElement('signal-role-editor')
@@ -50,7 +53,25 @@ export class SignalRoleEditor extends BaseSubstationElementEditor {
         this.showfunctions,
         this.showuserdef
       )}
-      ${renderFunctionRole(
+      ${renderFunctionalVariantRef(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderLNodeDataRef(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderLNodeInputRef(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderLNodeOutputRef(
         this.element,
         this.editCount,
         this.showfunctions,

@@ -8,13 +8,10 @@ import '@openscd/oscd-action-pane';
 import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
 import { renderText } from '../text-editor.js';
-import { renderL2CommParameters } from './l2-comm-parameters.js';
-import { renderL3IPv4CommParameters } from './l3-ipv4-comm-parameters.js';
-import { renderL3IPv6CommParameters } from './l3-ipv6-comm-parameters.js';
 
-/** Pane rendering `GooseParameters` element with its children */
-@customElement('goose-parameters-editor')
-export class GooseParametersEditor extends BaseSubstationElementEditor {
+/** Pane rendering `ReportParametersRef` element with its children */
+@customElement('report-parameters-ref-editor')
+export class ReportParametersRefEditor extends BaseSubstationElementEditor {
   @state()
   private get header(): string {
     const id = this.element.getAttribute('id');
@@ -45,26 +42,7 @@ export class GooseParametersEditor extends BaseSubstationElementEditor {
           @click=${() => this.removeElement()}
         ></mwc-icon-button>
       </abbr>
-      ${this.renderAddButton()}
       ${renderText(
-        this.element,
-        this.editCount,
-        this.showfunctions,
-        this.showuserdef
-      )}
-      ${renderL2CommParameters(
-        this.element,
-        this.editCount,
-        this.showfunctions,
-        this.showuserdef
-      )}
-      ${renderL3IPv4CommParameters(
-        this.element,
-        this.editCount,
-        this.showfunctions,
-        this.showuserdef
-      )}
-      ${renderL3IPv6CommParameters(
         this.element,
         this.editCount,
         this.showfunctions,
@@ -89,20 +67,23 @@ export class GooseParametersEditor extends BaseSubstationElementEditor {
   `;
 }
 
-export function renderGooseParameters(
+export function renderReportParametersRef(
   parent: Element,
   editCount: number,
   showfunctions: boolean,
   showuserdef: boolean
 ): TemplateResult {
-  const GooseParameters = getChildElementsByTagName(parent, 'GooseParameters');
-  return html` ${GooseParameters.map(
+  const ReportParametersRef = getChildElementsByTagName(
+    parent,
+    'ReportParametersRef'
+  );
+  return html` ${ReportParametersRef.map(
     gsePara =>
-      html`<goose-parameters-editor
+      html`<report-parameters-ref-editor
         .element=${gsePara}
         .editCount=${editCount}
         ?showfunctions=${showfunctions}
         ?showuserdef=${showuserdef}
-      ></goose-parameters-editor>`
+      ></report-parameters-ref-editor>`
   )}`;
 }

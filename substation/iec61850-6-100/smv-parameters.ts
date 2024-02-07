@@ -7,6 +7,10 @@ import '@openscd/oscd-action-pane';
 
 import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
+import { renderText } from '../text-editor.js';
+import { renderL2CommParameters } from './l2-comm-parameters.js';
+import { renderL3IPv4CommParameters } from './l3-ipv4-comm-parameters.js';
+import { renderL3IPv6CommParameters } from './l3-ipv6-comm-parameters.js';
 
 /** Pane rendering `SMVParameters` element with its children */
 @customElement('smv-parameters-editor')
@@ -42,6 +46,30 @@ export class SMVParametersEditor extends BaseSubstationElementEditor {
         ></mwc-icon-button>
       </abbr>
       ${this.renderAddButton()}
+      ${renderText(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderL2CommParameters(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderL3IPv4CommParameters(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderL3IPv6CommParameters(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
     </oscd-action-pane>`;
   }
 

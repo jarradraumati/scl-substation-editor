@@ -41,7 +41,6 @@ export class ReportParametersEditor extends BaseSubstationElementEditor {
           @click=${() => this.removeElement()}
         ></mwc-icon-button>
       </abbr>
-      ${this.renderAddButton()}
     </oscd-action-pane>`;
   }
 

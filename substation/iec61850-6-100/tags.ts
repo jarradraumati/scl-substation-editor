@@ -112,6 +112,23 @@ const tSignalRole = [
   'LNodeInputRef',
   'LNodeOutputRef',
 ] as const;
+const tFunctionalVariantGroup = ['FunctionalVariant'] as const;
+const tAllocationRoleRef = ['FunctionalVariantRef'] as const;
+const tFunctionalVariant = ['FunctionalSubVariant', 'VariableRef'] as const;
+const tVariableRef = ['FunctionalVariantRef'] as const;
+const tSourceRef = [
+  'AnalogueWiringParametersRef',
+  'BinaryWiringParametersRef',
+  'GooseParametersRef',
+  'ReportParametersRef',
+  'SMVParametersRef',
+] as const;
+const tControlRef = [
+  'AnalogueWiringParametersRef',
+  'BinaryWiringParametersRef',
+] as const;
+const tSubCategory = ['FunctionCatRef', 'SubCategory'] as const;
+const tApplicationSclRef = ['SclFileReference'] as const;
 
 const sCL6100Tags = [
   'Private',
@@ -162,6 +179,10 @@ const sCL6100Tags = [
   ...tSubFunctionTemplate,
   ...tSubscriberLNode,
   ...tVariable,
+  ...tFunctionalVariant,
+  ...tVariableRef,
+  ...tSourceRef,
+  ...tControlRef,
 ] as const;
 
 export type SCL6100Tag = (typeof sCL6100Tags)[number];
@@ -180,11 +201,15 @@ export const tags6100: Record<
       'Application',
       'BayType',
       'BehaviorDescription',
+      'CheckoutID',
       'CommunicationServiceSpecifications',
       'DOS',
       'FunctionCategory',
       'FunctionSclRef',
       'FunctionTemplate',
+      'LNodeInputs',
+      'LNodeOutputs',
+      'LNodeSpecNaming',
       'PowerSystemRelations',
       'ProcessEcho',
       'ProcessResources',
@@ -194,8 +219,8 @@ export const tags6100: Record<
     ],
   },
   SubCategory: {
-    parents: ['FunctionCategory'],
-    children: [],
+    parents: ['FunctionCategory', 'SubCategory'],
+    children: [...tSubCategory],
   },
   GooseParameters: {
     parents: ['CommunicationServiceSpecifications', 'ServiceSpecifications'],
@@ -226,8 +251,8 @@ export const tags6100: Record<
     children: [],
   },
   VariableRef: {
-    parents: ['FunctionRoleContent'],
-    children: [],
+    parents: ['FunctionRoleContent', 'FunctionalVariant'],
+    children: [...tVariableRef],
   },
   FunctionCategoryRef: {
     parents: ['FunctionRoleContent'],
@@ -247,19 +272,19 @@ export const tags6100: Record<
   },
   FunctionalVariant: {
     parents: ['Application'],
-    children: [],
+    children: [...tFunctionalVariant],
   },
   FunctionalVariantGroup: {
     parents: ['Application'],
-    children: [],
+    children: [...tFunctionalVariantGroup],
   },
   AllocationRoleRef: {
     parents: ['Application'],
-    children: [],
+    children: [...tAllocationRoleRef],
   },
   ApplicationSclRef: {
     parents: ['Application'],
-    children: [],
+    children: [...tApplicationSclRef],
   },
   InputVar: {
     parents: ['BehaviorDescription'],
@@ -307,11 +332,11 @@ export const tags6100: Record<
   },
   SourceRef: {
     parents: ['LNodeInputs'],
-    children: [],
+    children: [...tSourceRef],
   },
   ControlRef: {
     parents: ['LNodeOutputs'],
-    children: [],
+    children: [...tControlRef],
   },
   VariableApplyTo: {
     parents: ['Variable'],
@@ -502,6 +527,10 @@ export const tags6100: Record<
   },
   CheckoutID: {
     parents: ['Private'],
+    children: [],
+  },
+  FunctionalSubVariant: {
+    parents: ['FunctionalVariant'],
     children: [],
   },
 };

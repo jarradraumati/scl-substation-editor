@@ -8,6 +8,7 @@ import '@openscd/oscd-action-pane';
 import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
 import { renderText } from '../text-editor.js';
+import { renderControlRef } from './control-ref.js';
 
 /** Pane rendering `LNodeOutputs` element with its children */
 @customElement('lnode-outputs-editor')
@@ -42,6 +43,12 @@ export class LNodeOutputsEditor extends BaseSubstationElementEditor {
       </abbr>
       ${this.renderAddButton()}
       ${renderText(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderControlRef(
         this.element,
         this.editCount,
         this.showfunctions,

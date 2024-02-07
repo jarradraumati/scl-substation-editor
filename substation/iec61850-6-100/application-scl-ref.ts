@@ -8,19 +8,14 @@ import '@openscd/oscd-action-pane';
 import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
 import { renderText } from '../text-editor.js';
-import { renderL2CommParameters } from './l2-comm-parameters.js';
-import { renderL3IPv4CommParameters } from './l3-ipv4-comm-parameters.js';
-import { renderL3IPv6CommParameters } from './l3-ipv6-comm-parameters.js';
 
-/** Pane rendering `GooseParameters` element with its children */
-@customElement('goose-parameters-editor')
-export class GooseParametersEditor extends BaseSubstationElementEditor {
+/** Pane rendering `ApplicationSclRef` element with its children */
+@customElement('application-scl-ref-editor')
+export class ApplicationSclRefEditor extends BaseSubstationElementEditor {
   @state()
   private get header(): string {
-    const id = this.element.getAttribute('id');
-    const desc = this.element.getAttribute('desc');
-
-    return `${id}${desc ? ` - ${desc}` : ''}`;
+    const fileName = this.element.firstElementChild?.getAttribute('fileName');
+    return `ApplicationSclRef${fileName ? ` - ${fileName}` : ''}`;
   }
 
   render(): TemplateResult {
@@ -28,7 +23,7 @@ export class GooseParametersEditor extends BaseSubstationElementEditor {
       this.is6100 = true;
     return html`<oscd-action-pane
       label="${this.header}"
-      icon="schema"
+      icon="settings_applications"
       secondary
       highlighted
       ><abbr slot="action" title="Edit">
@@ -36,9 +31,8 @@ export class GooseParametersEditor extends BaseSubstationElementEditor {
           class="action edit"
           icon="edit"
           @click=${() => this.openEditWizard()}
-        ></mwc-icon-button>
-      </abbr>
-      <abbr slot="action" title="Remove">
+        ></mwc-icon-button> </abbr
+      ><abbr slot="action" title="Remove">
         <mwc-icon-button
           class="action remove"
           icon="delete"
@@ -47,24 +41,6 @@ export class GooseParametersEditor extends BaseSubstationElementEditor {
       </abbr>
       ${this.renderAddButton()}
       ${renderText(
-        this.element,
-        this.editCount,
-        this.showfunctions,
-        this.showuserdef
-      )}
-      ${renderL2CommParameters(
-        this.element,
-        this.editCount,
-        this.showfunctions,
-        this.showuserdef
-      )}
-      ${renderL3IPv4CommParameters(
-        this.element,
-        this.editCount,
-        this.showfunctions,
-        this.showuserdef
-      )}
-      ${renderL3IPv6CommParameters(
         this.element,
         this.editCount,
         this.showfunctions,
@@ -89,20 +65,23 @@ export class GooseParametersEditor extends BaseSubstationElementEditor {
   `;
 }
 
-export function renderGooseParameters(
+export function renderApplicationSclRef(
   parent: Element,
   editCount: number,
   showfunctions: boolean,
   showuserdef: boolean
 ): TemplateResult {
-  const GooseParameters = getChildElementsByTagName(parent, 'GooseParameters');
-  return html` ${GooseParameters.map(
-    gsePara =>
-      html`<goose-parameters-editor
-        .element=${gsePara}
+  const ApplicationSclRef = getChildElementsByTagName(
+    parent,
+    'ApplicationSclRef'
+  );
+  return html` ${ApplicationSclRef.map(
+    funcSclRef =>
+      html`<application-scl-ref-editor
+        .element=${funcSclRef}
         .editCount=${editCount}
         ?showfunctions=${showfunctions}
         ?showuserdef=${showuserdef}
-      ></goose-parameters-editor>`
+      ></application-scl-ref-editor>`
   )}`;
 }

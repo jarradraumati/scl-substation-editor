@@ -8,19 +8,20 @@ import '@openscd/oscd-action-pane';
 import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
 import { renderText } from '../text-editor.js';
-import { renderL2CommParameters } from './l2-comm-parameters.js';
-import { renderL3IPv4CommParameters } from './l3-ipv4-comm-parameters.js';
-import { renderL3IPv6CommParameters } from './l3-ipv6-comm-parameters.js';
+import { renderAnalogueWiringParametersRef } from './analogue-wiring-parameters-ref.js';
+import { renderBinaryWiringParametersRef } from './binary-wiring-parameters-ref.js';
+import { renderGooseParametersRef } from './goose-parameters-ref.js';
+import { renderSMVParametersRef } from './smv-parameters-ref.js';
+import { renderReportParametersRef } from './report-parameters-ref.js';
 
-/** Pane rendering `GooseParameters` element with its children */
-@customElement('goose-parameters-editor')
-export class GooseParametersEditor extends BaseSubstationElementEditor {
+/** Pane rendering `SourceRef` element with its children */
+@customElement('source-ref-editor')
+export class SourceRefEditor extends BaseSubstationElementEditor {
   @state()
   private get header(): string {
-    const id = this.element.getAttribute('id');
     const desc = this.element.getAttribute('desc');
 
-    return `${id}${desc ? ` - ${desc}` : ''}`;
+    return `SourceRef${desc ? ` - ${desc}` : ''}`;
   }
 
   render(): TemplateResult {
@@ -28,7 +29,7 @@ export class GooseParametersEditor extends BaseSubstationElementEditor {
       this.is6100 = true;
     return html`<oscd-action-pane
       label="${this.header}"
-      icon="schema"
+      icon="settings_applications"
       secondary
       highlighted
       ><abbr slot="action" title="Edit">
@@ -36,9 +37,8 @@ export class GooseParametersEditor extends BaseSubstationElementEditor {
           class="action edit"
           icon="edit"
           @click=${() => this.openEditWizard()}
-        ></mwc-icon-button>
-      </abbr>
-      <abbr slot="action" title="Remove">
+        ></mwc-icon-button> </abbr
+      ><abbr slot="action" title="Remove">
         <mwc-icon-button
           class="action remove"
           icon="delete"
@@ -52,19 +52,31 @@ export class GooseParametersEditor extends BaseSubstationElementEditor {
         this.showfunctions,
         this.showuserdef
       )}
-      ${renderL2CommParameters(
+      ${renderAnalogueWiringParametersRef(
         this.element,
         this.editCount,
         this.showfunctions,
         this.showuserdef
       )}
-      ${renderL3IPv4CommParameters(
+      ${renderBinaryWiringParametersRef(
         this.element,
         this.editCount,
         this.showfunctions,
         this.showuserdef
       )}
-      ${renderL3IPv6CommParameters(
+      ${renderGooseParametersRef(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderReportParametersRef(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderSMVParametersRef(
         this.element,
         this.editCount,
         this.showfunctions,
@@ -86,23 +98,31 @@ export class GooseParametersEditor extends BaseSubstationElementEditor {
       box-sizing: border-box;
       grid-template-columns: repeat(auto-fit, minmax(64px, auto));
     }
+
+    .container.processresource {
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      box-sizing: border-box;
+      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+    }
   `;
 }
 
-export function renderGooseParameters(
+export function renderSourceRef(
   parent: Element,
   editCount: number,
   showfunctions: boolean,
   showuserdef: boolean
 ): TemplateResult {
-  const GooseParameters = getChildElementsByTagName(parent, 'GooseParameters');
-  return html` ${GooseParameters.map(
-    gsePara =>
-      html`<goose-parameters-editor
-        .element=${gsePara}
+  const SourceRef = getChildElementsByTagName(parent, 'SourceRef');
+  return html` ${SourceRef.map(
+    commServSpec =>
+      html`<source-ref-editor
+        .element=${commServSpec}
         .editCount=${editCount}
         ?showfunctions=${showfunctions}
         ?showuserdef=${showuserdef}
-      ></goose-parameters-editor>`
+      ></source-ref-editor>`
   )}`;
 }

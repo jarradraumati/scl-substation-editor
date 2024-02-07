@@ -11,6 +11,9 @@ import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
 import { renderFunctionRole } from './function-role.js';
 import { renderAllocationRoleRef } from './allocation-role-ref.js';
+import { renderFunctionalVariant } from './functional-variant.js';
+import { renderFunctionalVariantGroup } from './functional-variant-group.js';
+import { renderApplicationSclRef } from './application-scl-ref.js';
 
 /** Pane rendering `Application` element with its children */
 @customElement('application-editor')
@@ -51,13 +54,31 @@ export class ApplicationEditor extends BaseSubstationElementEditor {
         this.showfunctions,
         this.showuserdef
       )}
+      ${renderFunctionRole(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderFunctionalVariant(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderFunctionalVariantGroup(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
       ${renderAllocationRoleRef(
         this.element,
         this.editCount,
         this.showfunctions,
         this.showuserdef
       )}
-      ${renderFunctionRole(
+      ${renderApplicationSclRef(
         this.element,
         this.editCount,
         this.showfunctions,

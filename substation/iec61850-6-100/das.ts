@@ -9,6 +9,11 @@ import { renderText } from '../text-editor.js';
 
 import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
+import { renderControllingLNode } from './controlling-lnode.js';
+import { renderSubscriberLNode } from './subscriber-lnode.js';
+import { renderProcessEcho } from './process-echo.js';
+import { renderLogParametersRef } from './log-parameters-ref.js';
+import { renderVal } from './val.js';
 
 /** Pane rendering `DAS` element with its children */
 @customElement('das-editor')
@@ -18,7 +23,7 @@ export class DASEditor extends BaseSubstationElementEditor {
     const name = this.element.getAttribute('name');
     const desc = this.element.getAttribute('desc');
 
-    return `DAS${name}${desc ? ` - ${desc}` : ''}`;
+    return `DAS - ${name}${desc ? ` - ${desc}` : ''}`;
   }
 
   render(): TemplateResult {
@@ -45,6 +50,36 @@ export class DASEditor extends BaseSubstationElementEditor {
       </abbr>
       ${this.renderAddButton()}
       ${renderText(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderControllingLNode(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderSubscriberLNode(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderProcessEcho(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderLogParametersRef(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderVal(
         this.element,
         this.editCount,
         this.showfunctions,

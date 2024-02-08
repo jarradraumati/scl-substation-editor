@@ -5,21 +5,19 @@ import { customElement, state } from 'lit/decorators.js';
 
 import '@openscd/oscd-action-pane';
 
-import { renderText } from '../text-editor.js';
-
 import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
-import { renderSubFunctionTemplate } from './sub-function-template.js';
+import { renderText } from '../text-editor.js';
+import { renderFunctionalVariantRef } from './functional-variant-ref.js';
 
-/** Pane rendering `FunctionTemplate` element with its children */
-@customElement('function-template-editor')
-export class FunctionTemplateEditor extends BaseSubstationElementEditor {
+/** Pane rendering `PowerSystemRelationRef` element with its children */
+@customElement('power-system-relation-ref-editor')
+export class PowerSystemRelationRefEditor extends BaseSubstationElementEditor {
   @state()
   private get header(): string {
-    const name = this.element.getAttribute('name');
     const desc = this.element.getAttribute('desc');
 
-    return `${name}${desc ? ` - ${desc}` : ''}`;
+    return `PowerSystemRelationRef${desc ? ` - ${desc}` : ''}`;
   }
 
   render(): TemplateResult {
@@ -27,7 +25,7 @@ export class FunctionTemplateEditor extends BaseSubstationElementEditor {
       this.is6100 = true;
     return html`<oscd-action-pane
       label="${this.header}"
-      icon="widgets"
+      icon="settings_applications"
       secondary
       highlighted
       ><abbr slot="action" title="Edit">
@@ -35,23 +33,21 @@ export class FunctionTemplateEditor extends BaseSubstationElementEditor {
           class="action edit"
           icon="edit"
           @click=${() => this.openEditWizard()}
-        ></mwc-icon-button>
-      </abbr>
-      <abbr slot="action" title="Remove">
+        ></mwc-icon-button> </abbr
+      ><abbr slot="action" title="Remove">
         <mwc-icon-button
           class="action remove"
           icon="delete"
           @click=${() => this.removeElement()}
         ></mwc-icon-button>
       </abbr>
-      ${this.renderAddButton()}
       ${renderText(
         this.element,
         this.editCount,
         this.showfunctions,
         this.showuserdef
       )}
-      ${renderSubFunctionTemplate(
+      ${renderFunctionalVariantRef(
         this.element,
         this.editCount,
         this.showfunctions,
@@ -68,23 +64,23 @@ export class FunctionTemplateEditor extends BaseSubstationElementEditor {
   `;
 }
 
-export function renderFunctionTemplate(
+export function renderPowerSystemRelationRef(
   parent: Element,
   editCount: number,
   showfunctions: boolean,
   showuserdef: boolean
 ): TemplateResult {
-  const FunctionTemplate = getChildElementsByTagName(
+  const PowerSystemRelationRef = getChildElementsByTagName(
     parent,
-    'FunctionTemplate'
+    'PowerSystemRelationRef'
   );
-  return html` ${FunctionTemplate.map(
-    app =>
-      html`<function-template-editor
-        .element=${app}
+  return html` ${PowerSystemRelationRef.map(
+    commServSpec =>
+      html`<power-system-relation-ref-editor
+        .element=${commServSpec}
         .editCount=${editCount}
         ?showfunctions=${showfunctions}
         ?showuserdef=${showuserdef}
-      ></function-template-editor>`
+      ></power-system-relation-ref-editor>`
   )}`;
 }

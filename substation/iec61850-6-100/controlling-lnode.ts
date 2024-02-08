@@ -5,21 +5,20 @@ import { customElement, state } from 'lit/decorators.js';
 
 import '@openscd/oscd-action-pane';
 
-import { renderText } from '../text-editor.js';
-
 import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
-import { renderSubFunctionTemplate } from './sub-function-template.js';
+import { renderText } from '../text-editor.js';
+import { renderAnalogueWiringParametersRef } from './analogue-wiring-parameters-ref.js';
+import { renderBinaryWiringParametersRef } from './binary-wiring-parameters-ref.js';
 
-/** Pane rendering `FunctionTemplate` element with its children */
-@customElement('function-template-editor')
-export class FunctionTemplateEditor extends BaseSubstationElementEditor {
+/** Pane rendering `ControllingLNode` element with its children */
+@customElement('controlling-lnode-editor')
+export class ControllingLNodeEditor extends BaseSubstationElementEditor {
   @state()
   private get header(): string {
-    const name = this.element.getAttribute('name');
     const desc = this.element.getAttribute('desc');
 
-    return `${name}${desc ? ` - ${desc}` : ''}`;
+    return `ControllingLNode${desc ? ` - ${desc}` : ''}`;
   }
 
   render(): TemplateResult {
@@ -27,7 +26,7 @@ export class FunctionTemplateEditor extends BaseSubstationElementEditor {
       this.is6100 = true;
     return html`<oscd-action-pane
       label="${this.header}"
-      icon="widgets"
+      icon="settings_applications"
       secondary
       highlighted
       ><abbr slot="action" title="Edit">
@@ -35,9 +34,8 @@ export class FunctionTemplateEditor extends BaseSubstationElementEditor {
           class="action edit"
           icon="edit"
           @click=${() => this.openEditWizard()}
-        ></mwc-icon-button>
-      </abbr>
-      <abbr slot="action" title="Remove">
+        ></mwc-icon-button> </abbr
+      ><abbr slot="action" title="Remove">
         <mwc-icon-button
           class="action remove"
           icon="delete"
@@ -51,7 +49,13 @@ export class FunctionTemplateEditor extends BaseSubstationElementEditor {
         this.showfunctions,
         this.showuserdef
       )}
-      ${renderSubFunctionTemplate(
+      ${renderAnalogueWiringParametersRef(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderBinaryWiringParametersRef(
         this.element,
         this.editCount,
         this.showfunctions,
@@ -68,23 +72,23 @@ export class FunctionTemplateEditor extends BaseSubstationElementEditor {
   `;
 }
 
-export function renderFunctionTemplate(
+export function renderControllingLNode(
   parent: Element,
   editCount: number,
   showfunctions: boolean,
   showuserdef: boolean
 ): TemplateResult {
-  const FunctionTemplate = getChildElementsByTagName(
+  const ControllingLNode = getChildElementsByTagName(
     parent,
-    'FunctionTemplate'
+    'ControllingLNode'
   );
-  return html` ${FunctionTemplate.map(
-    app =>
-      html`<function-template-editor
-        .element=${app}
+  return html` ${ControllingLNode.map(
+    commServSpec =>
+      html`<controlling-lnode-editor
+        .element=${commServSpec}
         .editCount=${editCount}
         ?showfunctions=${showfunctions}
         ?showuserdef=${showuserdef}
-      ></function-template-editor>`
+      ></controlling-lnode-editor>`
   )}`;
 }

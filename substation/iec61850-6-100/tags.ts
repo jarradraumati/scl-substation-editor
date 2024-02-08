@@ -115,6 +115,7 @@ const tSignalRole = [
 const tFunctionalVariantGroup = ['FunctionalVariant'] as const;
 const tAllocationRoleRef = ['FunctionalVariantRef'] as const;
 const tFunctionalVariant = ['FunctionalSubVariant', 'VariableRef'] as const;
+const tFunctionalSubVariant = ['FunctionalSubVariant', 'VariableRef'] as const;
 const tVariableRef = ['FunctionalVariantRef'] as const;
 const tSourceRef = [
   'AnalogueWiringParametersRef',
@@ -427,8 +428,8 @@ export const tags6100: Record<
     children: [...tFunctionTemplate],
   },
   SclFileReference: {
-    parents: ['FunctionSclRef'],
-    children: [],
+    parents: ['ApplicationSclRef', 'FunctionSclRef'],
+    children: ['Private'],
   },
   SDS: {
     parents: ['DOS'],
@@ -439,12 +440,12 @@ export const tags6100: Record<
     children: [...tDAS],
   },
   SubscriberLNode: {
-    parents: ['DOS'],
+    parents: ['DOS', 'DAS', 'SDS'],
     children: [...tSubscriberLNode],
   },
   ControllingLNode: {
     parents: ['DOS'],
-    children: [],
+    children: [...tControllingLNode],
   },
   LogParametersRef: {
     parents: ['DOS'],
@@ -531,7 +532,7 @@ export const tags6100: Record<
   },
   FunctionalSubVariant: {
     parents: ['FunctionalVariant'],
-    children: [],
+    children: [...tFunctionalSubVariant],
   },
 };
 

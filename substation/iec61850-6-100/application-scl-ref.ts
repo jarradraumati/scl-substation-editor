@@ -8,6 +8,7 @@ import '@openscd/oscd-action-pane';
 import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
 import { renderText } from '../text-editor.js';
+import { renderSclFileReference } from './scl-file-reference.js';
 
 /** Pane rendering `ApplicationSclRef` element with its children */
 @customElement('application-scl-ref-editor')
@@ -41,6 +42,12 @@ export class ApplicationSclRefEditor extends BaseSubstationElementEditor {
       </abbr>
       ${this.renderAddButton()}
       ${renderText(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderSclFileReference(
         this.element,
         this.editCount,
         this.showfunctions,

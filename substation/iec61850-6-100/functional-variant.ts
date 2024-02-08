@@ -20,7 +20,7 @@ export class FunctionalVariantEditor extends BaseSubstationElementEditor {
     const name = this.element.getAttribute('name');
     const desc = this.element.getAttribute('desc');
 
-    return `${name}${desc ? ` - ${desc}` : ''}`;
+    return `FunctionalVariant - ${name}${desc ? ` - ${desc}` : ''}`;
   }
 
   render(): TemplateResult {

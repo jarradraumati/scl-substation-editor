@@ -41,6 +41,7 @@ export class PowerSystemRelationRefEditor extends BaseSubstationElementEditor {
           @click=${() => this.removeElement()}
         ></mwc-icon-button>
       </abbr>
+      ${this.renderAddButton()}
       ${renderText(
         this.element,
         this.editCount,

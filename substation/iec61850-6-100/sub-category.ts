@@ -16,7 +16,7 @@ export class SubCategoryEditor extends BaseSubstationElementEditor {
   private get header(): string {
     const name = this.element.getAttribute('name');
 
-    return `${name}`;
+    return `SubCategory - ${name}`;
   }
 
   render(): TemplateResult {

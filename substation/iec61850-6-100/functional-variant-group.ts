@@ -19,7 +19,7 @@ export class FunctionalVariantGroupEditor extends BaseSubstationElementEditor {
     const name = this.element.getAttribute('name');
     const desc = this.element.getAttribute('desc');
 
-    return `${name}${desc ? ` - ${desc}` : ''}`;
+    return `FunctionalVariantGroup - ${name}${desc ? ` - ${desc}` : ''}`;
   }
 
   render(): TemplateResult {

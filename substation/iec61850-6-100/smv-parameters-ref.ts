@@ -17,7 +17,7 @@ export class SMVParametersRefEditor extends BaseSubstationElementEditor {
     const id = this.element.getAttribute('id');
     const desc = this.element.getAttribute('desc');
 
-    return `${id}${desc ? ` - ${desc}` : ''}`;
+    return `SMVParametersRef - ${id}${desc ? ` - ${desc}` : ''}`;
   }
 
   render(): TemplateResult {

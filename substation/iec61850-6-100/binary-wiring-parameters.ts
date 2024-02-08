@@ -17,7 +17,7 @@ export class BinaryWiringParametersEditor extends BaseSubstationElementEditor {
     const id = this.element.getAttribute('id');
     const desc = this.element.getAttribute('desc');
 
-    return `${id}${desc ? ` - ${desc}` : ''}`;
+    return `BinaryWiringParameters - ${id}${desc ? ` - ${desc}` : ''}`;
   }
 
   render(): TemplateResult {

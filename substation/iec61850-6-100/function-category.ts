@@ -17,7 +17,7 @@ export class FunctionCategoryEditor extends BaseSubstationElementEditor {
   private get header(): string {
     const name = this.element.getAttribute('name');
 
-    return `${name}`;
+    return `FunctionCategory - ${name}`;
   }
 
   render(): TemplateResult {

@@ -8,8 +8,10 @@ import '@openscd/oscd-action-pane';
 import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
 import { renderText } from '../text-editor.js';
-import { renderAnalogueWiringParametersRef } from './analogue-wiring-parameters-ref.js';
 import { renderBinaryWiringParametersRef } from './binary-wiring-parameters-ref.js';
+import { renderGooseParametersRef } from './goose-parameters-ref.js';
+import { renderSMVParametersRef } from './smv-parameters-ref.js';
+import { renderReportParametersRef } from './report-parameters-ref.js';
 
 /** Pane rendering `SubscriberLNode` element with its children */
 @customElement('subscriber-lnode-editor')
@@ -49,7 +51,19 @@ export class SubscriberLNodeEditor extends BaseSubstationElementEditor {
         this.showfunctions,
         this.showuserdef
       )}
-      ${renderAnalogueWiringParametersRef(
+      ${renderGooseParametersRef(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderSMVParametersRef(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderReportParametersRef(
         this.element,
         this.editCount,
         this.showfunctions,

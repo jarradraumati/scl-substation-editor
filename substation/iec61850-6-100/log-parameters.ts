@@ -16,7 +16,7 @@ export class LogParametersEditor extends BaseSubstationElementEditor {
     const id = this.element.getAttribute('id');
     const desc = this.element.getAttribute('desc');
 
-    return `${id}${desc ? ` - ${desc}` : ''}`;
+    return `LogParameters - ${id}${desc ? ` - ${desc}` : ''}`;
   }
 
   render(): TemplateResult {

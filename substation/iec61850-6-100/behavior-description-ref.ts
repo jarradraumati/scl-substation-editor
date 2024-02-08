@@ -9,6 +9,8 @@ import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
 import { renderText } from '../text-editor.js';
 import { renderFunctionalVariantRef } from './functional-variant-ref.js';
+import { renderInputVarRef } from './input-var-ref.js';
+import { renderOutputVarRef } from './output-var-ref.js';
 
 /** Pane rendering `BehaviorDescriptionRef` element with its children */
 @customElement('behavior-description-ref-editor')
@@ -49,6 +51,18 @@ export class BehaviorDescriptionRefEditor extends BaseSubstationElementEditor {
         this.showuserdef
       )}
       ${renderFunctionalVariantRef(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderInputVarRef(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderOutputVarRef(
         this.element,
         this.editCount,
         this.showfunctions,

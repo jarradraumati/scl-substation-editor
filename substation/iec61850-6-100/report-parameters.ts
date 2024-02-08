@@ -16,7 +16,7 @@ export class ReportParametersEditor extends BaseSubstationElementEditor {
     const id = this.element.getAttribute('id');
     const desc = this.element.getAttribute('desc');
 
-    return `${id}${desc ? ` - ${desc}` : ''}`;
+    return `ReportParameters - ${id}${desc ? ` - ${desc}` : ''}`;
   }
 
   render(): TemplateResult {

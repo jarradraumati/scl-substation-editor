@@ -1,32 +1,33 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable import/no-extraneous-dependencies */
 import { TemplateResult, css, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-
-import '@material/mwc-fab';
-import '@material/mwc-icon-button';
 
 import '@openscd/oscd-action-pane';
 
 import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
+import { renderText } from '../text-editor.js';
+import { renderFunctionalVariantRef } from './functional-variant-ref.js';
 
-@customElement('val-editor')
-export class ValEditor extends BaseSubstationElementEditor {
+/** Pane rendering `InputVarRef` element with its children */
+@customElement('input-var-ref-editor')
+export class InputVarRefEditor extends BaseSubstationElementEditor {
   @state()
-  get header(): string {
-    const content = this.element.textContent;
-
-    return `Val - ${content}`;
+  private get header(): string {
+    const desc = this.element.getAttribute('desc');
+    return `InputVarRef${desc ? ` - ${desc}` : ''}`;
   }
 
   render(): TemplateResult {
+    if (this.element.namespaceURI === 'http://www.iec.ch/61850/2019/SCL/6-100')
+      this.is6100 = true;
     return html`<oscd-action-pane
       label="${this.header}"
-      icon="notes"
+      icon="commit"
       secondary
       highlighted
-    >
-      <abbr slot="action" title="Edit">
+      ><abbr slot="action" title="Edit">
         <mwc-icon-button
           class="action edit"
           icon="edit"
@@ -40,6 +41,19 @@ export class ValEditor extends BaseSubstationElementEditor {
           @click=${() => this.removeElement()}
         ></mwc-icon-button>
       </abbr>
+      ${this.renderAddButton()}
+      ${renderText(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderFunctionalVariantRef(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
     </oscd-action-pane>`;
   }
 
@@ -51,23 +65,20 @@ export class ValEditor extends BaseSubstationElementEditor {
   `;
 }
 
-export function renderVal(
+export function renderInputVarRef(
   parent: Element,
   editCount: number,
   showfunctions: boolean,
   showuserdef: boolean
 ): TemplateResult {
-  if (!showfunctions) return html``;
-  if (!showuserdef) return html``;
-
-  const text = getChildElementsByTagName(parent, 'Val');
-  return html`${text.map(
-    fVal =>
-      html`<val-editor
+  const InputVarRef = getChildElementsByTagName(parent, 'InputVarRef');
+  return html` ${InputVarRef.map(
+    behDescRef =>
+      html`<input-var-ref-editor
+        .element=${behDescRef}
         .editCount=${editCount}
-        .element=${fVal}
         ?showfunctions=${showfunctions}
         ?showuserdef=${showuserdef}
-      ></val-editor>`
+      ></input-var-ref-editor>`
   )}`;
 }

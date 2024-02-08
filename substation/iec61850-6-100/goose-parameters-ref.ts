@@ -17,7 +17,7 @@ export class GooseParametersRefEditor extends BaseSubstationElementEditor {
     const id = this.element.getAttribute('id');
     const desc = this.element.getAttribute('desc');
 
-    return `${id}${desc ? ` - ${desc}` : ''}`;
+    return `GooseParametersRef - ${id}${desc ? ` - ${desc}` : ''}`;
   }
 
   render(): TemplateResult {

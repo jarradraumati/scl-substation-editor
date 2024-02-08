@@ -21,7 +21,7 @@ export class BehaviorDescriptionEditor extends BaseSubstationElementEditor {
     const name = this.element.getAttribute('name');
     const desc = this.element.getAttribute('desc');
 
-    return `${name}${desc ? ` - ${desc}` : ''}`;
+    return `BehaviorDescription - ${name}${desc ? ` - ${desc}` : ''}`;
   }
 
   render(): TemplateResult {

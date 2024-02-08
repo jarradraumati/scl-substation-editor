@@ -10,6 +10,9 @@ import BaseSubstationElementEditor from '../base-substation-element-editor.js';
 import { renderFunctionRef } from './function-ref.js';
 import { renderProcessResourceRef } from './process-resource-ref.js';
 import { renderBehaviorDescriptionRef } from './behavior-description-ref.js';
+import { renderVariableRef } from './variable-ref.js';
+import { renderPowerSystemRelationRef } from './power-system-relation-ref.js';
+import { renderFunctionCategoryRef } from './function-category-ref.js';
 
 /** Pane rendering `FunctionRoleContent` element with its children */
 @customElement('function-role-content-editor')
@@ -50,13 +53,31 @@ export class FunctionRoleContentEditor extends BaseSubstationElementEditor {
         this.showfunctions,
         this.showuserdef
       )}
+      ${renderBehaviorDescriptionRef(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
       ${renderProcessResourceRef(
         this.element,
         this.editCount,
         this.showfunctions,
         this.showuserdef
       )}
-      ${renderBehaviorDescriptionRef(
+      ${renderVariableRef(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderFunctionCategoryRef(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderPowerSystemRelationRef(
         this.element,
         this.editCount,
         this.showfunctions,

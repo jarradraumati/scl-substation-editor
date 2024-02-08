@@ -130,6 +130,7 @@ const tControlRef = [
 ] as const;
 const tSubCategory = ['FunctionCatRef', 'SubCategory'] as const;
 const tApplicationSclRef = ['SclFileReference'] as const;
+const tFunctionCategoryRef = ['FunctionalVariantRef'] as const;
 
 const sCL6100Tags = [
   'Private',
@@ -257,7 +258,7 @@ export const tags6100: Record<
   },
   FunctionCategoryRef: {
     parents: ['FunctionRoleContent'],
-    children: [],
+    children: [...tFunctionCategoryRef],
   },
   PowerSystemRelationRef: {
     parents: ['FunctionRoleContent'],

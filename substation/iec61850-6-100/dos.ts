@@ -12,6 +12,9 @@ import BaseSubstationElementEditor from '../base-substation-element-editor.js';
 import { renderSDS } from './sds.js';
 import { renderDAS } from './das.js';
 import { renderProcessEcho } from './process-echo.js';
+import { renderControllingLNode } from './controlling-lnode.js';
+import { renderSubscriberLNode } from './subscriber-lnode.js';
+import { renderLogParametersRef } from './log-parameters-ref.js';
 
 /** Pane rendering `DOS` element with its children */
 @customElement('dos-editor')
@@ -19,8 +22,9 @@ export class DOSEditor extends BaseSubstationElementEditor {
   @state()
   private get header(): string {
     const name = this.element.getAttribute('name');
+    const desc = this.element.getAttribute('desc');
 
-    return `DOS${name ? ` - ${name}` : ''}`;
+    return `DOS - ${name}${desc ? ` - ${desc}` : ''}`;
   }
 
   render(): TemplateResult {
@@ -64,7 +68,25 @@ export class DOSEditor extends BaseSubstationElementEditor {
         this.showfunctions,
         this.showuserdef
       )}
+      ${renderControllingLNode(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderSubscriberLNode(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
       ${renderProcessEcho(
+        this.element,
+        this.editCount,
+        this.showfunctions,
+        this.showuserdef
+      )}
+      ${renderLogParametersRef(
         this.element,
         this.editCount,
         this.showfunctions,

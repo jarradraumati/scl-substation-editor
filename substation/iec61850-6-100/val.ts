@@ -1,34 +1,32 @@
-/* eslint-disable no-use-before-define */
 /* eslint-disable import/no-extraneous-dependencies */
 import { TemplateResult, css, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 
-import '@openscd/oscd-action-pane';
+import '@material/mwc-fab';
+import '@material/mwc-icon-button';
 
-import { renderText } from '../text-editor.js';
+import '@openscd/oscd-action-pane';
 
 import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
 
-/** Pane rendering `ProcessEcho` element with its children */
-@customElement('process-echo-editor')
-export class ProcessEchoEditor extends BaseSubstationElementEditor {
+@customElement('val-editor')
+export class ValEditor extends BaseSubstationElementEditor {
   @state()
-  private get header(): string {
-    const desc = this.element.getAttribute('desc');
+  get header(): string {
+    const content = this.element.textContent;
 
-    return `ProcessEcho${desc ? ` - ${desc}` : ''}`;
+    return `${content}`;
   }
 
   render(): TemplateResult {
-    if (this.element.namespaceURI === 'http://www.iec.ch/61850/2019/SCL/6-100')
-      this.is6100 = true;
     return html`<oscd-action-pane
       label="${this.header}"
-      icon="schema"
+      icon="notes"
       secondary
       highlighted
-      ><abbr slot="action" title="Edit">
+    >
+      <abbr slot="action" title="Edit">
         <mwc-icon-button
           class="action edit"
           icon="edit"
@@ -42,12 +40,6 @@ export class ProcessEchoEditor extends BaseSubstationElementEditor {
           @click=${() => this.removeElement()}
         ></mwc-icon-button>
       </abbr>
-      ${renderText(
-        this.element,
-        this.editCount,
-        this.showfunctions,
-        this.showuserdef
-      )}
     </oscd-action-pane>`;
   }
 
@@ -56,31 +48,26 @@ export class ProcessEchoEditor extends BaseSubstationElementEditor {
       text-decoration: none;
       border-bottom: none;
     }
-
-    .content.actionicon {
-      display: grid;
-      grid-gap: 12px;
-      padding: 8px 12px 16px;
-      box-sizing: border-box;
-      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
-    }
   `;
 }
 
-export function renderProcessEcho(
+export function renderVal(
   parent: Element,
   editCount: number,
   showfunctions: boolean,
   showuserdef: boolean
 ): TemplateResult {
-  const ProcessEcho = getChildElementsByTagName(parent, 'ProcessEcho');
-  return html` ${ProcessEcho.map(
-    proEcho =>
-      html`<process-echo-editor
-        .element=${proEcho}
+  if (!showfunctions) return html``;
+  if (!showuserdef) return html``;
+
+  const text = getChildElementsByTagName(parent, 'Val');
+  return html`${text.map(
+    fVal =>
+      html`<val-editor
         .editCount=${editCount}
+        .element=${fVal}
         ?showfunctions=${showfunctions}
         ?showuserdef=${showuserdef}
-      ></process-echo-editor>`
+      ></val-editor>`
   )}`;
 }

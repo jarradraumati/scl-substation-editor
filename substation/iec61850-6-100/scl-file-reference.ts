@@ -5,21 +5,19 @@ import { customElement, state } from 'lit/decorators.js';
 
 import '@openscd/oscd-action-pane';
 
-import { renderText } from '../text-editor.js';
-
 import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
-import { renderSubFunctionTemplate } from './sub-function-template.js';
+import { renderText } from '../text-editor.js';
+import { renderPrivate } from '../private-editor.js';
 
-/** Pane rendering `FunctionTemplate` element with its children */
-@customElement('function-template-editor')
-export class FunctionTemplateEditor extends BaseSubstationElementEditor {
+/** Pane rendering `SclFileReference` element with its children */
+@customElement('scl-file-reference-editor')
+export class SclFileReferenceEditor extends BaseSubstationElementEditor {
   @state()
   private get header(): string {
-    const name = this.element.getAttribute('name');
     const desc = this.element.getAttribute('desc');
 
-    return `${name}${desc ? ` - ${desc}` : ''}`;
+    return `SclFileReference${desc ? ` - ${desc}` : ''}`;
   }
 
   render(): TemplateResult {
@@ -27,7 +25,7 @@ export class FunctionTemplateEditor extends BaseSubstationElementEditor {
       this.is6100 = true;
     return html`<oscd-action-pane
       label="${this.header}"
-      icon="widgets"
+      icon="settings_applications"
       secondary
       highlighted
       ><abbr slot="action" title="Edit">
@@ -35,9 +33,8 @@ export class FunctionTemplateEditor extends BaseSubstationElementEditor {
           class="action edit"
           icon="edit"
           @click=${() => this.openEditWizard()}
-        ></mwc-icon-button>
-      </abbr>
-      <abbr slot="action" title="Remove">
+        ></mwc-icon-button> </abbr
+      ><abbr slot="action" title="Remove">
         <mwc-icon-button
           class="action remove"
           icon="delete"
@@ -51,7 +48,7 @@ export class FunctionTemplateEditor extends BaseSubstationElementEditor {
         this.showfunctions,
         this.showuserdef
       )}
-      ${renderSubFunctionTemplate(
+      ${renderPrivate(
         this.element,
         this.editCount,
         this.showfunctions,
@@ -65,26 +62,42 @@ export class FunctionTemplateEditor extends BaseSubstationElementEditor {
       text-decoration: none;
       border-bottom: none;
     }
+
+    .content.actionicon {
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      box-sizing: border-box;
+      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+    }
+
+    .container.processresource {
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      box-sizing: border-box;
+      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+    }
   `;
 }
 
-export function renderFunctionTemplate(
+export function renderSclFileReference(
   parent: Element,
   editCount: number,
   showfunctions: boolean,
   showuserdef: boolean
 ): TemplateResult {
-  const FunctionTemplate = getChildElementsByTagName(
+  const SclFileReference = getChildElementsByTagName(
     parent,
-    'FunctionTemplate'
+    'SclFileReference'
   );
-  return html` ${FunctionTemplate.map(
-    app =>
-      html`<function-template-editor
-        .element=${app}
+  return html` ${SclFileReference.map(
+    commServSpec =>
+      html`<scl-file-reference-editor
+        .element=${commServSpec}
         .editCount=${editCount}
         ?showfunctions=${showfunctions}
         ?showuserdef=${showuserdef}
-      ></function-template-editor>`
+      ></scl-file-reference-editor>`
   )}`;
 }

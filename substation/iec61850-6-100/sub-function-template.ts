@@ -9,11 +9,10 @@ import { renderText } from '../text-editor.js';
 
 import { getChildElementsByTagName } from '../../foundation.js';
 import BaseSubstationElementEditor from '../base-substation-element-editor.js';
-import { renderSubFunctionTemplate } from './sub-function-template.js';
 
-/** Pane rendering `FunctionTemplate` element with its children */
-@customElement('function-template-editor')
-export class FunctionTemplateEditor extends BaseSubstationElementEditor {
+/** Pane rendering `SubFunctionTemplate` element with its children */
+@customElement('sub-function-template-editor')
+export class SubFunctionTemplateEditor extends BaseSubstationElementEditor {
   @state()
   private get header(): string {
     const name = this.element.getAttribute('name');
@@ -68,23 +67,23 @@ export class FunctionTemplateEditor extends BaseSubstationElementEditor {
   `;
 }
 
-export function renderFunctionTemplate(
+export function renderSubFunctionTemplate(
   parent: Element,
   editCount: number,
   showfunctions: boolean,
   showuserdef: boolean
 ): TemplateResult {
-  const FunctionTemplate = getChildElementsByTagName(
+  const SubFunctionTemplate = getChildElementsByTagName(
     parent,
-    'FunctionTemplate'
+    'SubFunctionTemplate'
   );
-  return html` ${FunctionTemplate.map(
+  return html` ${SubFunctionTemplate.map(
     app =>
-      html`<function-template-editor
+      html`<sub-function-template-editor
         .element=${app}
         .editCount=${editCount}
         ?showfunctions=${showfunctions}
         ?showuserdef=${showuserdef}
-      ></function-template-editor>`
+      ></sub-function-template-editor>`
   )}`;
 }

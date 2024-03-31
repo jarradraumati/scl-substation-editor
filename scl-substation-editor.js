@@ -6394,9 +6394,9 @@ const tags = {
         children: [...tEquipmentContainerSequence, "Voltage", "Bay", "Function"],
     },
 };
-const tagSet = new Set(sCLTags);
+const tagSet$1 = new Set(sCLTags);
 function isSCLTag(tag) {
-    return tagSet.has(tag);
+    return tagSet$1.has(tag);
 }
 
 const maxGseMacAddress = 0x010ccd0101ff;
@@ -6451,6 +6451,427 @@ function getChildren(parent) {
     return tags[parentTag].children;
 }
 
+const tFunctionCategory = ['SubCategory', 'FunctionCatRef'];
+const tProcessResources = ['ProcessResource'];
+const tProcessResource = ['Resource'];
+const tPowerSystemRelations = ['PowerSystemRelation'];
+const tLNodeInputs = ['SourceRef'];
+const tLNodeOutputs = ['ControlRef'];
+const tVariable = ['VariableApplyTo'];
+const tServiceSpecifications = [
+    'GooseParameters',
+    'SMVParameters',
+    'ReportParameters',
+    'BinaryWiringParameters',
+    'AnalogueWiringParameters',
+    'LogParameters',
+];
+const tCommServiceSpecifications = [
+    'GooseParameters',
+    'SMVParameters',
+    'ReportParameters',
+];
+const tFunctionRef = ['SignalRole'];
+const tFunctionRoleContent = [
+    'FunctionRef',
+    'BehaviorDescriptionRef',
+    'ProcessResourceRef',
+    'VariableRef',
+    'FunctionCategoryRef',
+    'PowerSystemRelationRef',
+];
+const tFunctionRole = ['FunctionRoleContent'];
+const tAllocationRole = ['FunctionRef'];
+const tApplication = [
+    'FunctionRole',
+    'FunctionalVariant',
+    'FunctionalVariantGroup',
+    'AllocationRoleRef',
+    'ApplicationSclRef',
+];
+const tBehaviorDescription = [
+    'InputVar',
+    'OutputVar',
+    'BehaviorReference',
+];
+const tProject = ['ProjectProcessReference'];
+const tFunctionTemplate = [
+    'SubFunctionTemplate',
+    'GeneralEquipment',
+    'ConductingEquipment',
+];
+const tSubFunctionTemplate = [
+    'GeneralEquipment',
+    'ConductingEquipment',
+    'SubFunctionTemplate',
+];
+const tFunctionSclRef = ['SclFileReference'];
+const tDOS = [
+    'SDS',
+    'DAS',
+    'SubscriberLNode',
+    'ControllingLNode',
+    'ProcessEcho',
+    'LogParametersRef',
+];
+const tSDS = [
+    'SDS',
+    'DAS',
+    'SubscriberLNode',
+    'ControllingLNode',
+    'ProcessEcho',
+    'LogParametersRef',
+];
+const tDAS = [
+    'SubscriberLNode',
+    'ControllingLNode',
+    'ProcessEcho',
+    'LogParametersRef',
+    'Val',
+];
+const tSubscriberLNode = [
+    'GooseParametersRef',
+    'SMVParametersRef',
+    'ReportParametersRef',
+    'BinaryWiringParametersRef',
+];
+const tControllingLNode = [
+    'BinaryWiringParametersRef',
+    'AnalogueWiringParametersRef',
+];
+const sCL6100Tags = [
+    'Private',
+    'FunctionCategory',
+    'ProcessResources',
+    'PowerSystemRelations',
+    'LNodeInputs',
+    'LNodeOutputs',
+    'ProcessEcho',
+    'LNodeSpecNaming',
+    'DOS',
+    'FunctionSclRef',
+    'Variable',
+    'CommunicationServiceSpecifications',
+    'ServiceSpecifications',
+    'BayType',
+    'AllocationRole',
+    'Application',
+    'BehaviorDescription',
+    'Project',
+    'FunctionTemplate',
+    ...tFunctionCategory,
+    ...tProcessResources,
+    ...tProcessResource,
+    ...tPowerSystemRelations,
+    ...tLNodeInputs,
+    ...tLNodeOutputs,
+    ...tVariable,
+    ...tCommServiceSpecifications,
+    ...tServiceSpecifications,
+    ...tFunctionRef,
+    ...tFunctionRoleContent,
+    ...tFunctionRole,
+    ...tAllocationRole,
+    ...tApplication,
+    ...tBehaviorDescription,
+    ...tProject,
+    ...tFunctionTemplate,
+    ...tSubFunctionTemplate,
+    ...tFunctionSclRef,
+    ...tDOS,
+    ...tSDS,
+    ...tDAS,
+    ...tSubscriberLNode,
+    ...tControllingLNode,
+];
+const tags6100 = {
+    Private: {
+        parents: [],
+        children: [
+            'ProcessResources',
+            'ServiceSpecifications',
+            'Application',
+            'Variable',
+            'LNodeSpecNaming',
+            'LNodeInputs',
+            'DOS',
+            'AllocationRole',
+            'BehaviorDescription',
+        ],
+    },
+    SubCategory: {
+        parents: ['FunctionCategory'],
+        children: [],
+    },
+    GooseParameters: {
+        parents: ['CommunicationServiceSpecifications', 'ServiceSpecifications'],
+        children: [],
+    },
+    SMVParameters: {
+        parents: ['CommunicationServiceSpecifications', 'ServiceSpecifications'],
+        children: [],
+    },
+    ReportParameters: {
+        parents: ['CommunicationServiceSpecifications', 'ServiceSpecifications'],
+        children: [],
+    },
+    SignalRole: {
+        parents: ['FunctionRef'],
+        children: [],
+    },
+    FunctionRef: {
+        parents: ['FunctionRoleContent', 'AllocationRole'],
+        children: [...tFunctionRef],
+    },
+    BehaviorDescriptionRef: {
+        parents: ['FunctionRoleContent'],
+        children: [],
+    },
+    ProcessResourceRef: {
+        parents: ['FunctionRoleContent'],
+        children: [],
+    },
+    VariableRef: {
+        parents: ['FunctionRoleContent'],
+        children: [],
+    },
+    FunctionCategoryRef: {
+        parents: ['FunctionRoleContent'],
+        children: [],
+    },
+    PowerSystemRelationRef: {
+        parents: ['FunctionRoleContent'],
+        children: [],
+    },
+    FunctionRoleContent: {
+        parents: ['FunctionRole'],
+        children: [...tFunctionRoleContent],
+    },
+    FunctionRole: {
+        parents: ['Application'],
+        children: [...tFunctionRole],
+    },
+    FunctionalVariant: {
+        parents: ['Application'],
+        children: [],
+    },
+    FunctionalVariantGroup: {
+        parents: ['Application'],
+        children: [],
+    },
+    AllocationRoleRef: {
+        parents: ['Application'],
+        children: [],
+    },
+    ApplicationSclRef: {
+        parents: ['Application'],
+        children: [],
+    },
+    InputVar: {
+        parents: ['BehaviorDescription'],
+        children: [],
+    },
+    OutputVar: {
+        parents: ['BehaviorDescription'],
+        children: [],
+    },
+    BehaviorReference: {
+        parents: ['BehaviorDescription'],
+        children: [],
+    },
+    ProjectProcessReference: {
+        parents: ['Project'],
+        children: [],
+    },
+    SubFunctionTemplate: {
+        parents: ['FunctionTemplate'],
+        children: [...tSubFunctionTemplate],
+    },
+    GeneralEquipment: {
+        parents: ['FunctionTemplate', 'SubFunctionTemplate'],
+        children: [],
+    },
+    ConductingEquipment: {
+        parents: ['FunctionTemplate', 'SubFunctionTemplate'],
+        children: [],
+    },
+    FunctionCatRef: {
+        parents: ['FunctionCategory'],
+        children: [],
+    },
+    ProcessResource: {
+        parents: ['ProcessResources'],
+        children: [...tProcessResource],
+    },
+    Resource: {
+        parents: ['ProcessResource'],
+        children: [],
+    },
+    PowerSystemRelation: {
+        parents: ['PowerSystemRelations'],
+        children: [],
+    },
+    SourceRef: {
+        parents: ['LNodeInputs'],
+        children: [],
+    },
+    ControlRef: {
+        parents: ['LNodeOutputs'],
+        children: [],
+    },
+    VariableApplyTo: {
+        parents: ['Variable'],
+        children: [],
+    },
+    BinaryWiringParameters: {
+        parents: ['ServiceSpecifications'],
+        children: [],
+    },
+    AnalogueWiringParameters: {
+        parents: ['ServiceSpecifications'],
+        children: [],
+    },
+    LogParameters: {
+        parents: ['ServiceSpecifications'],
+        children: [],
+    },
+    FunctionCategory: {
+        parents: ['Private'],
+        children: [...tFunctionCategory],
+    },
+    ProcessResources: {
+        parents: ['Private'],
+        children: ['ProcessResource'],
+    },
+    PowerSystemRelations: {
+        parents: ['Private'],
+        children: [...tPowerSystemRelations],
+    },
+    LNodeInputs: {
+        parents: ['Private'],
+        children: [...tLNodeInputs],
+    },
+    LNodeOutputs: {
+        parents: ['Private'],
+        children: [...tLNodeOutputs],
+    },
+    ProcessEcho: {
+        parents: ['DOS'],
+        children: [],
+    },
+    LNodeSpecNaming: {
+        parents: ['Private'],
+        children: [],
+    },
+    DOS: {
+        parents: ['Private'],
+        children: [...tDOS],
+    },
+    FunctionSclRef: {
+        parents: ['Private'],
+        children: [...tFunctionSclRef],
+    },
+    Variable: {
+        parents: ['Private'],
+        children: [...tVariable],
+    },
+    CommunicationServiceSpecifications: {
+        parents: ['Private'],
+        children: [...tCommServiceSpecifications],
+    },
+    ServiceSpecifications: {
+        parents: ['Private'],
+        children: [...tServiceSpecifications],
+    },
+    BayType: {
+        parents: ['Private'],
+        children: [],
+    },
+    AllocationRole: {
+        parents: ['Private'],
+        children: [...tAllocationRole],
+    },
+    Application: {
+        parents: ['Private'],
+        children: [...tApplication],
+    },
+    BehaviorDescription: {
+        parents: ['Private'],
+        children: [...tBehaviorDescription],
+    },
+    Project: {
+        parents: ['Private'],
+        children: [...tProject],
+    },
+    FunctionTemplate: {
+        parents: ['Private'],
+        children: [...tFunctionTemplate],
+    },
+    SclFileReference: {
+        parents: ['FunctionSclRef'],
+        children: [],
+    },
+    SDS: {
+        parents: ['DOS'],
+        children: [...tSDS],
+    },
+    DAS: {
+        parents: ['DOS'],
+        children: [...tDAS],
+    },
+    SubscriberLNode: {
+        parents: ['DOS'],
+        children: [...tSubscriberLNode],
+    },
+    ControllingLNode: {
+        parents: ['DOS'],
+        children: [],
+    },
+    LogParametersRef: {
+        parents: ['DOS'],
+        children: [],
+    },
+    GooseParametersRef: {
+        parents: ['SubscriberLNode'],
+        children: [],
+    },
+    SMVParametersRef: {
+        parents: ['SubscriberLNode'],
+        children: [],
+    },
+    ReportParametersRef: {
+        parents: ['SubscriberLNode'],
+        children: [],
+    },
+    BinaryWiringParametersRef: {
+        parents: ['SubscriberLNode', 'ControllingLNode'],
+        children: [],
+    },
+    Val: {
+        parents: ['DAS'],
+        children: [],
+    },
+    AnalogueWiringParametersRef: {
+        parents: ['ControllingLNode'],
+        children: [],
+    },
+};
+const tagSet = new Set(sCL6100Tags);
+function isSCL6100Tag(tag) {
+    return tagSet.has(tag);
+}
+
+/** Returns SCL valid children from a given [[`parent`]]
+ * > NOTE: !!only valid for 2007B4 (Ed2.1) projects
+ * > children are in the correct sequence as defined in the 2007B4 schema
+ * @returns SCL children for given [[`parent`]] */
+function get6100Children(parent) {
+    const parentTag = parent.localName;
+    if (!isSCL6100Tag(parentTag))
+        return [];
+    return tags6100[parentTag].children;
+}
+
 /** base class hosting global properties and the remove method */
 class BaseSubstationElementEditor extends s {
     constructor() {
@@ -6461,12 +6882,17 @@ class BaseSubstationElementEditor extends s {
         this.showfunctions = false;
         /** Whether text/private type element shall be shown */
         this.showuserdef = false;
+        /** Whether private type element is eIEC61850-6-100 */
+        this.is6100 = false;
     }
     openCreateWizard(tagName) {
         this.dispatchEvent(newCreateWizardEvent(this.element, tagName));
     }
     openEditWizard() {
         this.dispatchEvent(newEditWizardEvent(this.element));
+    }
+    openMapWizard() {
+        this.dispatchEvent(newEditWizardEvent(this.element, true));
     }
     removeElement() {
         this.dispatchEvent(newEditEvent({
@@ -6480,6 +6906,13 @@ class BaseSubstationElementEditor extends s {
     renderAddButtons() {
         var _a;
         const alreadyHasText = (_a = this.element.querySelector(':scope > Text')) !== null && _a !== void 0 ? _a : false;
+        if (this.is6100) {
+            return get6100Children(this.element)
+                .filter(child => child !== 'Text' || (child === 'Text' && !alreadyHasText))
+                .map(child => x `<mwc-list-item class="action add" value="${child}"
+              ><span>${child}</span></mwc-list-item
+            >`);
+        }
         return getChildren(this.element)
             .filter(child => child !== 'Text' || (child === 'Text' && !alreadyHasText))
             .map(child => x `<mwc-list-item class="action add" value="${child}"
@@ -6521,6 +6954,9 @@ __decorate([
     n$2({ type: Boolean })
 ], BaseSubstationElementEditor.prototype, "showuserdef", void 0);
 __decorate([
+    n$2({ type: Boolean })
+], BaseSubstationElementEditor.prototype, "is6100", void 0);
+__decorate([
     i$2('mwc-menu')
 ], BaseSubstationElementEditor.prototype, "addMenu", void 0);
 __decorate([
@@ -6542,7 +6978,7 @@ __decorate([
 let TextEditor = class TextEditor extends BaseSubstationElementEditor {
     get header() {
         const content = this.element.textContent;
-        return `${content}`;
+        return `Text - ${content}`;
     }
     render() {
         return x `<oscd-action-pane
@@ -6594,12 +7030,1459 @@ function renderText(parent, editCount, showfunctions, showuserdef) {
       ></text-editor>`)}`;
 }
 
-let PrivateEditor = class PrivateEditor extends BaseSubstationElementEditor {
+/** Pane rendering `Resource` element with its children */
+let ResourceEditor = class ResourceEditor extends BaseSubstationElementEditor {
     get header() {
-        const privateType = this.element.getAttribute('type');
-        return `${privateType}`;
+        const source = this.element.getAttribute('source');
+        const resInst = this.element.getAttribute('resInst');
+        return `Resource${source ? ` - ${source}` : ''}${resInst ? ` ${resInst}` : ''}`;
     }
     render() {
+        if (this.element.namespaceURI === 'http://www.iec.ch/61850/2019/SCL/6-100')
+            this.is6100 = true;
+        return x `<oscd-action-pane label="${this.header}" icon="commit" secondary
+      ><abbr slot="action" title="Edit">
+        <mwc-icon-button
+          class="action edit"
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title="Remove">
+        <mwc-icon-button
+          class="action remove"
+          icon="delete"
+          @click=${() => this.removeElement()}
+        ></mwc-icon-button>
+      </abbr>
+    </oscd-action-pane>`;
+    }
+};
+ResourceEditor.styles = i$5 `
+    abbr {
+      text-decoration: none;
+      border-bottom: none;
+    }
+  `;
+__decorate([
+    t$1()
+], ResourceEditor.prototype, "header", null);
+ResourceEditor = __decorate([
+    e$6('resource-editor')
+], ResourceEditor);
+function renderResource(parent, editCount, showfunctions, showuserdef) {
+    const Resource = getChildElementsByTagName(parent, 'Resource');
+    return x ` ${Resource.map(resc => x `<resource-editor
+        .element=${resc}
+        .editCount=${editCount}
+        ?showfunctions=${showfunctions}
+        ?showuserdef=${showuserdef}
+      ></resource-editor>`)}`;
+}
+
+/** Pane rendering `ProcessResource` element with its children */
+let ProcessResourceEditor = class ProcessResourceEditor extends BaseSubstationElementEditor {
+    get header() {
+        const name = this.element.getAttribute('name');
+        const desc = this.element.getAttribute('desc');
+        return `${name}${desc ? ` - ${desc}` : ''}`;
+    }
+    render() {
+        if (this.element.namespaceURI === 'http://www.iec.ch/61850/2019/SCL/6-100')
+            this.is6100 = true;
+        return x `<oscd-action-pane
+      label="${this.header}"
+      icon="schema"
+      secondary
+      highlighted
+      ><abbr slot="action" title="Edit">
+        <mwc-icon-button
+          class="action edit"
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title="Remove">
+        <mwc-icon-button
+          class="action remove"
+          icon="delete"
+          @click=${() => this.removeElement()}
+        ></mwc-icon-button>
+      </abbr>
+      ${this.renderAddButton()}
+      ${renderText(this.element, this.editCount, this.showfunctions, this.showuserdef)}
+      ${renderResource(this.element, this.editCount, this.showfunctions, this.showuserdef)}
+    </oscd-action-pane>`;
+    }
+};
+ProcessResourceEditor.styles = i$5 `
+    abbr {
+      text-decoration: none;
+      border-bottom: none;
+    }
+
+    .content.actionicon {
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      box-sizing: border-box;
+      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+    }
+  `;
+__decorate([
+    t$1()
+], ProcessResourceEditor.prototype, "header", null);
+ProcessResourceEditor = __decorate([
+    e$6('process-resource-editor')
+], ProcessResourceEditor);
+function renderProcessResource(parent, editCount, showfunctions, showuserdef) {
+    const ProcessResource = getChildElementsByTagName(parent, 'ProcessResource');
+    return x ` ${ProcessResource.map(proResrc => x `<process-resource-editor
+        .element=${proResrc}
+        .editCount=${editCount}
+        ?showfunctions=${showfunctions}
+        ?showuserdef=${showuserdef}
+      ></process-resource-editor>`)}`;
+}
+
+/** Pane rendering `ProcessResources` element with its children */
+let ProcessResourcesEditor = class ProcessResourcesEditor extends BaseSubstationElementEditor {
+    get header() {
+        const desc = this.element.getAttribute('desc');
+        return `ProcessResources${desc ? ` - ${desc}` : ''}`;
+    }
+    render() {
+        if (this.element.namespaceURI === 'http://www.iec.ch/61850/2019/SCL/6-100')
+            this.is6100 = true;
+        return x `<oscd-action-pane
+      label="${this.header}"
+      icon="widgets"
+      secondary
+      highlighted
+      ><abbr slot="action" title="Edit">
+        <mwc-icon-button
+          class="action edit"
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title="Remove">
+        <mwc-icon-button
+          class="action remove"
+          icon="delete"
+          @click=${() => this.removeElement()}
+        ></mwc-icon-button>
+      </abbr>
+      ${this.renderAddButton()}
+      ${renderText(this.element, this.editCount, this.showfunctions, this.showuserdef)}
+      ${renderProcessResource(this.element, this.editCount, this.showfunctions, this.showuserdef)}
+    </oscd-action-pane>`;
+    }
+};
+ProcessResourcesEditor.styles = i$5 `
+    abbr {
+      text-decoration: none;
+      border-bottom: none;
+    }
+
+    .content.actionicon {
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      box-sizing: border-box;
+      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+    }
+
+    .container.processresource {
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      box-sizing: border-box;
+      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+    }
+  `;
+__decorate([
+    t$1()
+], ProcessResourcesEditor.prototype, "header", null);
+ProcessResourcesEditor = __decorate([
+    e$6('process-resources-editor')
+], ProcessResourcesEditor);
+function renderProcessResources(parent, editCount, showfunctions, showuserdef) {
+    const ProcessResources = getChildElementsByTagName(parent, 'ProcessResources');
+    return x ` ${ProcessResources.map(proResc => x `<process-resources-editor
+        .element=${proResc}
+        .editCount=${editCount}
+        ?showfunctions=${showfunctions}
+        ?showuserdef=${showuserdef}
+      ></process-resources-editor>`)}`;
+}
+
+/** Pane rendering `PowerSystemRelation` element with its children */
+let PowerSystemRelationEditor = class PowerSystemRelationEditor extends BaseSubstationElementEditor {
+    get header() {
+        const name = this.element.getAttribute('name');
+        const desc = this.element.getAttribute('desc');
+        return `${name}${desc ? ` - ${desc}` : ''}`;
+    }
+    render() {
+        if (this.element.namespaceURI === 'http://www.iec.ch/61850/2019/SCL/6-100')
+            this.is6100 = true;
+        return x `<oscd-action-pane label="${this.header}" icon="bolt" secondary
+      ><abbr slot="action" title="Edit">
+        <mwc-icon-button
+          class="action edit"
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title="Remove">
+        <mwc-icon-button
+          class="action remove"
+          icon="delete"
+          @click=${() => this.removeElement()}
+        ></mwc-icon-button>
+      </abbr>
+    </oscd-action-pane>`;
+    }
+};
+PowerSystemRelationEditor.styles = i$5 `
+    abbr {
+      text-decoration: none;
+      border-bottom: none;
+    }
+  `;
+__decorate([
+    t$1()
+], PowerSystemRelationEditor.prototype, "header", null);
+PowerSystemRelationEditor = __decorate([
+    e$6('power-system-relation-editor')
+], PowerSystemRelationEditor);
+function renderPowerSystemRelation(parent, editCount, showfunctions, showuserdef) {
+    const PowerSystemRelation = getChildElementsByTagName(parent, 'PowerSystemRelation');
+    return x ` ${PowerSystemRelation.map(powSysRel => x `<power-system-relation-editor
+        .element=${powSysRel}
+        .editCount=${editCount}
+        ?showfunctions=${showfunctions}
+        ?showuserdef=${showuserdef}
+      ></power-system-relation-editor>`)}`;
+}
+
+/** Pane rendering `PowerSystemRelations` element with its children */
+let PowerSystemRelationsEditor = class PowerSystemRelationsEditor extends BaseSubstationElementEditor {
+    get header() {
+        const desc = this.element.getAttribute('desc');
+        return `PowerSystemRelations${desc ? ` - ${desc}` : ''}`;
+    }
+    render() {
+        if (this.element.namespaceURI === 'http://www.iec.ch/61850/2019/SCL/6-100')
+            this.is6100 = true;
+        return x `<oscd-action-pane
+      label="${this.header}"
+      icon="wind_power"
+      secondary
+      highlighted
+      ><abbr slot="action" title="Edit">
+        <mwc-icon-button
+          class="action edit"
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title="Remove">
+        <mwc-icon-button
+          class="action remove"
+          icon="delete"
+          @click=${() => this.removeElement()}
+        ></mwc-icon-button>
+      </abbr>
+      ${this.renderAddButton()}
+      ${renderText(this.element, this.editCount, this.showfunctions, this.showuserdef)}
+      ${renderPowerSystemRelation(this.element, this.editCount, this.showfunctions, this.showuserdef)}
+    </oscd-action-pane>`;
+    }
+};
+PowerSystemRelationsEditor.styles = i$5 `
+    abbr {
+      text-decoration: none;
+      border-bottom: none;
+    }
+
+    .content.actionicon {
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      box-sizing: border-box;
+      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+    }
+
+    .container.processresource {
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      box-sizing: border-box;
+      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+    }
+  `;
+__decorate([
+    t$1()
+], PowerSystemRelationsEditor.prototype, "header", null);
+PowerSystemRelationsEditor = __decorate([
+    e$6('power-system-relations-editor')
+], PowerSystemRelationsEditor);
+function renderPowerSystemRelations(parent, editCount, showfunctions, showuserdef) {
+    const PowerSystemRelations = getChildElementsByTagName(parent, 'PowerSystemRelations');
+    return x ` ${PowerSystemRelations.map(powSysRels => x `<power-system-relations-editor
+        .element=${powSysRels}
+        .editCount=${editCount}
+        ?showfunctions=${showfunctions}
+        ?showuserdef=${showuserdef}
+      ></power-system-relations-editor>`)}`;
+}
+
+/** Pane rendering `VariableApplyTo` element with its children */
+let VariableApplyToEditor = class VariableApplyToEditor extends BaseSubstationElementEditor {
+    get header() {
+        const desc = this.element.getAttribute('desc');
+        return `VariableApplyTo${desc ? ` - ${desc}` : ''}`;
+    }
+    render() {
+        if (this.element.namespaceURI === 'http://www.iec.ch/61850/2019/SCL/6-100')
+            this.is6100 = true;
+        return x `<oscd-action-pane
+      label="${this.header}"
+      icon="approval"
+      secondary
+      ><abbr slot="action" title="Edit">
+        <mwc-icon-button
+          class="action edit"
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title="Remove">
+        <mwc-icon-button
+          class="action remove"
+          icon="delete"
+          @click=${() => this.removeElement()}
+        ></mwc-icon-button>
+      </abbr>
+    </oscd-action-pane>`;
+    }
+};
+VariableApplyToEditor.styles = i$5 `
+    abbr {
+      text-decoration: none;
+      border-bottom: none;
+    }
+  `;
+__decorate([
+    t$1()
+], VariableApplyToEditor.prototype, "header", null);
+VariableApplyToEditor = __decorate([
+    e$6('variable-apply-to-editor')
+], VariableApplyToEditor);
+function renderVariableApplyTo(parent, editCount, showfunctions, showuserdef) {
+    const VariableApplyTo = getChildElementsByTagName(parent, 'VariableApplyTo');
+    return x ` ${VariableApplyTo.map(fVariableApplyTo => x `<variable-apply-to-editor
+        .element=${fVariableApplyTo}
+        .editCount=${editCount}
+        ?showfunctions=${showfunctions}
+        ?showuserdef=${showuserdef}
+      ></variable-apply-to-editor>`)}`;
+}
+
+/** Pane rendering `Variable` element with its children */
+let VariableEditor = class VariableEditor extends BaseSubstationElementEditor {
+    get header() {
+        const name = this.element.getAttribute('name');
+        const desc = this.element.getAttribute('desc');
+        return `${name}${desc ? ` - ${desc}` : ''}`;
+    }
+    render() {
+        if (this.element.namespaceURI === 'http://www.iec.ch/61850/2019/SCL/6-100')
+            this.is6100 = true;
+        return x `<oscd-action-pane
+      label="${this.header}"
+      icon="calculate"
+      secondary
+      highlighted
+      ><abbr slot="action" title="Edit">
+        <mwc-icon-button
+          class="action edit"
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title="Remove">
+        <mwc-icon-button
+          class="action remove"
+          icon="delete"
+          @click=${() => this.removeElement()}
+        ></mwc-icon-button>
+      </abbr>
+      ${this.renderAddButton()}
+      ${renderText(this.element, this.editCount, this.showfunctions, this.showuserdef)}
+      ${renderVariableApplyTo(this.element, this.editCount, this.showfunctions, this.showuserdef)}
+    </oscd-action-pane>`;
+    }
+};
+VariableEditor.styles = i$5 `
+    abbr {
+      text-decoration: none;
+      border-bottom: none;
+    }
+
+    .content.actionicon {
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      box-sizing: border-box;
+      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+    }
+  `;
+__decorate([
+    t$1()
+], VariableEditor.prototype, "header", null);
+VariableEditor = __decorate([
+    e$6('variable-editor')
+], VariableEditor);
+function renderVariable(parent, editCount, showfunctions, showuserdef) {
+    const Variable = getChildElementsByTagName(parent, 'Variable');
+    return x ` ${Variable.map(fVariable => x `<variable-editor
+        .element=${fVariable}
+        .editCount=${editCount}
+        ?showfunctions=${showfunctions}
+        ?showuserdef=${showuserdef}
+      ></variable-editor>`)}`;
+}
+
+/** Pane rendering `GooseParameters` element with its children */
+let GooseParametersEditor = class GooseParametersEditor extends BaseSubstationElementEditor {
+    get header() {
+        const id = this.element.getAttribute('id');
+        const desc = this.element.getAttribute('desc');
+        return `${id}${desc ? ` - ${desc}` : ''}`;
+    }
+    render() {
+        if (this.element.namespaceURI === 'http://www.iec.ch/61850/2019/SCL/6-100')
+            this.is6100 = true;
+        return x `<oscd-action-pane
+      label="${this.header}"
+      icon="schema"
+      secondary
+      highlighted
+      ><abbr slot="action" title="Edit">
+        <mwc-icon-button
+          class="action edit"
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title="Remove">
+        <mwc-icon-button
+          class="action remove"
+          icon="delete"
+          @click=${() => this.removeElement()}
+        ></mwc-icon-button>
+      </abbr>
+      ${this.renderAddButton()}
+    </oscd-action-pane>`;
+    }
+};
+GooseParametersEditor.styles = i$5 `
+    abbr {
+      text-decoration: none;
+      border-bottom: none;
+    }
+
+    .content.actionicon {
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      box-sizing: border-box;
+      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+    }
+  `;
+__decorate([
+    t$1()
+], GooseParametersEditor.prototype, "header", null);
+GooseParametersEditor = __decorate([
+    e$6('goose-parameters-editor')
+], GooseParametersEditor);
+function renderGooseParameters(parent, editCount, showfunctions, showuserdef) {
+    const GooseParameters = getChildElementsByTagName(parent, 'GooseParameters');
+    return x ` ${GooseParameters.map(gsePara => x `<goose-parameters-editor
+        .element=${gsePara}
+        .editCount=${editCount}
+        ?showfunctions=${showfunctions}
+        ?showuserdef=${showuserdef}
+      ></goose-parameters-editor>`)}`;
+}
+
+/** Pane rendering `SMVParameters` element with its children */
+let SMVParametersEditor = class SMVParametersEditor extends BaseSubstationElementEditor {
+    get header() {
+        const id = this.element.getAttribute('id');
+        const desc = this.element.getAttribute('desc');
+        return `${id}${desc ? ` - ${desc}` : ''}`;
+    }
+    render() {
+        if (this.element.namespaceURI === 'http://www.iec.ch/61850/2019/SCL/6-100')
+            this.is6100 = true;
+        return x `<oscd-action-pane
+      label="${this.header}"
+      icon="schema"
+      secondary
+      highlighted
+      ><abbr slot="action" title="Edit">
+        <mwc-icon-button
+          class="action edit"
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title="Remove">
+        <mwc-icon-button
+          class="action remove"
+          icon="delete"
+          @click=${() => this.removeElement()}
+        ></mwc-icon-button>
+      </abbr>
+      ${this.renderAddButton()}
+    </oscd-action-pane>`;
+    }
+};
+SMVParametersEditor.styles = i$5 `
+    abbr {
+      text-decoration: none;
+      border-bottom: none;
+    }
+
+    .content.actionicon {
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      box-sizing: border-box;
+      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+    }
+  `;
+__decorate([
+    t$1()
+], SMVParametersEditor.prototype, "header", null);
+SMVParametersEditor = __decorate([
+    e$6('smv-parameters-editor')
+], SMVParametersEditor);
+function renderSMVParameters(parent, editCount, showfunctions, showuserdef) {
+    const SMVParameters = getChildElementsByTagName(parent, 'SMVParameters');
+    return x ` ${SMVParameters.map(fSMVParameters => x `<smv-parameters-editor
+        .element=${fSMVParameters}
+        .editCount=${editCount}
+        ?showfunctions=${showfunctions}
+        ?showuserdef=${showuserdef}
+      ></smv-parameters-editor>`)}`;
+}
+
+/** Pane rendering `ReportParameters` element with its children */
+let ReportParametersEditor = class ReportParametersEditor extends BaseSubstationElementEditor {
+    get header() {
+        const id = this.element.getAttribute('id');
+        const desc = this.element.getAttribute('desc');
+        return `${id}${desc ? ` - ${desc}` : ''}`;
+    }
+    render() {
+        if (this.element.namespaceURI === 'http://www.iec.ch/61850/2019/SCL/6-100')
+            this.is6100 = true;
+        return x `<oscd-action-pane
+      label="${this.header}"
+      icon="schema"
+      secondary
+      highlighted
+      ><abbr slot="action" title="Edit">
+        <mwc-icon-button
+          class="action edit"
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title="Remove">
+        <mwc-icon-button
+          class="action remove"
+          icon="delete"
+          @click=${() => this.removeElement()}
+        ></mwc-icon-button>
+      </abbr>
+      ${this.renderAddButton()}
+    </oscd-action-pane>`;
+    }
+};
+ReportParametersEditor.styles = i$5 `
+    abbr {
+      text-decoration: none;
+      border-bottom: none;
+    }
+
+    .content.actionicon {
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      box-sizing: border-box;
+      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+    }
+  `;
+__decorate([
+    t$1()
+], ReportParametersEditor.prototype, "header", null);
+ReportParametersEditor = __decorate([
+    e$6('report-parameters-editor')
+], ReportParametersEditor);
+function renderReportParameters(parent, editCount, showfunctions, showuserdef) {
+    const ReportParameters = getChildElementsByTagName(parent, 'ReportParameters');
+    return x ` ${ReportParameters.map(rptPara => x `<report-parameters-editor
+        .element=${rptPara}
+        .editCount=${editCount}
+        ?showfunctions=${showfunctions}
+        ?showuserdef=${showuserdef}
+      ></report-parameters-editor>`)}`;
+}
+
+/** Pane rendering `BinaryWiringParameters` element with its children */
+let BinaryWiringParametersEditor = class BinaryWiringParametersEditor extends BaseSubstationElementEditor {
+    get header() {
+        const id = this.element.getAttribute('id');
+        const desc = this.element.getAttribute('desc');
+        return `${id}${desc ? ` - ${desc}` : ''}`;
+    }
+    render() {
+        if (this.element.namespaceURI === 'http://www.iec.ch/61850/2019/SCL/6-100')
+            this.is6100 = true;
+        return x `<oscd-action-pane
+      label="${this.header}"
+      icon="schema"
+      secondary
+      highlighted
+      ><abbr slot="action" title="Edit">
+        <mwc-icon-button
+          class="action edit"
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title="Remove">
+        <mwc-icon-button
+          class="action remove"
+          icon="delete"
+          @click=${() => this.removeElement()}
+        ></mwc-icon-button>
+      </abbr>
+      ${this.renderAddButton()}
+    </oscd-action-pane>`;
+    }
+};
+BinaryWiringParametersEditor.styles = i$5 `
+    abbr {
+      text-decoration: none;
+      border-bottom: none;
+    }
+
+    .content.actionicon {
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      box-sizing: border-box;
+      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+    }
+  `;
+__decorate([
+    t$1()
+], BinaryWiringParametersEditor.prototype, "header", null);
+BinaryWiringParametersEditor = __decorate([
+    e$6('binary-wiring-parameters-editor')
+], BinaryWiringParametersEditor);
+function renderBinaryWiringParameters(parent, editCount, showfunctions, showuserdef) {
+    const BinaryWiringParameters = getChildElementsByTagName(parent, 'BinaryWiringParameters');
+    return x ` ${BinaryWiringParameters.map(binWirPara => x `<binary-wiring-parameters-editor
+        .element=${binWirPara}
+        .editCount=${editCount}
+        ?showfunctions=${showfunctions}
+        ?showuserdef=${showuserdef}
+      ></binary-wiring-parameters-editor>`)}`;
+}
+
+/** Pane rendering `AnalogueWiringParameters` element with its children */
+let AnalogueWiringParametersEditor = class AnalogueWiringParametersEditor extends BaseSubstationElementEditor {
+    get header() {
+        const id = this.element.getAttribute('id');
+        const desc = this.element.getAttribute('desc');
+        return `${id}${desc ? ` - ${desc}` : ''}`;
+    }
+    render() {
+        if (this.element.namespaceURI === 'http://www.iec.ch/61850/2019/SCL/6-100')
+            this.is6100 = true;
+        return x `<oscd-action-pane
+      label="${this.header}"
+      icon="schema"
+      secondary
+      highlighted
+      ><abbr slot="action" title="Edit">
+        <mwc-icon-button
+          class="action edit"
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title="Remove">
+        <mwc-icon-button
+          class="action remove"
+          icon="delete"
+          @click=${() => this.removeElement()}
+        ></mwc-icon-button>
+      </abbr>
+      ${this.renderAddButton()}
+    </oscd-action-pane>`;
+    }
+};
+AnalogueWiringParametersEditor.styles = i$5 `
+    abbr {
+      text-decoration: none;
+      border-bottom: none;
+    }
+
+    .content.actionicon {
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      box-sizing: border-box;
+      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+    }
+  `;
+__decorate([
+    t$1()
+], AnalogueWiringParametersEditor.prototype, "header", null);
+AnalogueWiringParametersEditor = __decorate([
+    e$6('analogue-wiring-parameters-editor')
+], AnalogueWiringParametersEditor);
+function renderAnalogueWiringParameters(parent, editCount, showfunctions, showuserdef) {
+    const AnalogueWiringParameters = getChildElementsByTagName(parent, 'AnalogueWiringParameters');
+    return x ` ${AnalogueWiringParameters.map(anaWirPara => x `<analogue-wiring-parameters-editor
+        .element=${anaWirPara}
+        .editCount=${editCount}
+        ?showfunctions=${showfunctions}
+        ?showuserdef=${showuserdef}
+      ></analogue-wiring-parameters-editor>`)}`;
+}
+
+/** Pane rendering `ServiceSpecifications` element with its children */
+let ServiceSpecificationsEditor = class ServiceSpecificationsEditor extends BaseSubstationElementEditor {
+    get header() {
+        const desc = this.element.getAttribute('desc');
+        return `ServiceSpecifications${desc ? ` - ${desc}` : ''}`;
+    }
+    render() {
+        if (this.element.namespaceURI === 'http://www.iec.ch/61850/2019/SCL/6-100')
+            this.is6100 = true;
+        return x `<oscd-action-pane
+      label="${this.header}"
+      icon="settings_applications"
+      secondary
+      highlighted
+      ><abbr slot="action" title="Edit">
+        <mwc-icon-button
+          class="action edit"
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button> </abbr
+      ><abbr slot="action" title="Remove">
+        <mwc-icon-button
+          class="action remove"
+          icon="delete"
+          @click=${() => this.removeElement()}
+        ></mwc-icon-button>
+      </abbr>
+      ${this.renderAddButton()}
+      ${renderGooseParameters(this.element, this.editCount, this.showfunctions, this.showuserdef)}
+      ${renderSMVParameters(this.element, this.editCount, this.showfunctions, this.showuserdef)}
+      ${renderReportParameters(this.element, this.editCount, this.showfunctions, this.showuserdef)}
+      ${renderBinaryWiringParameters(this.element, this.editCount, this.showfunctions, this.showuserdef)}
+      ${renderAnalogueWiringParameters(this.element, this.editCount, this.showfunctions, this.showuserdef)}
+    </oscd-action-pane>`;
+    }
+};
+ServiceSpecificationsEditor.styles = i$5 `
+    abbr {
+      text-decoration: none;
+      border-bottom: none;
+    }
+
+    .content.actionicon {
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      box-sizing: border-box;
+      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+    }
+
+    .container.processresource {
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      box-sizing: border-box;
+      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+    }
+  `;
+__decorate([
+    t$1()
+], ServiceSpecificationsEditor.prototype, "header", null);
+ServiceSpecificationsEditor = __decorate([
+    e$6('service-specifications-editor')
+], ServiceSpecificationsEditor);
+function renderServiceSpecifications(parent, editCount, showfunctions, showuserdef) {
+    const ServiceSpecifications = getChildElementsByTagName(parent, 'ServiceSpecifications');
+    return x ` ${ServiceSpecifications.map(servSpec => x `<service-specifications-editor
+        .element=${servSpec}
+        .editCount=${editCount}
+        ?showfunctions=${showfunctions}
+        ?showuserdef=${showuserdef}
+      ></service-specifications-editor>`)}`;
+}
+
+/** Pane rendering `FunctionRef` element with its children */
+let FunctionRefEditor = class FunctionRefEditor extends BaseSubstationElementEditor {
+    get header() {
+        const ffunction = this.element.getAttribute('function');
+        return `FunctionRef${ffunction ? ` - ${ffunction}` : ''}`;
+    }
+    render() {
+        if (this.element.namespaceURI === 'http://www.iec.ch/61850/2019/SCL/6-100')
+            this.is6100 = true;
+        return x `<oscd-action-pane label="${this.header}" icon="commit" secondary
+      ><abbr slot="action" title="Edit">
+        <mwc-icon-button
+          class="action edit"
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title="Remove">
+        <mwc-icon-button
+          class="action remove"
+          icon="delete"
+          @click=${() => this.removeElement()}
+        ></mwc-icon-button>
+      </abbr>
+    </oscd-action-pane>`;
+    }
+};
+FunctionRefEditor.styles = i$5 `
+    abbr {
+      text-decoration: none;
+      border-bottom: none;
+    }
+  `;
+__decorate([
+    t$1()
+], FunctionRefEditor.prototype, "header", null);
+FunctionRefEditor = __decorate([
+    e$6('function-ref-editor')
+], FunctionRefEditor);
+function renderFunctionRef(parent, editCount, showfunctions, showuserdef) {
+    const FunctionRef = getChildElementsByTagName(parent, 'FunctionRef');
+    return x ` ${FunctionRef.map(functRef => x `<function-ref-editor
+        .element=${functRef}
+        .editCount=${editCount}
+        ?showfunctions=${showfunctions}
+        ?showuserdef=${showuserdef}
+      ></function-ref-editor>`)}`;
+}
+
+/** Pane rendering `AllocationRole` element with its children */
+let AllocationRoleEditor = class AllocationRoleEditor extends BaseSubstationElementEditor {
+    get header() {
+        const name = this.element.getAttribute('name');
+        const desc = this.element.getAttribute('desc');
+        return `${name}${desc ? ` - ${desc}` : ''}`;
+    }
+    render() {
+        if (this.element.namespaceURI === 'http://www.iec.ch/61850/2019/SCL/6-100')
+            this.is6100 = true;
+        return x `<oscd-action-pane
+      label="${this.header}"
+      icon="schema"
+      secondary
+      highlighted
+      ><abbr slot="action" title="Edit">
+        <mwc-icon-button
+          class="action edit"
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title="Remove">
+        <mwc-icon-button
+          class="action remove"
+          icon="delete"
+          @click=${() => this.removeElement()}
+        ></mwc-icon-button>
+      </abbr>
+      ${this.renderAddButton()}
+      ${renderFunctionRef(this.element, this.editCount, this.showfunctions, this.showuserdef)}
+    </oscd-action-pane>`;
+    }
+};
+AllocationRoleEditor.styles = i$5 `
+    abbr {
+      text-decoration: none;
+      border-bottom: none;
+    }
+
+    .content.actionicon {
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      box-sizing: border-box;
+      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+    }
+  `;
+__decorate([
+    t$1()
+], AllocationRoleEditor.prototype, "header", null);
+AllocationRoleEditor = __decorate([
+    e$6('allocation-role-editor')
+], AllocationRoleEditor);
+function renderAllocationRole(parent, editCount, showfunctions, showuserdef) {
+    const AllocationRole = getChildElementsByTagName(parent, 'AllocationRole');
+    return x ` ${AllocationRole.map(allocRole => x `<allocation-role-editor
+        .element=${allocRole}
+        .editCount=${editCount}
+        ?showfunctions=${showfunctions}
+        ?showuserdef=${showuserdef}
+      ></allocation-role-editor>`)}`;
+}
+
+/** Pane rendering `ProcessResourceRef` element with its children */
+let ProcessResourceRefEditor = class ProcessResourceRefEditor extends BaseSubstationElementEditor {
+    get header() {
+        const processResource = this.element.getAttribute('processResource');
+        return `ProcessResourceRef${processResource ? ` - ${processResource}` : ''}`;
+    }
+    render() {
+        if (this.element.namespaceURI === 'http://www.iec.ch/61850/2019/SCL/6-100')
+            this.is6100 = true;
+        return x `<oscd-action-pane label="${this.header}" icon="commit" secondary
+      ><abbr slot="action" title="Edit">
+        <mwc-icon-button
+          class="action edit"
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title="Remove">
+        <mwc-icon-button
+          class="action remove"
+          icon="delete"
+          @click=${() => this.removeElement()}
+        ></mwc-icon-button>
+      </abbr>
+    </oscd-action-pane>`;
+    }
+};
+ProcessResourceRefEditor.styles = i$5 `
+    abbr {
+      text-decoration: none;
+      border-bottom: none;
+    }
+  `;
+__decorate([
+    t$1()
+], ProcessResourceRefEditor.prototype, "header", null);
+ProcessResourceRefEditor = __decorate([
+    e$6('process-resource-ref-editor')
+], ProcessResourceRefEditor);
+function renderProcessResourceRef(parent, editCount, showfunctions, showuserdef) {
+    const ProcessResourceRef = getChildElementsByTagName(parent, 'ProcessResourceRef');
+    return x ` ${ProcessResourceRef.map(proResrcRef => x `<process-resource-ref-editor
+        .element=${proResrcRef}
+        .editCount=${editCount}
+        ?showfunctions=${showfunctions}
+        ?showuserdef=${showuserdef}
+      ></process-resource-ref-editor>`)}`;
+}
+
+/** Pane rendering `BehaviorDescriptionRef` element with its children */
+let BehaviorDescriptionRefEditor = class BehaviorDescriptionRefEditor extends BaseSubstationElementEditor {
+    get header() {
+        const behaviorDescription = this.element.getAttribute('behaviorDescription');
+        return `BehaviorDescriptionRef${behaviorDescription ? ` - ${behaviorDescription}` : ''}`;
+    }
+    render() {
+        if (this.element.namespaceURI === 'http://www.iec.ch/61850/2019/SCL/6-100')
+            this.is6100 = true;
+        return x `<oscd-action-pane label="${this.header}" icon="commit" secondary
+      ><abbr slot="action" title="Edit">
+        <mwc-icon-button
+          class="action edit"
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title="Remove">
+        <mwc-icon-button
+          class="action remove"
+          icon="delete"
+          @click=${() => this.removeElement()}
+        ></mwc-icon-button>
+      </abbr>
+    </oscd-action-pane>`;
+    }
+};
+BehaviorDescriptionRefEditor.styles = i$5 `
+    abbr {
+      text-decoration: none;
+      border-bottom: none;
+    }
+  `;
+__decorate([
+    t$1()
+], BehaviorDescriptionRefEditor.prototype, "header", null);
+BehaviorDescriptionRefEditor = __decorate([
+    e$6('behavior-description-ref-editor')
+], BehaviorDescriptionRefEditor);
+function renderBehaviorDescriptionRef(parent, editCount, showfunctions, showuserdef) {
+    const BehaviorDescriptionRef = getChildElementsByTagName(parent, 'BehaviorDescriptionRef');
+    return x ` ${BehaviorDescriptionRef.map(behDescRef => x `<behavior-description-ref-editor
+        .element=${behDescRef}
+        .editCount=${editCount}
+        ?showfunctions=${showfunctions}
+        ?showuserdef=${showuserdef}
+      ></behavior-description-ref-editor>`)}`;
+}
+
+/** Pane rendering `FunctionRoleContent` element with its children */
+let FunctionRoleContentEditor = class FunctionRoleContentEditor extends BaseSubstationElementEditor {
+    get header() {
+        const roleInst = this.element.getAttribute('roleInst');
+        return `FunctionRoleContent${roleInst ? ` - ${roleInst}` : ''}`;
+    }
+    render() {
+        if (this.element.namespaceURI === 'http://www.iec.ch/61850/2019/SCL/6-100')
+            this.is6100 = true;
+        return x `<oscd-action-pane
+      label="${this.header}"
+      icon="schema"
+      secondary
+      highlighted
+      ><abbr slot="action" title="Edit">
+        <mwc-icon-button
+          class="action edit"
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title="Remove">
+        <mwc-icon-button
+          class="action remove"
+          icon="delete"
+          @click=${() => this.removeElement()}
+        ></mwc-icon-button>
+      </abbr>
+      ${this.renderAddButton()}
+      ${renderFunctionRef(this.element, this.editCount, this.showfunctions, this.showuserdef)}
+      ${renderProcessResourceRef(this.element, this.editCount, this.showfunctions, this.showuserdef)}
+      ${renderBehaviorDescriptionRef(this.element, this.editCount, this.showfunctions, this.showuserdef)}
+    </oscd-action-pane>`;
+    }
+};
+FunctionRoleContentEditor.styles = i$5 `
+    abbr {
+      text-decoration: none;
+      border-bottom: none;
+    }
+
+    .content.actionicon {
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      box-sizing: border-box;
+      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+    }
+  `;
+__decorate([
+    t$1()
+], FunctionRoleContentEditor.prototype, "header", null);
+FunctionRoleContentEditor = __decorate([
+    e$6('function-role-content-editor')
+], FunctionRoleContentEditor);
+function renderFunctionRoleContent(parent, editCount, showfunctions, showuserdef) {
+    const FunctionRoleContent = getChildElementsByTagName(parent, 'FunctionRoleContent');
+    return x ` ${FunctionRoleContent.map(functRoleCont => x `<function-role-content-editor
+        .element=${functRoleCont}
+        .editCount=${editCount}
+        ?showfunctions=${showfunctions}
+        ?showuserdef=${showuserdef}
+      ></function-role-content-editor>`)}`;
+}
+
+/** Pane rendering `FunctionRole` element with its children */
+let FunctionRoleEditor = class FunctionRoleEditor extends BaseSubstationElementEditor {
+    get header() {
+        const name = this.element.getAttribute('name');
+        const desc = this.element.getAttribute('desc');
+        return `FunctionRole${name}${desc ? ` - ${desc}` : ''}`;
+    }
+    render() {
+        if (this.element.namespaceURI === 'http://www.iec.ch/61850/2019/SCL/6-100')
+            this.is6100 = true;
+        return x `<oscd-action-pane
+      label="${this.header}"
+      icon="schema"
+      secondary
+      highlighted
+      ><abbr slot="action" title="Edit">
+        <mwc-icon-button
+          class="action edit"
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title="Remove">
+        <mwc-icon-button
+          class="action remove"
+          icon="delete"
+          @click=${() => this.removeElement()}
+        ></mwc-icon-button>
+      </abbr>
+      ${this.renderAddButton()}
+      ${renderFunctionRoleContent(this.element, this.editCount, this.showfunctions, this.showuserdef)}
+    </oscd-action-pane>`;
+    }
+};
+FunctionRoleEditor.styles = i$5 `
+    abbr {
+      text-decoration: none;
+      border-bottom: none;
+    }
+
+    .content.actionicon {
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      box-sizing: border-box;
+      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+    }
+  `;
+__decorate([
+    t$1()
+], FunctionRoleEditor.prototype, "header", null);
+FunctionRoleEditor = __decorate([
+    e$6('function-role-editor')
+], FunctionRoleEditor);
+function renderFunctionRole(parent, editCount, showfunctions, showuserdef) {
+    const FunctionRole = getChildElementsByTagName(parent, 'FunctionRole');
+    return x ` ${FunctionRole.map(functRole => x `<function-role-editor
+        .element=${functRole}
+        .editCount=${editCount}
+        ?showfunctions=${showfunctions}
+        ?showuserdef=${showuserdef}
+      ></function-role-editor>`)}`;
+}
+
+/** Pane rendering `Application` element with its children */
+let ApplicationEditor = class ApplicationEditor extends BaseSubstationElementEditor {
+    get header() {
+        const name = this.element.getAttribute('name');
+        return `Application${name ? ` - ${name}` : ''}`;
+    }
+    render() {
+        if (this.element.namespaceURI === 'http://www.iec.ch/61850/2019/SCL/6-100')
+            this.is6100 = true;
+        return x `<oscd-action-pane
+      label="${this.header}"
+      icon="widgets"
+      secondary
+      highlighted
+      ><abbr slot="action" title="Edit">
+        <mwc-icon-button
+          class="action edit"
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title="Remove">
+        <mwc-icon-button
+          class="action remove"
+          icon="delete"
+          @click=${() => this.removeElement()}
+        ></mwc-icon-button>
+      </abbr>
+      ${this.renderAddButton()}
+      ${renderText(this.element, this.editCount, this.showfunctions, this.showuserdef)}
+      ${renderFunctionRole(this.element, this.editCount, this.showfunctions, this.showuserdef)}
+    </oscd-action-pane>`;
+    }
+};
+ApplicationEditor.styles = i$5 `
+    abbr {
+      text-decoration: none;
+      border-bottom: none;
+    }
+
+    .content.actionicon {
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      box-sizing: border-box;
+      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+    }
+
+    .container.processresource {
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      box-sizing: border-box;
+      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+    }
+  `;
+__decorate([
+    t$1()
+], ApplicationEditor.prototype, "header", null);
+ApplicationEditor = __decorate([
+    e$6('application-editor')
+], ApplicationEditor);
+function renderApplication(parent, editCount, showfunctions, showuserdef) {
+    const Application = getChildElementsByTagName(parent, 'Application');
+    return x ` ${Application.map(app => x `<application-editor
+        .element=${app}
+        .editCount=${editCount}
+        ?showfunctions=${showfunctions}
+        ?showuserdef=${showuserdef}
+      ></application-editor>`)}`;
+}
+
+/** Pane rendering `BehaviorReference` element with its children */
+let BehaviorReferenceEditor = class BehaviorReferenceEditor extends BaseSubstationElementEditor {
+    get header() {
+        const desc = this.element.getAttribute('desc');
+        return `BehaviorReference${desc ? ` - ${desc}` : ''}`;
+    }
+    render() {
+        if (this.element.namespaceURI === 'http://www.iec.ch/61850/2019/SCL/6-100')
+            this.is6100 = true;
+        return x `<oscd-action-pane
+      label="${this.header}"
+      icon="approval"
+      secondary
+      ><abbr slot="action" title="Edit">
+        <mwc-icon-button
+          class="action edit"
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title="Remove">
+        <mwc-icon-button
+          class="action remove"
+          icon="delete"
+          @click=${() => this.removeElement()}
+        ></mwc-icon-button>
+      </abbr>
+    </oscd-action-pane>`;
+    }
+};
+BehaviorReferenceEditor.styles = i$5 `
+    abbr {
+      text-decoration: none;
+      border-bottom: none;
+    }
+  `;
+__decorate([
+    t$1()
+], BehaviorReferenceEditor.prototype, "header", null);
+BehaviorReferenceEditor = __decorate([
+    e$6('behavior-reference-editor')
+], BehaviorReferenceEditor);
+function renderBehaviorReference(parent, editCount, showfunctions, showuserdef) {
+    const BehaviorReference = getChildElementsByTagName(parent, 'BehaviorReferenceTo');
+    return x ` ${BehaviorReference.map(behRef => x `<behavior-reference-editor
+        .element=${behRef}
+        .editCount=${editCount}
+        ?showfunctions=${showfunctions}
+        ?showuserdef=${showuserdef}
+      ></behavior-reference-editor>`)}`;
+}
+
+/** Pane rendering `InputVar` element with its children */
+let InputVarEditor = class InputVarEditor extends BaseSubstationElementEditor {
+    get header() {
+        const varName = this.element.getAttribute('varName');
+        return `InputVar${varName ? ` - ${varName}` : ''}`;
+    }
+    render() {
+        if (this.element.namespaceURI === 'http://www.iec.ch/61850/2019/SCL/6-100')
+            this.is6100 = true;
+        return x `<oscd-action-pane label="${this.header}" icon="commit" secondary
+      ><abbr slot="action" title="Edit">
+        <mwc-icon-button
+          class="action edit"
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title="Remove">
+        <mwc-icon-button
+          class="action remove"
+          icon="delete"
+          @click=${() => this.removeElement()}
+        ></mwc-icon-button>
+      </abbr>
+    </oscd-action-pane>`;
+    }
+};
+InputVarEditor.styles = i$5 `
+    abbr {
+      text-decoration: none;
+      border-bottom: none;
+    }
+  `;
+__decorate([
+    t$1()
+], InputVarEditor.prototype, "header", null);
+InputVarEditor = __decorate([
+    e$6('input-var-editor')
+], InputVarEditor);
+function renderInputVar(parent, editCount, showfunctions, showuserdef) {
+    const InputVar = getChildElementsByTagName(parent, 'InputVar');
+    return x ` ${InputVar.map(inVar => x `<input-var-editor
+        .element=${inVar}
+        .editCount=${editCount}
+        ?showfunctions=${showfunctions}
+        ?showuserdef=${showuserdef}
+      ></input-var-editor>`)}`;
+}
+
+/** Pane rendering `OutputVar` element with its children */
+let OutputVarEditor = class OutputVarEditor extends BaseSubstationElementEditor {
+    get header() {
+        const varName = this.element.getAttribute('function');
+        return `OutputVar${varName ? ` - ${varName}` : ''}`;
+    }
+    render() {
+        if (this.element.namespaceURI === 'http://www.iec.ch/61850/2019/SCL/6-100')
+            this.is6100 = true;
+        return x `<oscd-action-pane label="${this.header}" icon="commit" secondary
+      ><abbr slot="action" title="Edit">
+        <mwc-icon-button
+          class="action edit"
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title="Remove">
+        <mwc-icon-button
+          class="action remove"
+          icon="delete"
+          @click=${() => this.removeElement()}
+        ></mwc-icon-button>
+      </abbr>
+    </oscd-action-pane>`;
+    }
+};
+OutputVarEditor.styles = i$5 `
+    abbr {
+      text-decoration: none;
+      border-bottom: none;
+    }
+  `;
+__decorate([
+    t$1()
+], OutputVarEditor.prototype, "header", null);
+OutputVarEditor = __decorate([
+    e$6('output-var-editor')
+], OutputVarEditor);
+function renderOutputVar(parent, editCount, showfunctions, showuserdef) {
+    const OutputVar = getChildElementsByTagName(parent, 'OutputVar');
+    return x ` ${OutputVar.map(outVar => x `<output-var-editor
+        .element=${outVar}
+        .editCount=${editCount}
+        ?showfunctions=${showfunctions}
+        ?showuserdef=${showuserdef}
+      ></output-var-editor>`)}`;
+}
+
+/** Pane rendering `BehaviorDescription` element with its children */
+let BehaviorDescriptionEditor = class BehaviorDescriptionEditor extends BaseSubstationElementEditor {
+    get header() {
+        const name = this.element.getAttribute('name');
+        const desc = this.element.getAttribute('desc');
+        return `${name}${desc ? ` - ${desc}` : ''}`;
+    }
+    render() {
+        if (this.element.namespaceURI === 'http://www.iec.ch/61850/2019/SCL/6-100')
+            this.is6100 = true;
+        return x `<oscd-action-pane
+      label="${this.header}"
+      icon="calculate"
+      secondary
+      highlighted
+      ><abbr slot="action" title="Edit">
+        <mwc-icon-button
+          class="action edit"
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title="Remove">
+        <mwc-icon-button
+          class="action remove"
+          icon="delete"
+          @click=${() => this.removeElement()}
+        ></mwc-icon-button>
+      </abbr>
+      ${this.renderAddButton()}
+      ${renderText(this.element, this.editCount, this.showfunctions, this.showuserdef)}
+      ${renderBehaviorReference(this.element, this.editCount, this.showfunctions, this.showuserdef)}
+      ${renderInputVar(this.element, this.editCount, this.showfunctions, this.showuserdef)}
+      ${renderOutputVar(this.element, this.editCount, this.showfunctions, this.showuserdef)}
+    </oscd-action-pane>`;
+    }
+};
+BehaviorDescriptionEditor.styles = i$5 `
+    abbr {
+      text-decoration: none;
+      border-bottom: none;
+    }
+
+    .content.actionicon {
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      box-sizing: border-box;
+      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+    }
+  `;
+__decorate([
+    t$1()
+], BehaviorDescriptionEditor.prototype, "header", null);
+BehaviorDescriptionEditor = __decorate([
+    e$6('behavior-description-editor')
+], BehaviorDescriptionEditor);
+function renderBehaviorDescription(parent, editCount, showfunctions, showuserdef) {
+    const BehaviorDescription = getChildElementsByTagName(parent, 'BehaviorDescription');
+    return x ` ${BehaviorDescription.map(behDesc => x `<behavior-description-editor
+        .element=${behDesc}
+        .editCount=${editCount}
+        ?showfunctions=${showfunctions}
+        ?showuserdef=${showuserdef}
+      ></behavior-description-editor>`)}`;
+}
+
+let PrivateEditor = class PrivateEditor extends BaseSubstationElementEditor {
+    get header() {
+        // const content = this.element.textContent;
+        const privateType = this.element.getAttribute('type');
+        return `Private - ${privateType}`;
+    }
+    render() {
+        if (this.element.getAttribute('type') === 'eIEC61850-6-100')
+            this.is6100 = true;
         return x `<oscd-action-pane
       label="${this.header}"
       icon="contact_page"
@@ -6620,6 +8503,14 @@ let PrivateEditor = class PrivateEditor extends BaseSubstationElementEditor {
           @click=${() => this.removeElement()}
         ></mwc-icon-button>
       </abbr>
+      ${this.renderAddButton()}
+      ${renderApplication(this.element, this.editCount, this.showfunctions, this.showuserdef)}
+      ${renderBehaviorDescription(this.element, this.editCount, this.showfunctions, this.showuserdef)}
+      ${renderAllocationRole(this.element, this.editCount, this.showfunctions, this.showuserdef)}
+      ${renderServiceSpecifications(this.element, this.editCount, this.showfunctions, this.showuserdef)}
+      ${renderProcessResources(this.element, this.editCount, this.showfunctions, this.showuserdef)}
+      ${renderPowerSystemRelations(this.element, this.editCount, this.showfunctions, this.showuserdef)}
+      ${renderVariable(this.element, this.editCount, this.showfunctions, this.showuserdef)}
     </oscd-action-pane>`;
     }
 };
@@ -6797,125 +8688,88 @@ function renderEqFunctions(parent, editCount, showuserdef) {
       ></eq-function-editor>`)}`;
 }
 
-let GeneralEquipmentEditor = class GeneralEquipmentEditor extends BaseSubstationElementEditor {
-    get header() {
-        const name = this.element.getAttribute('name');
-        const desc = this.element.getAttribute('desc');
-        if (!this.showfunctions)
-            return `${name}`;
-        return `${name} ${desc ? `—  ${desc}` : ''}`;
-    }
-    render() {
-        if (this.showfunctions)
-            return x `<oscd-action-pane label=${this.header}>
-        <abbr slot="action" title="Edit">
-          <mwc-icon-button
-            class="action edit"
-            icon="edit"
-            @click=${() => this.openEditWizard()}
-          ></mwc-icon-button>
-        </abbr>
-        <abbr slot="action" title="Remove">
-          <mwc-icon-button
-            class="action remove"
-            icon="delete"
-            @click=${() => this.removeElement()}
-          ></mwc-icon-button>
-        </abbr>
-        ${this.renderAddButton()}
-        ${renderText(this.element, this.editCount, this.showfunctions, this.showuserdef)}
-        ${renderPrivate(this.element, this.editCount, this.showfunctions, this.showuserdef)}
-        ${renderLNodes(this.element, this.editCount, this.showfunctions)}
-        ${renderEqFunctions(this.element, this.editCount, this.showuserdef)}
-      </oscd-action-pane>`;
-        return x `<oscd-action-icon label=${this.header}>
-      <mwc-icon slot="icon">${generalConductingEquipmentIcon}</mwc-icon>
-      <mwc-fab
-        class="action edit"
-        slot="action"
-        mini
-        icon="edit"
-        @click="${() => this.openEditWizard()}"
-      ></mwc-fab>
-      <mwc-fab
-        class="action remove"
-        slot="action"
-        mini
-        icon="delete"
-        @click="${() => this.removeElement()}"
-      ></mwc-fab>
-    </oscd-action-icon>`;
-    }
-};
-GeneralEquipmentEditor.styles = i$5 `
-    abbr {
-      text-decoration: none;
-      border-bottom: none;
-    }
-
-    .container.lnode {
-      display: grid;
-      grid-gap: 12px;
-      padding: 8px 12px 16px;
-      box-sizing: border-box;
-      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
-    }
-  `;
-__decorate([
-    t$1()
-], GeneralEquipmentEditor.prototype, "header", null);
-GeneralEquipmentEditor = __decorate([
-    e$6('general-equipment-editor')
-], GeneralEquipmentEditor);
-function renderGeneralEquipment(parent, editCount, showfunctions, showuserdef) {
-    const generalEquipment = getChildElementsByTagName(parent, 'GeneralEquipment');
-    if (showfunctions)
-        return x `${generalEquipment.map(gEquipment => x `<general-equipment-editor
-          .editCount=${editCount}
-          .element=${gEquipment}
-          ?showfunctions=${showfunctions}
-          ?showuserdef=${showuserdef}
-        ></general-equipment-editor>`)}`;
-    return generalEquipment.length
-        ? x ` <div class="content actionicon">
-        ${generalEquipment.map(gEquipment => x `<general-equipment-editor
-              .editCount=${editCount}
-              .element=${gEquipment}
-              ?showfunctions=${showfunctions}
-              ?showuserdef=${showuserdef}
-            ></general-equipment-editor>`)}
-      </div>`
-        : x ``;
-}
-
-function getChildElementsByTagName(element, tag) {
-    if (!element || !tag)
-        return [];
-    return Array.from(element.children).filter(child => child.tagName === tag);
-}
-/** Common `CSS` styles used by substation subeditors */
-const styles = i$5 `
-  abbr {
-    text-decoration: none;
-    border-bottom: none;
-  }
-
-  .content.actionicon {
-    display: grid;
-    grid-gap: 12px;
-    padding: 8px 12px 16px;
-    box-sizing: border-box;
-    grid-template-columns: repeat(auto-fit, minmax(64px, auto));
-  }
-
-  .container.lnode {
-    display: grid;
-    grid-gap: 12px;
-    padding: 8px 12px 16px;
-    box-sizing: border-box;
-    grid-template-columns: repeat(auto-fit, minmax(64px, auto));
-  }
-`;
+const voltageLevelIcon = x `<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 25 25"
+>
+  <path
+    d="M 4 4 L 12.5 21 L 21 4"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="3"
+    stroke-linejoin="round"
+    stroke-linecap="round"
+  />
+</svg>`;
+const bayIcon = x `<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 25 25"
+>
+  <path
+    d="M 3 2 L 22 2"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linejoin="round"
+    stroke-linecap="round"
+  />
+  <path
+    d="M 3 5 L 22 5"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linejoin="round"
+    stroke-linecap="round"
+  />
+  <path
+    d="M 7 2 L 7 7.5"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linejoin="round"
+    stroke-linecap="round"
+  />
+  <path
+    d="M 18 5 L 18 7.5"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linejoin="round"
+    stroke-linecap="round"
+  />
+  <path
+    d="M 5.5 8.5 L 7 11 L 7 13 L 18 13 L 18 11 L 16.5 8.5"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linejoin="round"
+    stroke-linecap="round"
+  />
+  <path
+    d="M 12.5 13 L 12.5 15"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linejoin="round"
+    stroke-linecap="round"
+  />
+  <path
+    d="M 11 16 L 12.5 18.5 L 12.5 23"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linejoin="round"
+    stroke-linecap="round"
+  />
+  <path
+    d="M 10.5 21 L 12.5 23 L 14.5 21"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linejoin="round"
+    stroke-linecap="round"
+  />
+</svg>`;
 const powerTransformerTwoWindingIcon = x `<svg
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 25 25"
@@ -7235,12 +9089,301 @@ const earthSwitchIcon = x `<svg
     stroke-width="1.5"
   />
 </svg>`;
+const infeedingLine = x `<svg
+  viewBox="0 0 25 25"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M 12.5 0 L 12.5 4"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <polygon
+    points="4,4 12.5,21 21,4"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linejoin="round"
+    stroke-linecap="round"
+  />
+</svg>`;
+const synchronousMachine = x `<svg
+  viewBox="0 0 25 25"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <circle
+    cx="12.5"
+    cy="12.5"
+    r="11"
+    stroke-width="1.5"
+    stroke="currentColor"
+    fill="transparent"
+  />
+  <path
+    d="m 16.6,12.5 c -0.7,1.4 -1.3,2.8 -2.1,2.8 -1.5,0 -2.6,-5.6 -4.1,-5.6 -0.7,0 -1.4,1.4 -2.1,2.8"
+    stroke="currentColor"
+    fill="none"
+    stroke-width="1.2"
+    stroke-linecap="round"
+  />
+</svg>`;
+const motor = x `<svg
+  viewBox="0 0 25 25"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <circle
+    cx="12.5"
+    cy="12.5"
+    r="11"
+    stroke-width="1.5"
+    stroke="currentColor"
+    fill="transparent"
+  />
+  <path
+    d="m 12.5,15.5 2.3,-7.8 h 1.4 v 9.6 h -1.1 v -3.7 l 0.1,-3.7 -2.3,7.4 h -0.9 L 9.8,9.8 9.9,13.6 v 3.7 H 8.8 V 7.7 h 1.4 z"
+    stroke="currentColor"
+    fill="currentColor"
+    stroke-width="0.3"
+    stroke-linecap="round"
+  />
+</svg>`;
+const line = x `<svg
+  viewBox="0 0 25 25"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M 12.5,0 V 25"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="m 10.3,12.5 4.3,-2.5"
+    fill="currentColor"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="m 10.3,15 4.3,-2.5"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+</svg>`;
+const neutralResistor = x `<svg
+  viewBox="0 0 25 25"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M 12.5,0 V 4"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="m 12.5 25 v -4"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <rect
+    y="4"
+    x="8.5"
+    height="17"
+    width="8"
+    stroke="currentColor"
+    fill="none"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+</svg>`;
+const reactor = x `<svg
+  viewBox="0 0 25 25"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="m 4.5,12.5 h 8 V 0"
+    stroke="currentColor"
+    fill="none"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="m 4.5,12.5 a 8,8 0 0 1 8,-8 8,8 0 0 1 8,8 8,8 0 0 1 -8,8"
+    stroke="currentColor"
+    fill="none"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="M 12.5,20.5 V 25"
+    stroke="currentColor"
+    fill="none"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+</svg>`;
+const capacitor = x `<svg
+  viewBox="0 0 25 25"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M 6.5,10.1 H 18.5"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="M 12.5,0 V 10.1"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="M 6.5,14.9 H 18.5"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="M 12.5,14.9 V 25"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+</svg>`;
+const generator = x `<svg
+  viewBox="0 0 25 25"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <circle
+    cx="12.5"
+    cy="12.5"
+    r="11"
+    stroke-width="1.5"
+    stroke="currentColor"
+    fill="transparent"
+  />
+  <path
+    d="m 16.2,12.5 v 4.2 q -0.2,0.2 -0.6,0.6 -0.4,0.4 -1.1,0.7 -0.7,0.3 -1.8,0.3 -1.8,0 -2.9,-1.2 -1.1,-1.2 -1.1,-3.6 v -2.1 q 0,-2.4 1,-3.6 1,-1.1 2.9,-1.1 1.7,0 2.6,0.9 0.9,0.9 1,2.6 h -1.4 q -0.1,-1.1 -0.6,-1.6 -0.5,-0.6 -1.5,-0.6 -1.3,0 -1.8,0.9 -0.5,0.9 -0.5,2.6 v 2.1 q 0,1.8 0.7,2.7 0.7,0.9 1.9,0.9 1,0 1.4,-0.3 0.4,-0.3 0.6,-0.5 v -2.6 h -2.1 v -1.2 z"
+    stroke="currentColor"
+    fill="currentColor"
+    stroke-width="0.3"
+    stroke-linecap="round"
+  />
+</svg>`;
+const powerCable = x `<svg
+  viewBox="0 0 25 25"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M 12.5,0 V 4"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="M 9.4,4.2 H 15.6 L 12.5,8.3 Z"
+    fill="currentColor"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="m 12.5,8.3 v 9"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="m 9.4,21.3 h 6.2 l -3.1,-4.1 z"
+    fill="currentColor"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="m 12.5,21.3 v 4"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+</svg>`;
+const surgeArresterIcon = x `<svg
+  viewBox="0 0 25 25"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M 12.5,0 V 8"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="m 12.5,21 v 4"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <line
+    x1="10"
+    y1="24.25"
+    x2="15"
+    y2="24.25"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="M 11.2,8 12.5,11 13.8,8 Z"
+    fill="currentColor"
+    stroke="currentColor"
+    stroke-width="1"
+    stroke-linecap="round"
+  />
+  <rect
+    y="4"
+    x="8.5"
+    height="17"
+    width="8"
+    stroke="currentColor"
+    fill="none"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+</svg> `;
 const typeIcons = {
     CBR: circuitBreakerIcon,
     DIS: disconnectorIcon,
     CTR: currentTransformerIcon,
     VTR: voltageTransformerIcon,
     ERS: earthSwitchIcon,
+    CAB: powerCable,
+    CAP: capacitor,
+    GEN: generator,
+    IFL: infeedingLine,
+    LIN: line,
+    MOT: motor,
+    REA: reactor,
+    RES: neutralResistor,
+    SAR: surgeArresterIcon,
+    SMC: synchronousMachine,
 };
 function crossProduct(...arrays) {
     return arrays.reduce((a, b) => a.flatMap(d => b.map(e => [d, e].flat())), [[]]);
@@ -7321,6 +9464,126 @@ function getIcon(condEq) {
     var _a;
     return (_a = typeIcons[typeStr(condEq)]) !== null && _a !== void 0 ? _a : generalConductingEquipmentIcon;
 }
+
+let GeneralEquipmentEditor = class GeneralEquipmentEditor extends BaseSubstationElementEditor {
+    get header() {
+        const name = this.element.getAttribute('name');
+        const desc = this.element.getAttribute('desc');
+        if (!this.showfunctions)
+            return `${name}`;
+        return `${name} ${desc ? `—  ${desc}` : ''}`;
+    }
+    render() {
+        if (this.showfunctions)
+            return x `<oscd-action-pane label=${this.header}>
+        <abbr slot="action" title="Edit">
+          <mwc-icon-button
+            class="action edit"
+            icon="edit"
+            @click=${() => this.openEditWizard()}
+          ></mwc-icon-button>
+        </abbr>
+        <abbr slot="action" title="Remove">
+          <mwc-icon-button
+            class="action remove"
+            icon="delete"
+            @click=${() => this.removeElement()}
+          ></mwc-icon-button>
+        </abbr>
+        ${this.renderAddButton()}
+        ${renderText(this.element, this.editCount, this.showfunctions, this.showuserdef)}
+        ${renderPrivate(this.element, this.editCount, this.showfunctions, this.showuserdef)}
+        ${renderLNodes(this.element, this.editCount, this.showfunctions)}
+        ${renderEqFunctions(this.element, this.editCount, this.showuserdef)}
+      </oscd-action-pane>`;
+        return x `<oscd-action-icon label=${this.header}>
+      <mwc-icon slot="icon">${generalConductingEquipmentIcon}</mwc-icon>
+      <mwc-fab
+        class="action edit"
+        slot="action"
+        mini
+        icon="edit"
+        @click="${() => this.openEditWizard()}"
+      ></mwc-fab>
+      <mwc-fab
+        class="action remove"
+        slot="action"
+        mini
+        icon="delete"
+        @click="${() => this.removeElement()}"
+      ></mwc-fab>
+    </oscd-action-icon>`;
+    }
+};
+GeneralEquipmentEditor.styles = i$5 `
+    abbr {
+      text-decoration: none;
+      border-bottom: none;
+    }
+
+    .container.lnode {
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      box-sizing: border-box;
+      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+    }
+  `;
+__decorate([
+    t$1()
+], GeneralEquipmentEditor.prototype, "header", null);
+GeneralEquipmentEditor = __decorate([
+    e$6('general-equipment-editor')
+], GeneralEquipmentEditor);
+function renderGeneralEquipment(parent, editCount, showfunctions, showuserdef) {
+    const generalEquipment = getChildElementsByTagName(parent, 'GeneralEquipment');
+    if (showfunctions)
+        return x `${generalEquipment.map(gEquipment => x `<general-equipment-editor
+          .editCount=${editCount}
+          .element=${gEquipment}
+          ?showfunctions=${showfunctions}
+          ?showuserdef=${showuserdef}
+        ></general-equipment-editor>`)}`;
+    return generalEquipment.length
+        ? x ` <div class="content actionicon">
+        ${generalEquipment.map(gEquipment => x `<general-equipment-editor
+              .editCount=${editCount}
+              .element=${gEquipment}
+              ?showfunctions=${showfunctions}
+              ?showuserdef=${showuserdef}
+            ></general-equipment-editor>`)}
+      </div>`
+        : x ``;
+}
+
+function getChildElementsByTagName(element, tag) {
+    if (!element || !tag)
+        return [];
+    return Array.from(element.children).filter(child => child.localName === tag);
+}
+/** Common `CSS` styles used by substation subeditors */
+const styles = i$5 `
+  abbr {
+    text-decoration: none;
+    border-bottom: none;
+  }
+
+  .content.actionicon {
+    display: grid;
+    grid-gap: 12px;
+    padding: 8px 12px 16px;
+    box-sizing: border-box;
+    grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+  }
+
+  .container.lnode {
+    display: grid;
+    grid-gap: 12px;
+    padding: 8px 12px 16px;
+    box-sizing: border-box;
+    grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+  }
+`;
 function newEditWizardEvent(element, subWizard, eventInitDict) {
     return new CustomEvent('oscd-edit-wizard-request', {
         bubbles: true,
@@ -7397,6 +9660,13 @@ let LNodeEditor = class LNodeEditor extends BaseSubstationElementEditor {
         mini
         icon="delete"
         @click="${() => this.removeElement()}"
+      ></mwc-fab>
+      <mwc-fab
+        class="action edit"
+        slot="action"
+        mini
+        icon="developer_board"
+        @click="${() => this.openMapWizard()}"
       ></mwc-fab>
     </oscd-action-icon>`;
     }
@@ -7957,6 +10227,7 @@ let BayEditor = class BayEditor extends BaseSubstationElementEditor {
           @click=${() => this.removeElement()}
         ></mwc-icon-button>
       </abbr>
+      <mwc-icon slot="icon" style="width:24px;height:24px">${bayIcon}</mwc-icon>
       ${this.renderAddButton()}
       ${renderText(this.element, this.editCount, this.showfunctions, this.showuserdef)}
       ${renderPrivate(this.element, this.editCount, this.showfunctions, this.showuserdef)}
@@ -8021,6 +10292,9 @@ let VoltageLevelEditor = class VoltageLevelEditor extends BaseSubstationElementE
           @click=${() => this.removeElement()}
         ></mwc-icon-button>
       </abbr>
+      <mwc-icon slot="icon" style="width:24px;height:24px"
+        >${voltageLevelIcon}</mwc-icon
+      >
       ${this.renderAddButton()}
       ${renderText(this.element, this.editCount, this.showfunctions, this.showuserdef)}
       ${renderPrivate(this.element, this.editCount, this.showfunctions, this.showuserdef)}
@@ -8066,7 +10340,7 @@ let SubstationEditor = class SubstationEditor extends BaseSubstationElementEdito
         return `${name} ${desc ? `- ${desc}` : ''}`;
     }
     render() {
-        return x `<oscd-action-pane label="${this.header}">
+        return x `<oscd-action-pane label="${this.header}" icon="margin">
       <abbr slot="action" title="Edit">
         <mwc-icon-button
           class="action edit"
@@ -8314,6 +10588,7 @@ class SclSubstationEditorPlugin extends s {
         </nav>
       </h1>
       <section>
+        ${renderPrivate(this.doc.documentElement, this.editCount, shouldShowFunctions(), shouldShowUserDef())}
         ${renderSubstations(this.doc.documentElement, this.editCount, shouldShowFunctions(), shouldShowUserDef())}
         ${renderLines(this.doc.documentElement, this.editCount, shouldShowFunctions(), shouldShowUserDef())}
         ${renderProcesses(this.doc.documentElement, this.editCount, shouldShowFunctions(), shouldShowUserDef())}

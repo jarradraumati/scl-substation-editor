@@ -15,6 +15,8 @@ export default class BaseSubstationElementEditor extends LitElement {
     showfunctions: boolean;
     /** Whether text/private type element shall be shown */
     showuserdef: boolean;
+    /** Whether private type element is eIEC61850-6-100 */
+    is6100: boolean;
     addMenu?: Menu;
     addButton: IconButton;
     removeActionable?: HTMLElement;
@@ -23,6 +25,7 @@ export default class BaseSubstationElementEditor extends LitElement {
     addActionable?: ListItem[];
     private openCreateWizard;
     openEditWizard(): void;
+    openMapWizard(): void;
     removeElement(): void;
     updated(): void;
     private renderAddButtons;
